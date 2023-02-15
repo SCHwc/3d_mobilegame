@@ -9,11 +9,9 @@ public class Managers : MonoBehaviour
 
     #region 하위 매니저 정적 필드 및 프로퍼티
     private static InputManager _input = new InputManager();
-    private static SceneManager _scene = new SceneManager();
 
     // Managers초기화 전 사용할 경우 대비하여 get시 초기화 실행 후 반환
     public static InputManager Input { get { Init(); return _input; } }
-    public static SceneManager Scene { get { Init(); return _scene; } }
     #endregion
 
     private void Start()
@@ -38,7 +36,6 @@ public class Managers : MonoBehaviour
 
             #region 하위매니저들 초기화
             _input.Init();
-            _scene.Init();
             #endregion
 
             // 성능 향상을 위한 프레임 고정
