@@ -17,13 +17,36 @@ public abstract class AIBase : MovableBase
         }
     }
 
-    protected NavMeshAgent agent;
+    [SerializeField, Tooltip("캐릭터의 공격범위"), InspectorName("공격범위")]
+    protected float _atkRange = 0f;
+    public float AtkRange
+    {
+        get => _atkRange;
+        set
+        {
+            _atkRange= value;
+        }
+    }
+
+    [SerializeField, Tooltip("캐릭터의 감지범위"), InspectorName("감지범위")]
+    protected float _findRange = 0f;
+    public float FindRange
+    {
+        get => _findRange;
+        set
+        {
+            _findRange = value;
+        }
+    }
+    public NavMeshAgent agent;
+
+    protected bool isBattle;
 
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
+        agent.speed = this.stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
     }
 
 

@@ -15,7 +15,7 @@ public class PlayeableCharacterBase : MovableBase
         throw new System.NotImplementedException();
     }
 
-    public override float GetDamage()
+    public override float GetDamage(float damage, MovableBase from)
     {
         throw new System.NotImplementedException();
     }

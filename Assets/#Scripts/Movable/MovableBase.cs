@@ -12,7 +12,7 @@ public abstract class MovableBase : MonoBehaviour
 
     // 추상 메서드들
     abstract public float Attack();      // 공격관련 메서드
-    abstract public float GetDamage();   // 피격관련 메서드
+    abstract public float GetDamage(float damage, MovableBase from);   // 피격관련 메서드
     abstract public float GetHeal();     // 체력회복 메서드
     abstract public void Move();        // 이동관련 메서드
 
