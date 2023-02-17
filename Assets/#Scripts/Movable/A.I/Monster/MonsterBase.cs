@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class MonsterBase : AIBase
 {
-    public override int Attack()
+    public override void Idle()
+    {
+        throw new System.NotImplementedException();
+    }
+    public override float Attack()
     {
         throw new System.NotImplementedException();
     }
 
-    public override int GetDamage()
+    public override float GetDamage()
     {
         throw new System.NotImplementedException();
     }
 
-    public override int GetHeal()
+    public override float GetHeal()
     {
         throw new System.NotImplementedException();
     }
