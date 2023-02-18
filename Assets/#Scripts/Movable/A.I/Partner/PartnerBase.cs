@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class PState
 {
+    protected float distance;
     /// <summary> 해당 상태를 시작할 때 1회 호출 </summary>
     public abstract void OnEnter(PartnerBase partner);
 
@@ -28,6 +29,8 @@ public class PartnerBase : AIBase
     protected override void Start()
     {
         base.Start();
+
+        Setup();
     }
 
     private void Update()
@@ -41,9 +44,12 @@ public class PartnerBase : AIBase
     public void Setup()
     {
         // 동료 캐릭터가 가질 수 있는 상태 개수만큼 메모리 할당, 각 상태에 클래스 메모리 할당
-        states = new PState[4];
+        states = new PState[5];
         states[(int)PartnerState.Idle] = new PartnerStates.PIdle();
         states[(int)PartnerState.Walk] = new PartnerStates.PMove();
+        states[(int)PartnerState.Attack] = new PartnerStates.PAttack();
+        states[(int)PartnerState.Die] = new PartnerStates.PDie();
+        states[(int)PartnerState.Skill] = new PartnerStates.PSkill();
 
         ChangeState(PartnerState.Idle);
     }
@@ -80,8 +86,7 @@ public class PartnerBase : AIBase
         currentState.OnEnter(this);
     }
     private void OnEnable()
-    {// 등장할때마다 초기화 (이동시에 오브젝트를 끌 예정)
-        Idle();
+    {
     }
     private void OnDrawGizmos()
     {
@@ -111,5 +116,25 @@ public class PartnerBase : AIBase
     public override void Move()
     {
         partnerState = PartnerState.Walk;
+    }
+
+    public override void Die()
+    {
+        gameObject.SetActive(false);
+    }
+    public void AttackTimeCheck()
+    {
+        Stat.AttackSpeed = Stat.AttackDelay;
+    }
+    public void ComboAttack()
+    {
+        if (targetMonster == null)
+        {
+            Stat.AttackSpeed = Stat.AttackDelay;
+        }
+        else
+        {
+            return;
+        }
     }
 }

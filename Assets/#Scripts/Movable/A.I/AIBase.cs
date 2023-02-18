@@ -6,17 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AIBase : MovableBase
 {
-    [SerializeField, Tooltip("캐릭터의 공격 딜레이"), InspectorName("공격 딜레이")]
-    protected float _atkDelay = 0f;
-    public float AtkDelay
-    {
-        get => _atkDelay;
-        set
-        {
-            _atkDelay = value;
-        }
-    }
-
     [SerializeField, Tooltip("캐릭터의 공격범위"), InspectorName("공격범위")]
     protected float _atkRange = 0f;
     public float AtkRange
@@ -51,4 +40,5 @@ public abstract class AIBase : MovableBase
 
 
     abstract public void Idle();
+    abstract public void Die();
 }

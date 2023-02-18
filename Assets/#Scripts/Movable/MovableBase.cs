@@ -6,9 +6,20 @@ using UnityEngine;
 public abstract class MovableBase : MonoBehaviour
 {
     protected StatBase stat;
+    public StatBase Stat
+    {
+        set => stat=value;
+        get
+        {
+            if (!stat)
+            {
+                stat = GetComponent<StatBase>();
+            }
+            return stat;
+        }
+    }
     protected Collider collider; // 콜라이더
-    protected Animator anim;     // 애니메이터
-    protected Enums.State state = Enums.State.Default; // 상태(FSM을 위한)
+    public Animator anim;     // 애니메이터
 
     // 추상 메서드들
     abstract public float Attack();      // 공격관련 메서드

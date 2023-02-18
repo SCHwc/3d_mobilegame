@@ -27,4 +27,9 @@ public class MonsterBase : AIBase
     {
         throw new System.NotImplementedException();
     }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }
