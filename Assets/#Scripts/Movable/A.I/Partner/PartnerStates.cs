@@ -35,7 +35,7 @@ namespace PartnerStates
 
             if (partner.targetMonster != null) // 타겟이 있을 때
             {                                  // 타겟과의 거리
-                float distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude;
+                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude;
                 if (distance > partner.AtkRange) // 공격범위보다 멀다면 이동
                 {
                     partner.ChangeState(PartnerState.Walk);
@@ -63,10 +63,10 @@ namespace PartnerStates
 
         public override void OnUpdate(PartnerBase partner)
         {
-            if (partner.targetMonster == null) // 타겟이 없을때
-            {
-
+            if (partner.targetMonster == null)
+            {   // 타겟이 없다면 다시 대기상태로 돌아간다.
                 distance = 0;
+                partner.ChangeState(PartnerState.Idle);
             }
             else
             {    // 타겟이 있으면 거리 할당
@@ -103,18 +103,17 @@ namespace PartnerStates
 
         public override void OnUpdate(PartnerBase partner)
         {
-
-            if (partner.targetMonster != null) // 타겟이 있다면 타겟과의 거리 할당
-            {
-                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude;
+            if (partner.targetMonster == null)
+            {   // 타겟이 없다면 할당된 타겟을 지우고 다시 대기상태로 돌아간다.
+                distance = 0;
+                partner.ChangeState(PartnerState.Idle);
             }
             else
-            {
-                distance = 0;
+            {   // 타겟이 있다면 타겟과의 거리 할당
+                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude; ;
             }
 
-            if (partner.targetMonster == null) { partner.ChangeState(PartnerState.Idle); }
-            else if (partner.targetMonster != null && distance > partner.AtkRange)
+            if (partner.targetMonster != null && distance > partner.AtkRange)
             {
                 partner.ChangeState(PartnerState.Walk);
             }
@@ -132,7 +131,6 @@ namespace PartnerStates
                 partner.anim.SetBool("isBattle", false);
                 partner.Stat.AttackSpeed -= Time.deltaTime;
             }
-
         }
 
         public override void OnExit(PartnerBase partner)

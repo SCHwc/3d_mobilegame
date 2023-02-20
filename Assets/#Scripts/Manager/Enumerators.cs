@@ -8,7 +8,16 @@ public enum PartnerState // AI동료 캐릭터의 상태들
 
     Count
 }
+public enum MonsterState // 몬스터의 상태들
+{
+    Idle,
+    Walk,
+    Attack,
+    Skill,
+    Die,
 
+    Count
+}
 
 public enum SceneType // Scene 종류
 {

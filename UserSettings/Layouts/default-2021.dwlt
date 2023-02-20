@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 82
+  controlID: 162
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,8 +166,8 @@ MonoBehaviour:
     y: 0
     width: 907
     height: 486
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -193,8 +193,8 @@ MonoBehaviour:
     y: 486
     width: 907
     height: 461
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -219,8 +219,8 @@ MonoBehaviour:
     y: 0
     width: 308
     height: 947
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 430
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -341,6 +341,7 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: 1107266504801513746, guid: 183df93d6a900a34d937e691fe72da71, type: 2}
     - {fileID: 1151316574975228818, guid: 3aba0109e251abf4f9817c75980e4751, type: 2}
+    - {fileID: 1151316574975228818, guid: 8ac657eca0f280742a0d088a380f7aa8, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.39369503
       e01: 0
@@ -358,14 +359,30 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.84306175
+    - e00: 0.84850866
       e01: 0
       e02: 0
-      e03: -6.2643747
+      e03: 23.46228
       e10: 0
-      e11: 0.84306175
+      e11: 0.84850866
       e12: 0
-      e13: 52.102203
+      e13: -25.474731
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.84850866
+      e01: 0
+      e02: 0
+      e03: 8.485077
+      e10: 0
+      e11: 0.84850866
+      e12: 0
+      e13: 26.525314
       e20: 0
       e21: 0
       e22: 1
@@ -375,10 +392,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 3aba0109e251abf4f9817c75980e4751,
+  m_AnimatorController: {fileID: 9100000, guid: 8ac657eca0f280742a0d088a380f7aa8,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1151316574975228818, guid: 3aba0109e251abf4f9817c75980e4751,
+  - m_Target: {fileID: 1151316574975228818, guid: 8ac657eca0f280742a0d088a380f7aa8,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -618,9 +635,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -6.0388136, y: 4.134752, z: -0.70723265}
+    m_Target: {x: 2.4417462, y: 2.444431, z: 1.5539498}
     speed: 2
-    m_Value: {x: -6.0388136, y: 4.134752, z: -0.70723265}
+    m_Value: {x: 2.4417462, y: 2.444431, z: 1.5539498}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -667,9 +684,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.19448295, y: -0.48913917, z: 0.11289003, w: -0.8427263}
+    m_Target: {x: 0.08818856, y: -0.8068503, z: 0.12467517, w: 0.57068115}
     speed: 2
-    m_Value: {x: -0.19465083, y: -0.48787147, z: 0.112597466, w: -0.84345376}
+    m_Value: {x: 0.08800121, y: -0.80770326, z: 0.12480697, w: 0.5694687}
   m_Size:
     m_Target: 0.7341068
     speed: 2
@@ -825,21 +842,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 32fbffff
+      m_ExpandedIDs: 68f9ffffc4faffffc8faffffccfaffff32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Crabik 01
-        m_OriginalName: Crabik 01
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 23426
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -890,7 +907,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/#Animation/Monster/Monster_1F
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -905,7 +923,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 9e5a0000
     m_LastClickedID: 23198
-    m_ExpandedIDs: 00000000f0600000f2600000f4600000f6600000f8600000fa600000fc600000fe60000000610000026100000461000006610000086100000a6100000c6100000e61000010610000126100001461000016610000186100001a6100001c6100001e6100002061000022610000246100002661000028610000
+    m_ExpandedIDs: 00000000ee600000f0600000f2600000f4600000f6600000f8600000fa600000fc600000fe60000000610000026100000461000006610000086100000a6100000c6100000e61000010610000126100001461000016610000186100001a6100001c6100001e61000020610000226100002461000026610000286100002a610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -933,21 +951,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000f0600000f2600000f4600000f6600000f8600000fa600000fc600000fe60000000610000026100000461000006610000086100000a6100000c6100000e61000010610000126100001461000016610000186100001a6100001c6100001e61000020610000226100002461000026610000286100002e62000030620000
+    m_ExpandedIDs: ffffffff00000000ee600000f0600000f2600000f4600000f6600000f8600000fa600000fc600000fe60000000610000026100000461000006610000086100000a6100000e61000010610000126100001461000016610000186100001a6100001c6100001e61000020610000226100002461000026610000286100002a61000020620000746e0000766e0000fa70000040750000467500004a7500004e750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Monster_1F
+      m_OriginalName: Monster_1F
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 30080
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -1025,7 +1043,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 305
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

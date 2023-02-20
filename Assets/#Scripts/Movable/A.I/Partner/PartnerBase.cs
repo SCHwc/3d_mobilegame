@@ -53,27 +53,7 @@ public class PartnerBase : AIBase
 
         ChangeState(PartnerState.Idle);
     }
-    void UpdateState()
-    {
-        switch (partnerState)
-        {
-            case PartnerState.Idle:
-                isBattle = false;
-                break;
-            case PartnerState.Walk:
-                isBattle = true;
-                agent.enabled = true;
-                break;
-            case PartnerState.Attack:
-                isBattle = true;
-                agent.enabled = false;
-                break;
-            case PartnerState.Die:
-                isBattle = false;
-                agent.enabled = false;
-                break;
-        }
-    }
+
     public void ChangeState(PartnerState newState)
     {
         /// <summary> 예외처리 </summary>
@@ -85,50 +65,34 @@ public class PartnerBase : AIBase
         currentState = states[(int)newState];
         currentState.OnEnter(this);
     }
-    private void OnEnable()
-    {
-    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.5f);
+        Gizmos.DrawWireSphere(transform.position, AtkRange);     // 공격범위체크
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, FindRange);    // 감지범위체크
     }
-    public override void Idle()
-    {
-        partnerState = PartnerState.Idle;
-    }
-    public override float Attack() // 타겟이 있고 타겟이 나의 공격범위에 있을 때
-    {
-        partnerState = PartnerState.Attack;
-        return 0;
-    }
+
+
 
     public override float GetDamage(float damage, MovableBase from) // 공격을 받았을 때
     {
-        throw new System.NotImplementedException();
+        base.GetDamage(damage, from);
+
+        if (Stat.CurrentHp <= 0)
+        {
+            ChangeState(PartnerState.Die);
+        }
+
+        return damage;
     }
 
-    public override float GetHeal()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void Move()
-    {
-        partnerState = PartnerState.Walk;
-    }
-
-    public override void Die()
-    {
-        gameObject.SetActive(false);
-    }
-    public void AttackTimeCheck()
-    {
-        Stat.AttackSpeed = Stat.AttackDelay;
-    }
-    public void ComboAttack()
-    {
-        if (targetMonster == null)
+    public void Anim_ComboAttack()
+    {   // 다음 연계공격이 있을 때 애니메이션이 끝날 때 넣어줄 함수
+        if (targetMonster.gameObject == null)
         {
             Stat.AttackSpeed = Stat.AttackDelay;
         }
@@ -136,5 +100,29 @@ public class PartnerBase : AIBase
         {
             return;
         }
+    }
+
+    public void Anim_AttackTimeCheck()
+    {   // 공격 애니메이션이 끝날 때 공격 대기시간을 초기화 하기 위해 넣어줄 함수
+        Stat.AttackSpeed = Stat.AttackDelay;
+       
+    }
+
+    public override float Attack() // 타겟이 있고 타겟이 나의 공격범위에 있을 때
+    {
+        partnerState = PartnerState.Attack;
+        return 0;
+    }
+    public override float GetHeal()
+    {
+        throw new System.NotImplementedException();
+    }
+    public override void Move()
+    {
+        partnerState = PartnerState.Walk;
+    }
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }

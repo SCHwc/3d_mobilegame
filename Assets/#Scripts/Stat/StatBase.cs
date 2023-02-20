@@ -17,16 +17,20 @@ public class StatBase : MonoBehaviour
 
     [SerializeField] protected float moveSpeedMultiflier = 2f;
 
-    public float CurrentHp { get => Mathf.Clamp(_currentHp, 0, _maxHp); } // 현재 체력 제한
+    public float CurrentHp
+    {
+        get => _currentHp;
+        set => _currentHp = Mathf.Clamp(value, 0, _maxHp);
+    } // 현재 체력 제한
     public float MaxHP { get => _maxHp; }
     public float HPRate { get => _currentHp / _maxHp; } // 체력비율
     public float MoveSpeed { get => _moveSpeed; }
-    public float AttackSpeed 
-    { 
+    public float AttackSpeed
+    {
         get => _attackSpeed;
         set
         {
-            _attackSpeed= value;
+            _attackSpeed = value;
         }
     }
     public float AttackDelay
@@ -41,5 +45,5 @@ public class StatBase : MonoBehaviour
     public int AttackPower { get => _attackPower; }
     public int DefensePower { get => _defensePower; }
     #endregion
-    
+
 }
