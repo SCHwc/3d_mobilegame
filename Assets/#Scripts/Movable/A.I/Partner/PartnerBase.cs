@@ -81,6 +81,7 @@ public class PartnerBase : AIBase
     {
         base.GetDamage(damage, from);
 
+        anim.SetTrigger("GetHit");
         if (Stat.CurrentHp <= 0)
         {
             ChangeState(PartnerState.Die);
@@ -89,6 +90,26 @@ public class PartnerBase : AIBase
         return damage;
     }
 
+    public void Anim_Attack()
+    {
+        switch (atkType)
+        {
+            case AttackType.Short:
+                atkCollider.enabled = true;
+                if (targetMonster != null)
+                {
+                    GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
+                }
+                Invoke("AttackColliderOff", 0.3f);
+                break;
+            case AttackType.Long:
+                break;
+        };
+    }
+    void AttackColliderOff()
+    {
+        atkCollider.enabled = false;
+    }
 
     public void Anim_ComboAttack()
     {   // 다음 연계공격이 있을 때 애니메이션이 끝날 때 넣어줄 함수
@@ -105,24 +126,31 @@ public class PartnerBase : AIBase
     public void Anim_AttackTimeCheck()
     {   // 공격 애니메이션이 끝날 때 공격 대기시간을 초기화 하기 위해 넣어줄 함수
         Stat.AttackSpeed = Stat.AttackDelay;
-       
+
     }
+
+
+
+
+
+
+
+
+
+
+
 
     public override float Attack() // 타겟이 있고 타겟이 나의 공격범위에 있을 때
     {
-        partnerState = PartnerState.Attack;
         return 0;
     }
     public override float GetHeal()
     {
         throw new System.NotImplementedException();
     }
-    public override void Move()
-    {
-        partnerState = PartnerState.Walk;
-    }
+
     public override void Die()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 }

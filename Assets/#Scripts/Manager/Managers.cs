@@ -14,6 +14,8 @@ public class Managers : MonoBehaviour
     public static InputManager Input { get { Init(); return _input; } }
     #endregion
 
+    public static GameObject swordEffect;
+
     private void Start()
     {
         Init();
@@ -40,6 +42,8 @@ public class Managers : MonoBehaviour
 
             // 성능 향상을 위한 프레임 고정
             Application.targetFrameRate = 60;
+
+            swordEffect = Resources.Load<GameObject>("Effects/SwordImpact");
         }
     }
 }

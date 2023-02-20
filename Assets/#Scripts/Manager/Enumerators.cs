@@ -19,6 +19,12 @@ public enum MonsterState // 몬스터의 상태들
     Count
 }
 
+public enum AttackType
+{
+    Short,
+    Long
+}
+
 public enum SceneType // Scene 종류
 {
     Unknown,    // 디폴트

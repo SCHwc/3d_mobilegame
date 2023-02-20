@@ -6,6 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AIBase : MovableBase
 {
+    public AttackType atkType; // 이 캐릭터의 전투방식 (근접, 원거리)
+
     [SerializeField, Tooltip("캐릭터의 공격범위"), InspectorName("공격범위")]
     protected float _atkRange = 0f;
     public float AtkRange
@@ -29,13 +31,14 @@ public abstract class AIBase : MovableBase
     }
     public NavMeshAgent agent;
 
-    protected bool isBattle;
+    public Collider atkCollider; // 근접공격에 필요한 콜라이더
 
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = this.stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
+       
     }
 
     public override float GetDamage(float damage, MovableBase from)
@@ -49,6 +52,12 @@ public abstract class AIBase : MovableBase
 
         return damage;
     }
-   
+
+    
+
     abstract public void Die();
+    public override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
 }

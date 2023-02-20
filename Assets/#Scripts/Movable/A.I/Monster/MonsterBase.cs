@@ -22,7 +22,7 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
-    public GameObject targetCharacter;
+    public MovableBase targetCharacter;
 
     int getHitStack = 0; // 공격한 적을 타겟으로 할당하기 위한 변수
 
@@ -67,9 +67,9 @@ public class MonsterBase : AIBase
     {
         base.GetDamage(damage, from);
 
-        if (getHitStack == 0 && targetCharacter != from.gameObject)
+        if (getHitStack == 0 && targetCharacter != from)
         {   // 전투 중 몬스터를 공격하는 캐릭터가 타겟이 아니라면 그 공격한 캐릭터를 타겟으로 설정 (1회 한정)
-            targetCharacter = from.gameObject;
+            targetCharacter = from;
             getHitStack++;
         }
 
@@ -92,16 +92,41 @@ public class MonsterBase : AIBase
         currentState.OnEnter(this);
     }
 
+    public void Anim_Attack()
+    {
+        switch (atkType)
+        {
+            case AttackType.Short:
+                atkCollider.enabled = true;
+                if (targetCharacter != null)
+                {
+                    GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
+                }
+                Invoke("AttackColliderOff", 0.3f);
+                break;
+            case AttackType.Long:
+                break;
+        };
+    }
+    void AttackColliderOff()
+    {
+        atkCollider.enabled = false;
+    }
+
+    public void Anim_AttackTimeCheck()
+    {   // 공격 애니메이션이 끝날 때 공격 대기시간을 초기화 하기 위해 넣어줄 함수
+        Stat.AttackSpeed = Stat.AttackDelay;
+    }
+
+   
+
+
 
     public override float Attack()
     {
         throw new System.NotImplementedException();
     }
     public override float GetHeal()
-    {
-        throw new System.NotImplementedException();
-    }
-    public override void Move()
     {
         throw new System.NotImplementedException();
     }

@@ -16,7 +16,7 @@ namespace MonsterStates
         {
             if (monster.targetCharacter != null)
             {
-                distance = (monster.targetCharacter.transform.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude;
 
                 if (distance > monster.AtkRange) // 공격범위보다 멀다면 이동
                 {
@@ -52,7 +52,7 @@ namespace MonsterStates
             }
             else
             {
-                distance = (monster.targetCharacter.transform.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude;
             }
 
             monster.anim.SetFloat("isMove", monster.agent.velocity.magnitude);
@@ -77,6 +77,10 @@ namespace MonsterStates
         public override void OnEnter(MonsterBase monster)
         {
             monster.Stat.AttackSpeed = 0f;
+            if (monster.targetCharacter != null)
+            {
+            monster.transform.LookAt(monster.targetCharacter.transform);
+            }
         }
 
 
@@ -89,7 +93,7 @@ namespace MonsterStates
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
-                distance = (monster.targetCharacter.transform.position - monster.gameObject.transform.position).magnitude; ;
+                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude; ;
             }
 
             if (monster.targetCharacter != null && distance > monster.AtkRange)

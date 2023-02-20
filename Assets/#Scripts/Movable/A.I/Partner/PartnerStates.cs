@@ -99,6 +99,11 @@ namespace PartnerStates
             Debug.Log("Attack 상태 진입");
 
             partner.Stat.AttackSpeed = 0f;
+
+            if (partner.targetMonster != null)
+            {
+                partner.transform.LookAt(partner.targetMonster.transform);
+            }
         }
 
         public override void OnUpdate(PartnerBase partner)
@@ -144,17 +149,15 @@ namespace PartnerStates
     {
         public override void OnEnter(PartnerBase partner)
         {
-            throw new System.NotImplementedException();
+            partner.anim.SetTrigger("isDie");
         }
 
-        public override void OnExit(PartnerBase partner)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public override void OnUpdate(PartnerBase partner)
         {
-            throw new System.NotImplementedException();
+        }
+        public override void OnExit(PartnerBase partner)
+        {
         }
     }
 
