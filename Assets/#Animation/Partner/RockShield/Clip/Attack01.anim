@@ -56067,7 +56067,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.36666667
+  - time: 0.43333334
     functionName: Anim_Attack
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -56075,7 +56075,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.8333333
-    functionName: Anim_ComboAttack
+    functionName: Anim_AttackTimeCheck
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

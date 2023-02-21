@@ -19,10 +19,10 @@ public abstract class PState
 
 public class PartnerBase : AIBase
 {
-    PartnerState partnerState;
+   protected PartnerState partnerState;
 
-    PState[] states;
-    PState currentState;
+    protected PState[] states;
+    protected PState currentState;
 
     public GameObject targetMonster;
 
@@ -33,7 +33,7 @@ public class PartnerBase : AIBase
         Setup();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (currentState != null)
         {
@@ -41,7 +41,7 @@ public class PartnerBase : AIBase
         }
     }
 
-    public void Setup()
+    public virtual void Setup()
     {
         // 동료 캐릭터가 가질 수 있는 상태 개수만큼 메모리 할당, 각 상태에 클래스 메모리 할당
         states = new PState[5];
@@ -90,21 +90,17 @@ public class PartnerBase : AIBase
         return damage;
     }
 
-    public void Anim_Attack()
+    public virtual void Anim_Attack()
     {
-        switch (atkType)
+        if (atkType == AttackType.Short)
         {
-            case AttackType.Short:
-                atkCollider.enabled = true;
-                if (targetMonster != null)
-                {
-                    GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
-                }
-                Invoke("AttackColliderOff", 0.3f);
-                break;
-            case AttackType.Long:
-                break;
-        };
+            atkCollider.enabled = true;
+            if (targetMonster != null)
+            {
+                GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
+            }
+            Invoke("AttackColliderOff", 0.3f);
+        }
     }
     void AttackColliderOff()
     {
