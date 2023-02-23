@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatBase : MonoBehaviour
 {
+    public string name; // 이름
+
     #region 스탯들
     [SerializeField] protected float _currentHp;         // 현재체력
     [SerializeField] protected float _maxHp;             // 최대체력
@@ -14,9 +16,13 @@ public class StatBase : MonoBehaviour
     [SerializeField] protected int _defensePower;        // 방어력
     [SerializeField] protected int _selfRecovery;        // 체력젠
 
-    [SerializeField] protected float moveSpeedMultiflier = 2f;
+    public float moveSpeedMultiflier = 2f;
 
-    public float CurrentHp { get => Mathf.Clamp(_currentHp, 0, _maxHp); } // 현재 체력 제한
+    public float CurrentHp 
+    {
+        get => _currentHp;
+        set => _currentHp = Mathf.Clamp(value, 0, _maxHp); 
+    } // 현재 체력 제한
     public float MaxHP { get => _maxHp; }
     public float HPRate { get => _currentHp / _maxHp; } // 체력비율
     public float MoveSpeed { get => _moveSpeed; }

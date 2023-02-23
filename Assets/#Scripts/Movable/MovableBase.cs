@@ -7,13 +7,27 @@ public abstract class MovableBase : MonoBehaviour
 {
     protected StatBase stat;
     protected Collider collider; // 콜라이더
-    protected Animator anim;     // 애니메이터
-    protected Enums.State state = Enums.State.Default; // 상태(FSM을 위한)
+    public Animator anim;     // 애니메이터
+
+    [SerializeField]protected MovableBase target; // 타겟
+
+    public StatBase Stat
+    {
+        set => stat = value;
+        get
+        {
+            if(!stat)
+            {
+                stat = GetComponent<StatBase>();
+            }
+            return stat;
+        }
+    }
 
     // 추상 메서드들
-    abstract public int Attack();      // 공격관련 메서드
-    abstract public int GetDamage();   // 피격관련 메서드
-    abstract public int GetHeal();     // 체력회복 메서드
+    abstract public float Attack();      // 공격관련 메서드
+    abstract public float GetDamage(float damage, MovableBase from);   // 피격관련 메서드
+    abstract public float GetHeal();     // 체력회복 메서드
     abstract public void Move();        // 이동관련 메서드
 
     protected virtual void Start()
