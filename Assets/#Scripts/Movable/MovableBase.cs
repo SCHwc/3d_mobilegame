@@ -20,7 +20,7 @@ public abstract class MovableBase : MonoBehaviour
     }
     protected Collider collider; // 콜라이더
     public Animator anim;     // 애니메이터
-
+    public Transform focusTarget;
     // 추상 메서드들
     abstract public float Attack();      // 공격관련 메서드
     abstract public float GetDamage(float damage, MovableBase from);   // 피격관련 메서드

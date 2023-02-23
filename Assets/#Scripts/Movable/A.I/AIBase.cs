@@ -33,6 +33,7 @@ public abstract class AIBase : MovableBase
 
     public Collider atkCollider; // 근접공격에 필요한 콜라이더
 
+    
     protected override void Start()
     {
         base.Start();

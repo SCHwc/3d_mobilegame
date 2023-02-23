@@ -22,7 +22,6 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
-    public MovableBase targetCharacter;
 
     int getHitStack = 0; // 공격한 적을 타겟으로 할당하기 위한 변수
 
@@ -67,9 +66,9 @@ public class MonsterBase : AIBase
     {
         base.GetDamage(damage, from);
 
-        if (getHitStack == 0 && targetCharacter != from)
+        if (getHitStack == 0 && focusTarget != from)
         {   // 전투 중 몬스터를 공격하는 캐릭터가 타겟이 아니라면 그 공격한 캐릭터를 타겟으로 설정 (1회 한정)
-            targetCharacter = from;
+            focusTarget = from.transform;
             getHitStack++;
         }
 
@@ -98,7 +97,7 @@ public class MonsterBase : AIBase
         {
             case AttackType.Short:
                 atkCollider.enabled = true;
-                if (targetCharacter != null)
+                if (focusTarget != null)
                 {
                     GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
                 }

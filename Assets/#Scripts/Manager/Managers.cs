@@ -16,6 +16,8 @@ public class Managers : MonoBehaviour
 
     public static GameObject swordEffect;
 
+    public static Dictionary<string, WeaponInfo> weaponInfos;
+
     private void Start()
     {
         Init();
@@ -24,7 +26,7 @@ public class Managers : MonoBehaviour
     private static void Init()
     {
         // 싱글톤
-        if(_instance == null)
+        if (_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
             if (go == null)
@@ -43,7 +45,43 @@ public class Managers : MonoBehaviour
             // 성능 향상을 위한 프레임 고정
             Application.targetFrameRate = 60;
 
-            swordEffect = Resources.Load<GameObject>("Effects/SwordImpact");
         }
+
+        swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
+
+        if (weaponInfos == null)
+        {
+            weaponInfos = new Dictionary<string, WeaponInfo>();
+
+            weaponInfos.Add
+                (
+                "IceMissile",
+                new WeaponInfo
+                (
+                    typeof(Weapon_IceMissile),
+                    Resources.Load<GameObject>("Prefabs/Projectiles/IceMissile"),
+                    null,
+                    "IceMissile"
+                    )
+                ) ;
+        }
+
     }
 }
+
+public class WeaponInfo
+{
+    public System.Type weapon;
+    public GameObject spawnPrefab;
+    public Sprite icon;
+    public string name;
+
+    public WeaponInfo(System.Type wantWeapon, GameObject wantPrefab, Sprite wantIcon, string wantName)
+    {
+        weapon = wantWeapon;
+        spawnPrefab = wantPrefab;
+        icon = wantIcon;
+        name = wantName;
+    }
+}
+

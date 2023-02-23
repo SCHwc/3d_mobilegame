@@ -24,8 +24,6 @@ public class PartnerBase : AIBase
     protected PState[] states;
     protected PState currentState;
 
-    public GameObject targetMonster;
-
     protected override void Start()
     {
         base.Start();
@@ -95,7 +93,7 @@ public class PartnerBase : AIBase
         if (atkType == AttackType.Short)
         {
             atkCollider.enabled = true;
-            if (targetMonster != null)
+            if (focusTarget != null)
             {
                 GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
             }
@@ -109,7 +107,7 @@ public class PartnerBase : AIBase
 
     public void Anim_ComboAttack()
     {   // 다음 연계공격이 있을 때 애니메이션이 끝날 때 넣어줄 함수
-        if (targetMonster.gameObject == null)
+        if (focusTarget.gameObject == null)
         {
             Stat.AttackSpeed = Stat.AttackDelay;
         }
@@ -125,7 +123,7 @@ public class PartnerBase : AIBase
 
     }
 
-
+    
 
 
 

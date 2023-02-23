@@ -14,9 +14,9 @@ namespace MonsterStates
 
         public override void OnUpdate(MonsterBase monster)
         {
-            if (monster.targetCharacter != null)
+            if (monster.focusTarget != null)
             {
-                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
 
                 if (distance > monster.AtkRange) // 공격범위보다 멀다면 이동
                 {
@@ -45,21 +45,21 @@ namespace MonsterStates
 
         public override void OnUpdate(MonsterBase monster)
         {
-            if (monster.targetCharacter == null)
+            if (monster.focusTarget == null)
             {
                 distance = 0;
                 monster.ChangeState(MonsterState.Idle);
             }
             else
             {
-                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
             }
 
             monster.anim.SetFloat("isMove", monster.agent.velocity.magnitude);
 
             if (distance > monster.AtkRange)
             {             // 공격범위보다 크다면 이동
-                monster.agent.SetDestination(monster.targetCharacter.transform.position);
+                monster.agent.SetDestination(monster.focusTarget.position);
             }
             else if (distance <= monster.AtkRange)
             {             // 공격범위보다 작거나 같다면 공격으로 변경
@@ -77,30 +77,30 @@ namespace MonsterStates
         public override void OnEnter(MonsterBase monster)
         {
             monster.Stat.AttackSpeed = 0f;
-            if (monster.targetCharacter != null)
+            if (monster.focusTarget != null)
             {
-            monster.transform.LookAt(monster.targetCharacter.transform);
+            monster.transform.LookAt(monster.focusTarget);
             }
         }
 
 
         public override void OnUpdate(MonsterBase monster)
         {
-            if (monster.targetCharacter == null)
+            if (monster.focusTarget == null)
             {   // 타겟이 없다면 할당된 타겟을 지우고 다시 대기상태로 돌아간다.
                 distance = 0;
                 monster.ChangeState(MonsterState.Idle);
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
-                distance = (monster.targetCharacter.gameObject.transform.position - monster.gameObject.transform.position).magnitude; ;
+                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
             }
 
-            if (monster.targetCharacter != null && distance > monster.AtkRange)
+            if (monster.focusTarget != null && distance > monster.AtkRange)
             {
                 monster.ChangeState(MonsterState.Walk);
             }
-            else if (monster.targetCharacter != null && distance <= monster.AtkRange && monster.Stat.AttackSpeed <= 0)
+            else if (monster.focusTarget != null && distance <= monster.AtkRange && monster.Stat.AttackSpeed <= 0)
             {
                 monster.anim.SetFloat("isMove", monster.agent.velocity.magnitude);
                 monster.anim.SetBool("isBattle", true);

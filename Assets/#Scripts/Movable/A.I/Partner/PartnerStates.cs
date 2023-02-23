@@ -17,7 +17,7 @@ namespace PartnerStates
 
         public override void OnUpdate(PartnerBase partner)
         {
-            if (partner.targetMonster == null)
+            if (partner.focusTarget == null)
             {
                 // 캐릭터의 감지범위만큼 적을 감지한다.
                 Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange);
@@ -27,15 +27,15 @@ namespace PartnerStates
                     if (collider.tag == "Monster") // 만약 몬스터가 있다면 타겟 설정
                     {
                         Debug.Log("몬스터 발견 !");
-                        partner.targetMonster = collider.gameObject;
+                        partner.focusTarget = collider.gameObject.transform;
                         break;
                     }
                 }
             }
 
-            if (partner.targetMonster != null) // 타겟이 있을 때
+            if (partner.focusTarget != null) // 타겟이 있을 때
             {                                  // 타겟과의 거리
-                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude;
+                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude;
                 if (distance > partner.AtkRange) // 공격범위보다 멀다면 이동
                 {
                     partner.ChangeState(PartnerState.Walk);
@@ -63,21 +63,21 @@ namespace PartnerStates
 
         public override void OnUpdate(PartnerBase partner)
         {
-            if (partner.targetMonster == null)
+            if (partner.focusTarget == null)
             {   // 타겟이 없다면 다시 대기상태로 돌아간다.
                 distance = 0;
                 partner.ChangeState(PartnerState.Idle);
             }
             else
             {    // 타겟이 있으면 거리 할당
-                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude;
+                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude;
             }
 
             partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
 
             if (distance > partner.AtkRange)
             {             // 공격범위보다 크다면 이동
-                partner.agent.SetDestination(partner.targetMonster.transform.position);
+                partner.agent.SetDestination(partner.focusTarget.position);
             }
             else if (distance <= partner.AtkRange)
             {             // 공격범위보다 작거나 같다면 공격으로 변경
@@ -100,29 +100,29 @@ namespace PartnerStates
 
             partner.Stat.AttackSpeed = 0f;
 
-            if (partner.targetMonster != null)
+            if (partner.focusTarget != null)
             {
-                partner.transform.LookAt(partner.targetMonster.transform);
+                partner.transform.LookAt(partner.focusTarget);
             }
         }
 
         public override void OnUpdate(PartnerBase partner)
         {
-            if (partner.targetMonster == null)
+            if (partner.focusTarget == null)
             {   // 타겟이 없다면 할당된 타겟을 지우고 다시 대기상태로 돌아간다.
                 distance = 0;
                 partner.ChangeState(PartnerState.Idle);
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
-                distance = (partner.targetMonster.transform.position - partner.gameObject.transform.position).magnitude; ;
+                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude; ;
             }
 
-            if (partner.targetMonster != null && distance > partner.AtkRange)
+            if (partner.focusTarget != null && distance > partner.AtkRange)
             {
                 partner.ChangeState(PartnerState.Walk);
             }
-            else if (partner.targetMonster != null && distance <= partner.AtkRange && partner.Stat.AttackSpeed <= 0)
+            else if (partner.focusTarget != null && distance <= partner.AtkRange && partner.Stat.AttackSpeed <= 0)
             {
                 partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 partner.anim.SetBool("isBattle", true);
