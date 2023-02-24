@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_IceMissile : WeaponBase
+public class Weapon_Fireball : WeaponBase
 {
-    public Weapon_IceMissile(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_Fireball(MovableBase wantOwner) : base(wantOwner)
     {
-       spawnPrefab= Resources.Load<GameObject>("Prefabs/Projectiles/IceMissile");
+        spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
     }
 
     public override void OnAttack(MovableBase target, bool wantTracking)

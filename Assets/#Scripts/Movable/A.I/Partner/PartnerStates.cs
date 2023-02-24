@@ -65,6 +65,7 @@ namespace PartnerStates
         {
             if (partner.focusTarget == null)
             {   // 타겟이 없다면 다시 대기상태로 돌아간다.
+                
                 distance = 0;
                 partner.ChangeState(PartnerState.Idle);
             }
@@ -131,7 +132,7 @@ namespace PartnerStates
 
             if (partner.Stat.AttackSpeed > 0)
             {
-                Debug.Log($"공격 대기 남은시간 - {partner.Stat.AttackSpeed}");
+               // Debug.Log($"공격 대기 남은시간 - {partner.Stat.AttackSpeed}");
                 partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 partner.anim.SetBool("isBattle", false);
                 partner.Stat.AttackSpeed -= Time.deltaTime;

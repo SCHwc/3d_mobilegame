@@ -16,9 +16,9 @@ public class Managers : MonoBehaviour
 
     public static GameObject swordEffect;
 
-    public static Dictionary<string, WeaponInfo> weaponInfos;
+    //public static Dictionary<string, WeaponInfo> weaponInfos = null;
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -49,39 +49,38 @@ public class Managers : MonoBehaviour
 
         swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
 
-        if (weaponInfos == null)
-        {
-            weaponInfos = new Dictionary<string, WeaponInfo>();
-
-            weaponInfos.Add
-                (
-                "IceMissile",
-                new WeaponInfo
-                (
-                    typeof(Weapon_IceMissile),
-                    Resources.Load<GameObject>("Prefabs/Projectiles/IceMissile"),
-                    null,
-                    "IceMissile"
-                    )
-                ) ;
-        }
+        //if (weaponInfos == null)
+        //{
+        //    weaponInfos = new Dictionary<string, WeaponInfo>();
+        //    weaponInfos.Add
+        //        (
+        //        "IceMissile",
+        //        new WeaponInfo
+        //        (
+        //            typeof(Weapon_IceMissile),
+        //            Resources.Load<GameObject>("Prefabs/Projectiles/IceMissile"),
+        //            null,
+        //            "IceMissile"
+        //            )
+        //        );
+        //}
 
     }
 }
 
-public class WeaponInfo
-{
-    public System.Type weapon;
-    public GameObject spawnPrefab;
-    public Sprite icon;
-    public string name;
+//public class WeaponInfo
+//{
+//    public System.Type weapon;
+//    public GameObject spawnPrefab;
+//    public Sprite icon;
+//    public string name;
 
-    public WeaponInfo(System.Type wantWeapon, GameObject wantPrefab, Sprite wantIcon, string wantName)
-    {
-        weapon = wantWeapon;
-        spawnPrefab = wantPrefab;
-        icon = wantIcon;
-        name = wantName;
-    }
-}
+//    public WeaponInfo(System.Type wantWeapon, GameObject wantPrefab, Sprite wantIcon, string wantName)
+//    {
+//        weapon = wantWeapon;
+//        spawnPrefab = wantPrefab;
+//        icon = wantIcon;
+//        name = wantName;
+//    }
+//}
 
