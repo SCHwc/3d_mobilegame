@@ -23,16 +23,8 @@ public class MonsterBase : AIBase
     MState currentState;
 
 
-    int getHitStack = 0; // 공격한 적을 타겟으로 할당하기 위한 변수
+    public int getHitStack = 0; // 공격한 적을 타겟으로 할당하기 위한 변수
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AtkRange);     // 공격범위체크
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, FindRange);    // 감지범위체크
-    }
     protected override void Start()
     {
         base.Start();
@@ -117,7 +109,7 @@ public class MonsterBase : AIBase
         Stat.AttackSpeed = Stat.AttackDelay;
     }
 
-   
+
 
 
 

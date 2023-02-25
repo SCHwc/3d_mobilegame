@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7102322668525495756}
   - component: {fileID: 7127924112952238430}
   - component: {fileID: 7042172318203855642}
+  - component: {fileID: -7428855551830050586}
   m_Layer: 0
   m_Name: FireballExplosionRed
   m_TagString: Untagged
@@ -4903,6 +4904,19 @@ MonoBehaviour:
   destroyWhenDone: 1
   soundPrefabIsChild: 0
   pitchRandomMultiplier: 1.4
+--- !u!114 &-7428855551830050586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929329050847825510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4402485c83f6e7a41b8a9247727e8702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTime: 0.8
 --- !u!1 &6929373061634350182
 GameObject:
   m_ObjectHideFlags: 0

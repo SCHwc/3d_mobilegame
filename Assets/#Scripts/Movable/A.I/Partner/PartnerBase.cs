@@ -64,17 +64,6 @@ public class PartnerBase : AIBase
         currentState.OnEnter(this);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AtkRange);     // 공격범위체크
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, FindRange);    // 감지범위체크
-    }
-
-
-
     public override float GetDamage(float damage, MovableBase from) // 공격을 받았을 때
     {
         base.GetDamage(damage, from);

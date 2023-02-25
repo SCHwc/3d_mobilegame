@@ -8,10 +8,13 @@ namespace PartnerStates
 
     public class PIdle : PState
     {
+        float findRange = 0;
+
         public override void OnEnter(PartnerBase partner)
         {
             Debug.Log("Idle 상태 진입");
             partner.anim.SetBool("isBattle", false);
+            findRange = 0;
         }
 
 
@@ -19,8 +22,11 @@ namespace PartnerStates
         {
             if (partner.focusTarget == null)
             {
+                if (findRange < partner.FindRange) { findRange += Time.deltaTime; }
+                else { findRange = 0; }
+                
                 // 캐릭터의 감지범위만큼 적을 감지한다.
-                Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange);
+                Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, findRange, 1 << 11);
 
                 foreach (Collider collider in col)
                 {
@@ -35,6 +41,7 @@ namespace PartnerStates
 
             if (partner.focusTarget != null) // 타겟이 있을 때
             {                                  // 타겟과의 거리
+                findRange = 0;
                 distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude;
                 if (distance > partner.AtkRange) // 공격범위보다 멀다면 이동
                 {
@@ -65,7 +72,7 @@ namespace PartnerStates
         {
             if (partner.focusTarget == null)
             {   // 타겟이 없다면 다시 대기상태로 돌아간다.
-                
+
                 distance = 0;
                 partner.ChangeState(PartnerState.Idle);
             }
@@ -132,7 +139,7 @@ namespace PartnerStates
 
             if (partner.Stat.AttackSpeed > 0)
             {
-               // Debug.Log($"공격 대기 남은시간 - {partner.Stat.AttackSpeed}");
+                // Debug.Log($"공격 대기 남은시간 - {partner.Stat.AttackSpeed}");
                 partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 partner.anim.SetBool("isBattle", false);
                 partner.Stat.AttackSpeed -= Time.deltaTime;

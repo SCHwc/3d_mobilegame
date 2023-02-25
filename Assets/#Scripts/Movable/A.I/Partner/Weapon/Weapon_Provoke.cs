@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Weapon_Provoke : WeaponBase
+{
+    public Weapon_Provoke(MovableBase wantOwner) : base(wantOwner)
+    {
+        spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Provoke");
+    }
+
+    public override void OnAttack(MovableBase target, bool wantTracking)
+    {
+        Shot(target, owner.transform.position, wantTracking);
+    }
+}

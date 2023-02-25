@@ -6,14 +6,35 @@ namespace MonsterStates
 {
     public class MIdle : MState
     {
+        float findRange = 0;
         public override void OnEnter(MonsterBase monster)
         {
             monster.anim.SetBool("isBattle", false);
+            monster.getHitStack = 0;
+            findRange = 0;
         }
 
 
         public override void OnUpdate(MonsterBase monster)
         {
+            if (monster.focusTarget == null)
+            {
+                if (findRange < monster.FindRange) { findRange += Time.deltaTime; }
+                else { findRange = 0; }
+
+                // 캐릭터의 감지범위만큼 적을 감지한다.
+                Collider[] col = Physics.OverlapSphere(monster.gameObject.transform.position, findRange);
+
+                foreach (Collider collider in col)
+                {
+                    if (collider.tag == "Partner"||collider.tag=="Player") 
+                    {
+                        monster.focusTarget = collider.gameObject.transform;
+                        break;
+                    }
+                }
+            }
+
             if (monster.focusTarget != null)
             {
                 distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
@@ -38,7 +59,7 @@ namespace MonsterStates
     {
         public override void OnEnter(MonsterBase monster)
         {
-            
+
             monster.agent.enabled = true;
         }
 
@@ -79,7 +100,7 @@ namespace MonsterStates
             monster.Stat.AttackSpeed = 0f;
             if (monster.focusTarget != null)
             {
-            monster.transform.LookAt(monster.focusTarget);
+                monster.transform.LookAt(monster.focusTarget);
             }
         }
 

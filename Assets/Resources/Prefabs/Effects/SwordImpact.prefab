@@ -9788,7 +9788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4402485c83f6e7a41b8a9247727e8702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTime: 1
+  leftTime: 0.8
 --- !u!1 &7756544200875850154
 GameObject:
   m_ObjectHideFlags: 0

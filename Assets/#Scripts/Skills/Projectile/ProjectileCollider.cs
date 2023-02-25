@@ -17,5 +17,6 @@ public class ProjectileCollider : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider collision) { from?.OnTriggerEnter(collision); }
+
     //public void OnCollisionEnter(Collision collision) { from?.OnCollisionEnter(collision); }
 }

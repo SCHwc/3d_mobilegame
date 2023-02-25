@@ -65,15 +65,22 @@ public class ProjectileBase : MonoBehaviour
 
         if (isTracking)
         {  // 목표물을 추적하도록 설정되있다면 목표물을 바라보게 만들고 계속 전진
-            Vector3 targetPosition = focusTarget.transform.position;
-            targetPosition.y = 1;
-            transform.LookAt(targetPosition);
-            transform.position += transform.forward * currentSpeed * Time.deltaTime;
+            if (focusTarget)
+            {
+                Vector3 targetPosition = focusTarget.transform.position;
+                targetPosition.y = 1;
+                transform.LookAt(targetPosition);
+                transform.position += transform.forward * currentSpeed * Time.deltaTime;
+            }
         }
         else
-        {
+        {   // 아니라면 초기화 메서드에서 할당받은 방향으로 전진
+            transform.LookAt(Direction);
             transform.position += Direction * currentSpeed * Time.deltaTime;
         }
+
+
+
     }
 
     public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
@@ -90,24 +97,37 @@ public class ProjectileBase : MonoBehaviour
         // 충돌무시 오브젝트라면 return
         if (ignoreList.Contains(other)) { return; }
 
+
+        // 몬스터를 공격하기 위한 로직
         if (owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             MonsterBase monster = other.GetComponent<MonsterBase>();
             if (monster != null)
-            {
+            {    // 이 스킬에 달려있는 이벤트들을 모두 실행시킨다.
                 foreach (ProjectileAction current in actions) { current?.Activate(this, monster, transform.position); }
             }
         }
 
+        // 플레이어 진영을 공격하기 위한 로직
+        if (owner.focusTarget.gameObject == other && (other.gameObject.layer == LayerMask.NameToLayer("Player")
+            || other.gameObject.layer == LayerMask.NameToLayer("Partner")))
+        {
+            MovableBase target = other.GetComponent<MovableBase>();
+            if (target != null)
+            {   // 이 스킬에 달려있는 이벤트들을 모두 실행시킨다.
+                foreach (ProjectileAction current in actions) { current?.Activate(this, target, transform.position); }
+            }
+        }
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        // 콜라이더에서 충돌을 감지하면 충돌한 물체의 정보를 여기서 받아옴 > Activate 함수로 정보 전달후에 충돌 이벤트 실행
         Activate(other.gameObject);
     }
 
     public virtual void SetIgnore(GameObject target)
     {
-        ignoreList.Add(target); //대상을 무시하도록 합니다!
+        ignoreList.Add(target); //대상을 충돌무시한다.(Layer를 활용해서 충돌을 나누면 이 함수 불필요)
     }
 }
