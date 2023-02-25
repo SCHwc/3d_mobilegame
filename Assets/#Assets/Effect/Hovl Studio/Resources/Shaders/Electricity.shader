@@ -118,7 +118,7 @@ Shader "Hovl/Particles/Electricity"
 					return o;
 				}
 
-				fixed4 frag ( v2f i  ) : SV_Target
+				fixed4 frag ( v2f i  ) : SV_target
 				{
 					UNITY_SETUP_INSTANCE_ID( i );
 					UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( i );

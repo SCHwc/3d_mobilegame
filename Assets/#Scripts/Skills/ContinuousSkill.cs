@@ -33,8 +33,8 @@ public class ContinuousSkill : SkillBase
             if(holdTimeCheck >= holdTime)
             {
                 onSkill = false;
-                holdTimeCheck = 0f;
-                damageDelayCheck = 0f;
+                //holdTimeCheck = 0f;
+                //damageDelayCheck = 0f;
                 ps.Stop();
                 Destroy(gameObject);
             }

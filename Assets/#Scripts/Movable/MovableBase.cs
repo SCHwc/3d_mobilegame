@@ -9,7 +9,7 @@ public abstract class MovableBase : MonoBehaviour
     protected Collider collider; // 콜라이더
     public Animator anim;     // 애니메이터
 
-    [SerializeField]protected MovableBase target; // 타겟
+    public MovableBase focusTarget; // 타겟
 
     public StatBase Stat
     {

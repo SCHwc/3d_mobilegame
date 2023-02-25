@@ -11,7 +11,7 @@ public class MonsterBase : AIBase
 
     public override float GetDamage(float damage, MovableBase from)
     {
-        throw new System.NotImplementedException();
+        return 0;
     }
 
     public override float GetHeal()

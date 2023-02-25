@@ -840,7 +840,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4598507526983224813}
   - component: {fileID: 4598507526983224812}
-  - component: {fileID: 4598507526983224815}
   m_Layer: 0
   m_Name: WeaponCol
   m_TagString: Untagged
@@ -876,18 +875,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4598507526983224815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4598507526983224810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c95482690d8b81b48a79b7ab1e7e0ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4598507527288233364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2889,7 @@ GameObject:
   - component: {fileID: 4598507526270086968}
   - component: {fileID: 4598507526270086971}
   - component: {fileID: 4794441524186798055}
-  - component: {fileID: -5524306472529249682}
+  - component: {fileID: 4470503390899380974}
   m_Layer: 0
   m_Name: PandaKnight
   m_TagString: Untagged
@@ -2999,7 +2986,7 @@ MonoBehaviour:
   _defensePower: 10
   _selfRecovery: 0
   moveSpeedMultiflier: 1.5
---- !u!114 &-5524306472529249682
+--- !u!114 &4470503390899380974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3008,15 +2995,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7780183556927851944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e9db3cc651acd48a0cfad1f34f6cf2, type: 3}
+  m_Script: {fileID: 11500000, guid: 642b0ed72731f684b99f2ab24a1eb5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  focusTarget: {fileID: 0}
   isRun: 0
-  normalSkillPrefab: {fileID: 1296210326916947490, guid: 9496984ec30ef0d438781a5ea76cc590,
-    type: 3}
-  ultimateSkillPrefab: {fileID: 1220669486009758456, guid: e7027d863104b1c4898dc6918ce7dca2,
-    type: 3}
+  normalWeaponName: FloatingSword
+  ultimateWeaponName: BlackHole
   weaponCol: {fileID: 4598507526983224812}
   normalSkillCooldown: 5
   ultimateSkillCooldown: 10

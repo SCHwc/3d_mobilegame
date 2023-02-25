@@ -6,12 +6,16 @@ public class PlayeableCharacterBase : MovableBase
 {
     public bool isRun = false; // 달리기 상태인지
 
-    public GameObject normalSkillPrefab; // 일반스킬 오브젝트
-    public GameObject ultimateSkillPrefab; // 궁극기
+    #region 스킬 이름 & WeaponBase
+    [SerializeField] protected string normalWeaponName; // 노말스킬 이름
+    WeaponBase normalSkill; // 스킬 스크립트
+    [SerializeField] protected string ultimateWeaponName; // 궁극기 이름
+    WeaponBase ultimateSkill; // 궁극기 스크립트
+    #endregion
 
     [SerializeField] protected Collider weaponCol;        // 무기콜라이더
 
-    #region 스킬관련
+    #region 스킬쿨타임
     [SerializeField] protected float normalSkillCooldown; //노말스킬 쿨타임
     [SerializeField] protected float ultimateSkillCooldown; //노말스킬 쿨타임
     protected float normalSkillCheckTime = 0;
@@ -49,13 +53,13 @@ public class PlayeableCharacterBase : MovableBase
     protected override void Start()
     {
         base.Start();
+
+        normalSkill = AddWeapon(normalWeaponName);
+        ultimateSkill = AddWeapon(ultimateWeaponName);
     }
 
     protected void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            GetDamage(1, this);
-
         View();
 
         // 노말 쿨타임 체크
@@ -106,6 +110,25 @@ public class PlayeableCharacterBase : MovableBase
     public virtual void Skill(SkillType skillType) // 스킬발동
     {
 
+        switch (skillType)
+        {
+            case SkillType.Normal:
+                if(isCool_normal != true)
+                {
+                    isCool_normal = true;
+                    normalSkill.OnAttack(this, false);
+                    anim.SetTrigger("OnSkill");
+                }
+                break;
+            case SkillType.Ultimate:
+                if(isCool_ultimate != true)
+                {
+                    isCool_ultimate = true;
+                    ultimateSkill.OnAttack(focusTarget, false);
+                    anim.SetTrigger("OnSkill");
+                }
+                break;
+        }
     }
 
     public virtual void ActiveAttackCol()
@@ -130,8 +153,8 @@ public class PlayeableCharacterBase : MovableBase
     // 시야각 + 시야 범위 내의 몬스터중 가장 가까운 녀석을 타겟으로 가져가도록하는 메서드
     protected void View()
     {
-        float nearestTargetDist = viewDistance + 1;
-        int nearestTargetIdx = -1;
+        float nearesttargetDist = viewDistance + 1;
+        int nearesttargetIdx = -1;
 
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
 
@@ -139,23 +162,38 @@ public class PlayeableCharacterBase : MovableBase
         {
             Transform _targetTf = _target[i].transform;
             Vector3 _direction = (_targetTf.position - transform.position).normalized;
+            // 시야각
             float _angle = Vector3.Angle(_direction, transform.forward);
             if(_angle < viewAngle * 0.5f)
             {
+                
                 float dist = (_targetTf.position - transform.position).magnitude;
-                if (dist < nearestTargetDist)
+                if (dist < nearesttargetDist)
                 {
-                    nearestTargetDist = dist;
-                    nearestTargetIdx = i;
+                    nearesttargetDist = dist;
+                    nearesttargetIdx = i;
                 }
             }
         }
 
-        if (nearestTargetIdx > -1)
-            target = _target[nearestTargetIdx].GetComponent<MovableBase>();
+        if (nearesttargetIdx > -1)
+            focusTarget = _target[nearesttargetIdx].GetComponent<MovableBase>();
         else
-            target = null;
+            focusTarget = null;
 
+    }
+
+    public WeaponBase AddWeapon(string wantName)
+    {
+        switch (wantName)
+        {
+            case "FloatingSword":
+                return new Weapon_FloatingSword(this);
+            case "BlackHole":
+                return new Weapon_BlackHole(this);
+        }
+
+        return null;
     }
 
     public override float GetHeal() { return 0; }
