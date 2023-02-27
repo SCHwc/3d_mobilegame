@@ -6,38 +6,39 @@ namespace MonsterStates
 {
     public class MIdle : MState
     {
-        float findRange = 0;
         public override void OnEnter(MonsterBase monster)
         {
             monster.anim.SetBool("isBattle", false);
             monster.getHitStack = 0;
-            findRange = 0;
         }
-
 
         public override void OnUpdate(MonsterBase monster)
         {
             if (monster.focusTarget == null)
             {
-                if (findRange < monster.FindRange) { findRange += Time.deltaTime; }
-                else { findRange = 0; }
+                float nearestDistance = 10f;
+                int nearestIndex = -1;
 
                 // 캐릭터의 감지범위만큼 적을 감지한다.
-                Collider[] col = Physics.OverlapSphere(monster.gameObject.transform.position, findRange);
-
-                foreach (Collider collider in col)
+                Collider[] col = Physics.OverlapSphere(monster.gameObject.transform.position, monster.FindRange, 1 << 9 | 1 << 10);
+                for (int i = 0; i < col.Length; i++)
                 {
-                    if (collider.tag == "Partner"||collider.tag=="Player") 
+                    float tempDistance = (col[i].gameObject.transform.position - monster.gameObject.transform.position).magnitude;
+                    if (tempDistance < nearestDistance)
                     {
-                        monster.focusTarget = collider.gameObject.transform;
-                        break;
+                        nearestDistance = tempDistance;
+                        nearestIndex = i;
                     }
                 }
+
+                if (nearestIndex > -1) { monster.focusTarget = col[nearestIndex].GetComponent<MovableBase>(); }
+                else { monster.focusTarget = null; }
+
             }
 
             if (monster.focusTarget != null)
             {
-                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
 
                 if (distance > monster.AtkRange) // 공격범위보다 멀다면 이동
                 {
@@ -73,14 +74,14 @@ namespace MonsterStates
             }
             else
             {
-                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
             }
 
             monster.anim.SetFloat("isMove", monster.agent.velocity.magnitude);
 
             if (distance > monster.AtkRange)
             {             // 공격범위보다 크다면 이동
-                monster.agent.SetDestination(monster.focusTarget.position);
+                monster.agent.SetDestination(monster.focusTarget.transform.position);
             }
             else if (distance <= monster.AtkRange)
             {             // 공격범위보다 작거나 같다면 공격으로 변경
@@ -100,7 +101,7 @@ namespace MonsterStates
             monster.Stat.AttackSpeed = 0f;
             if (monster.focusTarget != null)
             {
-                monster.transform.LookAt(monster.focusTarget);
+                monster.transform.LookAt(monster.focusTarget.transform);
             }
         }
 
@@ -114,7 +115,7 @@ namespace MonsterStates
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
-                distance = (monster.focusTarget.position - monster.gameObject.transform.position).magnitude;
+                distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
             }
 
             if (monster.focusTarget != null && distance > monster.AtkRange)
@@ -155,20 +156,5 @@ namespace MonsterStates
         {
         }
 
-    }
-
-    public class MSkill : MState
-    {
-        public override void OnEnter(MonsterBase monster)
-        {
-        }
-
-        public override void OnExit(MonsterBase monster)
-        {
-        }
-
-        public override void OnUpdate(MonsterBase monster)
-        {
-        }
     }
 }

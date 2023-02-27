@@ -77,8 +77,12 @@ public class ProjectileBase : MonoBehaviour
         }
         else
         {   // 아니라면 초기화 메서드에서 할당받은 방향으로 전진
-            transform.LookAt(Direction);
-            transform.position += Direction * currentSpeed * Time.deltaTime;
+            Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
+
+            Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
+            //transform.LookAt(transform.position + lookPosition); 
+            transform.rotation=Quaternion.LookRotation(lookPosition);
+            transform.position += movePosition;
         }
 
 
@@ -90,19 +94,20 @@ public class ProjectileBase : MonoBehaviour
         owner = wantOnwer;
         focusTarget = wantTarget;
         isTracking = wantTracking;
-
-        Direction = focusTarget.transform.position;
+        if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
+        Direction = focusTarget.transform.position - owner.transform.position;
     }
 
     public virtual void Activate(GameObject other)
     {
         // 충돌무시 오브젝트라면 return
         if (ignoreList.Contains(other)) { return; }
-
+        // 충돌한 물체가 같은 진영이라면 return
+        if (owner.isAlly == other.GetComponent<MovableBase>()?.isAlly) { return; }
 
         // 몬스터를 공격하기 위한 로직
         if ((owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            ||(isRangeAttack&&other.gameObject.layer==LayerMask.NameToLayer("Monster")))
+            || (isRangeAttack && other.gameObject.layer == LayerMask.NameToLayer("Monster")))
         {
             MonsterBase monster = other.GetComponent<MonsterBase>();
             if (monster != null)

@@ -19,8 +19,8 @@ TagManager:
   - Player
   - Partner
   - Monster
-  - MonsterAttack
   - PartnerAttack
+  - MonsterAttack
   - 
   - 
   - 

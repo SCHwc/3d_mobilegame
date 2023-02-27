@@ -33,13 +33,17 @@ public abstract class AIBase : MovableBase
 
     public Collider atkCollider; // 근접공격에 필요한 콜라이더
 
-    
+    protected WeaponBase equipSkill;
+    public string skillName;
+    public bool skillTracking;
+
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = this.stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
-       
+        AddWeapon(skillName);
+
     }
 
     public override float GetDamage(float damage, MovableBase from)
@@ -54,11 +58,14 @@ public abstract class AIBase : MovableBase
         return damage;
     }
 
+    public virtual void SkillCasting() { anim.SetTrigger("isSkill"); }
+
+    public virtual void OffCollider()
+    {
+        collider.enabled = false;
+    }
+
     
 
     abstract public void Die();
-    public override void Move()
-    {
-        throw new System.NotImplementedException();
-    }
 }

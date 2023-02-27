@@ -8,41 +8,38 @@ namespace PartnerStates
 
     public class PIdle : PState
     {
-        float findRange = 0;
-
         public override void OnEnter(PartnerBase partner)
         {
             Debug.Log("Idle 상태 진입");
             partner.anim.SetBool("isBattle", false);
-            findRange = 0;
-        }
 
+        }
 
         public override void OnUpdate(PartnerBase partner)
         {
+            float nearestDistance = 10f;
+            int nearestIndex = -1;
             if (partner.focusTarget == null)
             {
-                if (findRange < partner.FindRange) { findRange += Time.deltaTime; }
-                else { findRange = 0; }
-                
                 // 캐릭터의 감지범위만큼 적을 감지한다.
-                Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, findRange, 1 << 11);
-
-                foreach (Collider collider in col)
+                Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange, 1 << 11);
+                for (int i = 0; i < col.Length; i++)
                 {
-                    if (collider.tag == "Monster") // 만약 몬스터가 있다면 타겟 설정
+                    float tempDistance = (col[i].gameObject.transform.position - partner.gameObject.transform.position).magnitude;
+                    if (tempDistance < nearestDistance)
                     {
-                        Debug.Log("몬스터 발견 !");
-                        partner.focusTarget = collider.gameObject.transform;
-                        break;
+                        nearestDistance = tempDistance;
+                        nearestIndex = i;
                     }
                 }
+
+                if (nearestIndex > -1) { partner.focusTarget = col[nearestIndex].GetComponent<MovableBase>(); }
+                else { partner.focusTarget = null; }
             }
 
             if (partner.focusTarget != null) // 타겟이 있을 때
-            {                                  // 타겟과의 거리
-                findRange = 0;
-                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude;
+            {                                    // 타겟과의 거리
+                distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
                 if (distance > partner.AtkRange) // 공격범위보다 멀다면 이동
                 {
                     partner.ChangeState(PartnerState.Walk);
@@ -78,14 +75,14 @@ namespace PartnerStates
             }
             else
             {    // 타겟이 있으면 거리 할당
-                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude;
+                distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
             }
 
             partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
 
             if (distance > partner.AtkRange)
             {             // 공격범위보다 크다면 이동
-                partner.agent.SetDestination(partner.focusTarget.position);
+                partner.agent.SetDestination(partner.focusTarget.transform.position);
             }
             else if (distance <= partner.AtkRange)
             {             // 공격범위보다 작거나 같다면 공격으로 변경
@@ -107,11 +104,6 @@ namespace PartnerStates
             Debug.Log("Attack 상태 진입");
 
             partner.Stat.AttackSpeed = 0f;
-
-            if (partner.focusTarget != null)
-            {
-                partner.transform.LookAt(partner.focusTarget);
-            }
         }
 
         public override void OnUpdate(PartnerBase partner)
@@ -123,7 +115,8 @@ namespace PartnerStates
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
-                distance = (partner.focusTarget.position - partner.gameObject.transform.position).magnitude; ;
+                distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
+                partner.transform.LookAt(partner.focusTarget.transform);
             }
 
             if (partner.focusTarget != null && distance > partner.AtkRange)
@@ -169,22 +162,6 @@ namespace PartnerStates
         }
     }
 
-    public class PSkill : PState
-    {
-        public override void OnEnter(PartnerBase partner)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnExit(PartnerBase partner)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnUpdate(PartnerBase partner)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+   
 }
 

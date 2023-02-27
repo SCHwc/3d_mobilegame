@@ -20,7 +20,6 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
-
     public int getHitStack = 0; // 공격한 적을 타겟으로 할당하기 위한 변수
 
     protected override void Start()
@@ -46,7 +45,6 @@ public class MonsterBase : AIBase
         states[(int)MonsterState.Walk] = new MonsterStates.MMove();
         states[(int)MonsterState.Attack] = new MonsterStates.MAttack();
         states[(int)MonsterState.Die] = new MonsterStates.MDie();
-        states[(int)MonsterState.Skill] = new MonsterStates.MSkill();
 
         ChangeState(MonsterState.Idle);
     }
@@ -58,7 +56,7 @@ public class MonsterBase : AIBase
 
         if (getHitStack == 0 && focusTarget != from)
         {   // 전투 중 몬스터를 공격하는 캐릭터가 타겟이 아니라면 그 공격한 캐릭터를 타겟으로 설정 (1회 한정)
-            focusTarget = from.transform;
+            focusTarget = from.GetComponent<MovableBase>();
             getHitStack++;
         }
 
@@ -106,19 +104,7 @@ public class MonsterBase : AIBase
     {   // 공격 애니메이션이 끝날 때 공격 대기시간을 초기화 하기 위해 넣어줄 함수
         Stat.AttackSpeed = Stat.AttackDelay;
     }
-
-
-
-
-
-    public override float Attack()
-    {
-        throw new System.NotImplementedException();
-    }
-    public override float GetHeal()
-    {
-        throw new System.NotImplementedException();
-    }
+    
     public override void Die()
     {
         Destroy(gameObject);

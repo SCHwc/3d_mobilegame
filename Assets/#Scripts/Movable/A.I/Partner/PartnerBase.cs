@@ -19,7 +19,7 @@ public abstract class PState
 
 public class PartnerBase : AIBase
 {
-   protected PartnerState partnerState;
+    protected PartnerState partnerState;
 
     protected PState[] states;
     protected PState currentState;
@@ -47,7 +47,6 @@ public class PartnerBase : AIBase
         states[(int)PartnerState.Walk] = new PartnerStates.PMove();
         states[(int)PartnerState.Attack] = new PartnerStates.PAttack();
         states[(int)PartnerState.Die] = new PartnerStates.PDie();
-        states[(int)PartnerState.Skill] = new PartnerStates.PSkill();
 
         ChangeState(PartnerState.Idle);
     }
@@ -112,24 +111,23 @@ public class PartnerBase : AIBase
 
     }
 
-    
-
-
-
-
-
-
-
-
-
-
-    public override float Attack() // 타겟이 있고 타겟이 나의 공격범위에 있을 때
+    public void Anim_Skill()
     {
-        return 0;
+        equipSkill.OnAttack(focusTarget.GetComponent<MonsterBase>(), skillTracking);
     }
-    public override float GetHeal()
+
+    public override void AddWeapon(string wantName)
     {
-        throw new System.NotImplementedException();
+        switch (wantName)
+        {
+            case "Provoke":
+                equipSkill = new Weapon_Provoke(this);
+                break;
+            case "FireShield":
+                break;
+            case "IceSpear":
+                break;
+        }
     }
 
     public override void Die()

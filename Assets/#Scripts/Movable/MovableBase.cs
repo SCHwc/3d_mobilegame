@@ -18,19 +18,19 @@ public abstract class MovableBase : MonoBehaviour
             return stat;
         }
     }
-    protected Collider collider; // 콜라이더
-    public Animator anim;     // 애니메이터
-    public Transform focusTarget;
+    protected Collider collider;        // 콜라이더
+    public Animator anim;               // 애니메이터
+    public MovableBase focusTarget;     // 이 캐릭터의 목표물
+    public bool isAlly;                 // 동맹여부
     // 추상 메서드들
-    abstract public float Attack();      // 공격관련 메서드
     abstract public float GetDamage(float damage, MovableBase from);   // 피격관련 메서드
-    abstract public float GetHeal();     // 체력회복 메서드
-    abstract public void Move();        // 이동관련 메서드
-
+   
     protected virtual void Start()
     {
         stat = GetComponent<StatBase>();
         collider = GetComponent<Collider>();
         anim = GetComponent<Animator>();
     }
+
+    public virtual void AddWeapon(string wantName) { }
 }

@@ -39,7 +39,7 @@ public class Partner_LongAttack : PartnerBase
         }
     }
 
-    public void AddWeapon(string wantName)
+    public override void AddWeapon(string wantName)
     {
         switch (wantName)
         {
