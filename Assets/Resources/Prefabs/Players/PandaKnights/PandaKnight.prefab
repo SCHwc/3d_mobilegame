@@ -2890,7 +2890,7 @@ GameObject:
   - component: {fileID: 4598507526270086971}
   - component: {fileID: 4794441524186798055}
   - component: {fileID: 4470503390899380974}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PandaKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3010,7 +3010,7 @@ MonoBehaviour:
   viewDistance: 10
   targetMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
 --- !u!1 &7780216755276329648
 GameObject:
   m_ObjectHideFlags: 0

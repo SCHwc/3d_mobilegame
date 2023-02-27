@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CharacterAttack
   - Monster
+  - Partner
   layers:
   - Default
   - TransparentFX
@@ -15,12 +16,12 @@ TagManager:
   - UI
   - 
   - Skill
+  - 
+  - Player
+  - Partner
   - Monster
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PartnerAttack
+  - MonsterAttack
   - 
   - 
   - 

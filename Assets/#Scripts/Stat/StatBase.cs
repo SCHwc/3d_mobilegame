@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class StatBase : MonoBehaviour
 {
-    public string name; // 이름
-
     #region 스탯들
     [SerializeField] protected float _currentHp;         // 현재체력
     [SerializeField] protected float _maxHp;             // 최대체력

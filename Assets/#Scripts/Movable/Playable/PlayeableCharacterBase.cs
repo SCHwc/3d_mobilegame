@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayeableCharacterBase : MovableBase
 {
     public bool isRun = false; // 달리기 상태인지
+    protected bool isAttacking = false; // 평타중인지
 
+    float moveAttackSpeed = 0.5f;
+
+    public Vector3 inputVector; // 입력벡터
+
+    [SerializeField] protected Collider weaponCol;        // 무기콜라이더
+    
     #region 스킬 이름 & WeaponBase
     [SerializeField] protected string normalWeaponName; // 노말스킬 이름
     WeaponBase normalSkill; // 스킬 스크립트
     [SerializeField] protected string ultimateWeaponName; // 궁극기 이름
     WeaponBase ultimateSkill; // 궁극기 스크립트
     #endregion
-
-    [SerializeField] protected Collider weaponCol;        // 무기콜라이더
 
     #region 스킬쿨타임
     [SerializeField] protected float normalSkillCooldown; //노말스킬 쿨타임
@@ -60,8 +65,11 @@ public class PlayeableCharacterBase : MovableBase
 
     protected void Update()
     {
-        View();
+        View(); // 시야각을 통한 타겟 체크
 
+        Move(inputVector); // 이동
+
+        #region 쿨타임 체크
         // 노말 쿨타임 체크
         if (isCool_normal)
         {
@@ -82,13 +90,17 @@ public class PlayeableCharacterBase : MovableBase
                 isCool_ultimate = false;
             }
         }
+        #endregion
+
+        AttackMove(inputVector); // 공격시 앞으로 조금씩 이동
     }
 
     public virtual void Move(Vector3 inputDir)
     {
         anim.SetFloat("MoveSpeed", inputDir.magnitude);
 
-        if (inputDir.magnitude > 0.1f)
+        // 입력 방향이 있으며 공격중이 아닐때
+        if (inputDir.magnitude > 0.1f && !isAttacking)
         {
             float dirX = inputDir.x;
             float dirZ = inputDir.y;
@@ -102,9 +114,43 @@ public class PlayeableCharacterBase : MovableBase
         }
     }
 
+    // 공격시 움직이는 메서드
+    public virtual void AttackMove(Vector3 inputVector)
+    {
+        // 공격시 앞으로 조금 이동
+        if (isAttacking)
+        {
+            if (inputVector.magnitude > 0.1f) // 입력방향있으면 그방향으로
+            {
+                float dirX = inputVector.x;
+                float dirZ = inputVector.y;
+                Vector3 moveDir = new Vector3(dirX, 0, dirZ);
+
+                transform.position += (moveDir * Time.deltaTime * moveAttackSpeed);
+
+                transform.LookAt(transform.position + moveDir);
+            }
+            else if (focusTarget != null) // 입력 안하고 타겟 존재시 타겟쪽으로 움직이며 공격
+            {
+                Vector3 moveDir = focusTarget.transform.position - transform.position;
+                moveDir.y = 0f;
+                moveDir = moveDir.normalized;
+
+                transform.position += moveDir * Time.deltaTime * moveAttackSpeed;
+
+                transform.LookAt(transform.position + moveDir);
+            }
+            else // 타겟없고 입력없으면 자기의 앞방향으로
+            {
+                transform.position += transform.forward.normalized * Time.deltaTime * moveAttackSpeed;
+            }
+        }
+    }
+
     public virtual void Attack(bool onAttack)
     {
         anim.SetBool("OnAttack", onAttack);
+        isAttacking = onAttack;
     }
 
     public virtual void Skill(SkillType skillType) // 스킬발동
@@ -195,8 +241,4 @@ public class PlayeableCharacterBase : MovableBase
 
         return null;
     }
-
-    public override float GetHeal() { return 0; }
-    public override float Attack() { return 0; }
-    public override void Move() { }
 }

@@ -4,24 +4,9 @@ using UnityEngine;
 
 public class MonsterBase : AIBase
 {
-    public override float Attack()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public override float GetDamage(float damage, MovableBase from)
     {
         return 0;
     }
-
-    public override float GetHeal()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Move()
-    {
-        throw new System.NotImplementedException();
-    }
-
 }

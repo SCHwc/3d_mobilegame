@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        player.isRun = Managers.Input.isRun;
-        player.Move(Managers.Input.inputVector);
-        player.Attack(Managers.Input.onAttack);
+        player.inputVector = Managers.Input.inputVector; // 입력값 넘겨주기
+        player.isRun = Managers.Input.isRun;    // 달리기 상태 업데이트
+        player.Attack(Managers.Input.onAttack); // 공격입력 받으면 발동
     }
 
     public void Skill(SkillType type)

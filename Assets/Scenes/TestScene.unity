@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 279392649}
   - component: {fileID: 279392648}
   - component: {fileID: 279392650}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: 11
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -476,7 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   _currentHp: 0
   _maxHp: 0
   _moveSpeed: 0
@@ -728,7 +727,7 @@ GameObject:
   - component: {fileID: 858702323}
   - component: {fileID: 858702322}
   - component: {fileID: 858702328}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: 33
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -761,7 +760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   _currentHp: 0
   _maxHp: 0
   _moveSpeed: 0
@@ -1611,7 +1609,7 @@ GameObject:
   - component: {fileID: 1953865787}
   - component: {fileID: 1953865786}
   - component: {fileID: 1953865792}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: 22
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -1644,7 +1642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   _currentHp: 0
   _maxHp: 0
   _moveSpeed: 0
