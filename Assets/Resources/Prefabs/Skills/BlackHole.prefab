@@ -14756,6 +14756,7 @@ MonoBehaviour:
   leftTime: 5
   contactSelf: 0
   isTracking: 0
+  isRangeAttack: 1
 --- !u!114 &2936523207631537992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14793,7 +14794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b196b7647b8e59a47ba85b6c5d4f5277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullingPower: 20000
+  pullingPower: 300
 --- !u!1 &1222299379008806686
 GameObject:
   m_ObjectHideFlags: 0

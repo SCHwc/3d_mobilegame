@@ -41,6 +41,8 @@ public class ProjectileBase : MonoBehaviour
     public bool contactSelf;
     [Tooltip("발사체가 목표물을 계속 따라가는가?")]
     public bool isTracking;
+    [Tooltip("광역기인가?")]
+    public bool isRangeAttack;
     #endregion
 
     void Start()
@@ -92,7 +94,8 @@ public class ProjectileBase : MonoBehaviour
 
 
         // 몬스터를 공격하기 위한 로직
-        if (owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        if ((owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            || (isRangeAttack && other.gameObject.layer == LayerMask.NameToLayer("Monster")))
         {
             MonsterBase monster = other.GetComponent<MonsterBase>();
             if (monster != null)

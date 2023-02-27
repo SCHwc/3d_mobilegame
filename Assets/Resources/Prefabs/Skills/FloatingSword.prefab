@@ -4911,10 +4911,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focustarget: {fileID: 0}
+  actions: []
   currentSpeed: 0
   leftTime: 3
   contactSelf: 0
   isTracking: 0
+  isRangeAttack: 1
 --- !u!114 &-2118420137716120772
 MonoBehaviour:
   m_ObjectHideFlags: 0
