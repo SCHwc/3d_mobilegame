@@ -17,8 +17,6 @@ public abstract class MState
 
 public class MonsterBase : AIBase
 {
-    MonsterState monsterState;
-
     MState[] states;
     MState currentState;
 
