@@ -74,7 +74,10 @@ public class ProjectileBase : MonoBehaviour
         }
         else
         {   // 아니라면 초기화 메서드에서 할당받은 방향으로 전진
-            transform.position += Direction * currentSpeed * Time.deltaTime;
+            Vector3 movePosition = Direction * currentSpeed * Time.deltaTime; // 날아가는 방향
+            Vector3 lookPos = new Vector3(Direction.x, 0, Direction.z).normalized; // 바라보는 방향
+            transform.position += movePosition;
+
         }
     }
 
@@ -84,7 +87,7 @@ public class ProjectileBase : MonoBehaviour
         focustarget = wanttarget;
         isTracking = wantTracking;
 
-        Direction = focustarget.transform.position;
+        Direction = focustarget.transform.position - owner.transform.position;
     }
 
     public virtual void Activate(GameObject other)

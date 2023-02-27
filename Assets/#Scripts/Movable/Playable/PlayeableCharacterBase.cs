@@ -124,7 +124,7 @@ public class PlayeableCharacterBase : MovableBase
             {
                 float dirX = inputVector.x;
                 float dirZ = inputVector.y;
-                Vector3 moveDir = new Vector3(dirX, 0, dirZ);
+                Vector3 moveDir = new Vector3(dirX, 0, dirZ).normalized;
 
                 transform.position += (moveDir * Time.deltaTime * moveAttackSpeed);
 

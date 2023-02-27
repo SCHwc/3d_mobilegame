@@ -2976,7 +2976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: PandaKnight
   _currentHp: 100
   _maxHp: 100
   _moveSpeed: 3
@@ -3000,10 +2999,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   focusTarget: {fileID: 0}
+  isAlly: 1
   isRun: 0
+  inputVector: {x: 0, y: 0, z: 0}
+  weaponCol: {fileID: 4598507526983224812}
   normalWeaponName: FloatingSword
   ultimateWeaponName: BlackHole
-  weaponCol: {fileID: 4598507526983224812}
   normalSkillCooldown: 5
   ultimateSkillCooldown: 10
   viewAngle: 130

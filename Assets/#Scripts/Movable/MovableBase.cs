@@ -19,12 +19,10 @@ public abstract class MovableBase : MonoBehaviour
         }
     }
 
-    protected Collider collider; // 콜라이더
-    public Animator anim;     // 애니메이터
-
+    protected Collider collider;    // 콜라이더
+    public Animator anim;           // 애니메이터
     public MovableBase focusTarget; // 타겟
-
-
+    public bool isAlly;             // 이 캐릭터의 목표물
     // 추상 메서드들
     abstract public float GetDamage(float damage, MovableBase from);   // 피격관련 메서드
 
