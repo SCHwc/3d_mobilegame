@@ -7,7 +7,7 @@ public class PlayeableCharacterBase : MovableBase
     public bool isRun = false; // �޸��� ��������
     protected bool isAttacking = false; // ��Ÿ������
 
-    float moveAttackSpeed = 0.5f;
+    float moveAttackSpeed = 0.2f;
 
     public Vector3 inputVector; // �Էº���
 
@@ -92,7 +92,6 @@ public class PlayeableCharacterBase : MovableBase
         }
         #endregion
 
-        AttackMove(inputVector); // ���ݽ� ������ ���ݾ� �̵�
     }
 
     public virtual void Move(Vector3 inputDir)
@@ -162,12 +161,12 @@ public class PlayeableCharacterBase : MovableBase
                 if(isCool_normal != true)
                 {
                     isCool_normal = true;
-                    normalSkill.OnAttack(this, false);
+                    normalSkill.OnAttack(focusTarget, false);
                     anim.SetTrigger("OnSkill");
                 }
                 break;
             case SkillType.Ultimate:
-                if(isCool_ultimate != true)
+                if(isCool_ultimate != true && focusTarget != null)
                 {
                     isCool_ultimate = true;
                     ultimateSkill.OnAttack(focusTarget, false);

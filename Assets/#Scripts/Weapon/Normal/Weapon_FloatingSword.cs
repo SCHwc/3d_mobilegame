@@ -12,11 +12,11 @@ public class Weapon_FloatingSword : WeaponBase
     protected override ProjectileBase Shot(MovableBase wanttarget, Vector3 wantPosition, bool wantTracking)
     {
         // 스킬 오브젝트 소환하고 위치 할당
-        ProjectileBase proj = GameObject.Instantiate(spawnPrefab, wanttarget.transform).GetComponent<ProjectileBase>();
+        ProjectileBase proj = GameObject.Instantiate(spawnPrefab, owner.transform).GetComponent<ProjectileBase>();
         proj.Initialize(owner, wanttarget, wantTracking);
         Vector3 wantPos = Vector3.zero;
         wantPos.y += 0.7f;
-        proj.transform.position = wanttarget.transform.position + wantPos;
+        proj.transform.position = owner.transform.position + wantPos;
 
         return proj;
     }

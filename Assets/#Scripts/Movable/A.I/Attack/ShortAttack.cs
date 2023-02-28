@@ -22,6 +22,6 @@ public class ShortAttack : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // 주인이 공격 시 콜라이더가 켜지고, 충돌감지는 여기서
-        other.GetComponent<AIBase>().GetDamage(owner.Stat.AttackPower, owner);
+        other.GetComponent<MovableBase>().GetDamage(owner.Stat.AttackPower, owner);
     }
 }

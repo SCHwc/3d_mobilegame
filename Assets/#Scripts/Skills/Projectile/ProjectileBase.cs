@@ -106,7 +106,6 @@ public class ProjectileBase : MonoBehaviour
 
         focusTarget = wantTarget;
         Direction = focusTarget.transform.position - owner.transform.position;
-
     }
 
     public virtual void Activate(GameObject other)

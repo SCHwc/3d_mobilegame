@@ -20,8 +20,6 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
-    public int getHitStack = 0; // ������ ���� Ÿ������ �Ҵ��ϱ� ���� ����
-
     protected override void Start()
     {
         base.Start();
@@ -54,11 +52,8 @@ public class MonsterBase : AIBase
     {
         base.GetDamage(damage, from);
 
-        if (getHitStack == 0 && focusTarget != from)
-        {   // ���� �� ���͸� �����ϴ� ĳ���Ͱ� Ÿ���� �ƴ϶�� �� ������ ĳ���͸� Ÿ������ ���� (1ȸ ����)
-            focusTarget = from.GetComponent<MovableBase>();
-            getHitStack++;
-        }
+        if(focusTarget == null)
+            focusTarget = from;
 
         if (Stat.CurrentHp <= 0)
         {
