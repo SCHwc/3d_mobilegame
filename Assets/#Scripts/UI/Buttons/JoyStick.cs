@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-<<<<<<<< HEAD:Assets/#Scripts/UI/Buttons/JoyStick.cs
 public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-========
-public class PlayerController : MonoBehaviour
->>>>>>>> re-paul:Assets/#Scripts/Controllers/PlayerController.cs
 {
-    PlayeableCharacterBase player { get => GameManager.Instance.player; } // 플레이어
-
-    private void Update()
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        player.inputVector = Managers.Input.inputVector; // 입력값 넘겨주기
-        player.isRun = Managers.Input.isRun;    // 달리기 상태 업데이트
-        player.Attack(Managers.Input.onAttack); // 공격입력 받으면 발동
+        throw new System.NotImplementedException();
     }
 
-    public void Skill(SkillType type)
+    public void OnDrag(PointerEventData eventData)
     {
-        player.Skill(type);
+        throw new System.NotImplementedException();
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }
+

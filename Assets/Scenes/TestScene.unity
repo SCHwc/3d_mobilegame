@@ -348,8 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26316ee2aa7d0404e935f9696ba445b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever: {fileID: 1977571741}
-  leverRange: 30
 --- !u!1 &279392642
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +363,7 @@ GameObject:
   - component: {fileID: 279392649}
   - component: {fileID: 279392648}
   - component: {fileID: 279392650}
+  - component: {fileID: 279392651}
   m_Layer: 11
   m_Name: 11
   m_TagString: Monster
@@ -465,6 +464,14 @@ MonoBehaviour:
   anim: {fileID: 0}
   focusTarget: {fileID: 0}
   isAlly: 0
+  atkType: 0
+  _atkRange: 0
+  _findRange: 0
+  agent: {fileID: 0}
+  atkCollider: {fileID: 0}
+  skillName: 
+  skillTracking: 0
+  getHitStack: 0
 --- !u!114 &279392649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,10 +488,12 @@ MonoBehaviour:
   _maxHp: 0
   _moveSpeed: 0
   _attackSpeed: 0
+  _attackDelay: 0
   _resistance: 0
   _attackPower: 0
   _defensePower: 0
   _selfRecovery: 0
+  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!54 &279392650
 Rigidbody:
@@ -502,6 +511,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!195 &279392651
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279392642}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &721783058
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +759,7 @@ GameObject:
   - component: {fileID: 858702323}
   - component: {fileID: 858702322}
   - component: {fileID: 858702328}
+  - component: {fileID: 858702329}
   m_Layer: 11
   m_Name: 33
   m_TagString: Monster
@@ -750,6 +782,14 @@ MonoBehaviour:
   anim: {fileID: 0}
   focusTarget: {fileID: 0}
   isAlly: 0
+  atkType: 0
+  _atkRange: 0
+  _findRange: 0
+  agent: {fileID: 0}
+  atkCollider: {fileID: 0}
+  skillName: 
+  skillTracking: 0
+  getHitStack: 0
 --- !u!114 &858702323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,10 +806,12 @@ MonoBehaviour:
   _maxHp: 0
   _moveSpeed: 0
   _attackSpeed: 0
+  _attackDelay: 0
   _resistance: 0
   _attackPower: 0
   _defensePower: 0
   _selfRecovery: 0
+  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!65 &858702324
 BoxCollider:
@@ -865,6 +907,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!195 &858702329
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858702321}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &926892373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222775672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d4ee780166622428bc399dc7a86134, type: 3}
+  m_Script: {fileID: 11500000, guid: 05ce2b12f00a7744482e012554ff9c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1222775674
@@ -1611,6 +1675,7 @@ GameObject:
   - component: {fileID: 1953865787}
   - component: {fileID: 1953865786}
   - component: {fileID: 1953865792}
+  - component: {fileID: 1953865793}
   m_Layer: 11
   m_Name: 22
   m_TagString: Monster
@@ -1633,6 +1698,14 @@ MonoBehaviour:
   anim: {fileID: 0}
   focusTarget: {fileID: 0}
   isAlly: 0
+  atkType: 0
+  _atkRange: 0
+  _findRange: 0
+  agent: {fileID: 0}
+  atkCollider: {fileID: 0}
+  skillName: 
+  skillTracking: 0
+  getHitStack: 0
 --- !u!114 &1953865787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1649,10 +1722,12 @@ MonoBehaviour:
   _maxHp: 0
   _moveSpeed: 0
   _attackSpeed: 0
+  _attackDelay: 0
   _resistance: 0
   _attackPower: 0
   _defensePower: 0
   _selfRecovery: 0
+  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!65 &1953865788
 BoxCollider:
@@ -1748,6 +1823,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!195 &1953865793
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953865785}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1977571740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,7 +1947,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2105541759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4f0f3f0948ddb44be8c7dcb4f18a02, type: 3}
+  m_Script: {fileID: 11500000, guid: cf0aadd590293094ab881ba5e704a5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1189029301}
