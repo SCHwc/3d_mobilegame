@@ -150,7 +150,7 @@ CGINCLUDE
             return half4(ambientLighting + diffuseReflection  + specularReflection, 1.0);
          }
 
-	half4 frag( v2f i ) : SV_Target
+	half4 frag( v2f i ) : SV_target
 	{ 
  
 		half4 edgeBlendFactors = half4(1.0, 0.0, 0.0, 0.0);

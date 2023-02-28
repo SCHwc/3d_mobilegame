@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class WeaponBase
 {
-    protected MovableBase owner;       // ÁÖÀÎ
-    protected GameObject spawnPrefab;  // ¿ÀºêÁ§Æ® 
-
-    //public WeaponInfo info { get; protected set; }
+    protected MovableBase owner;       // ï¿½ï¿½ï¿½ï¿½
+    protected GameObject spawnPrefab;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
     public WeaponBase(MovableBase wantOwner)
     {
         owner = wantOwner;
     }
 
-    protected virtual ProjectileBase Shot(MovableBase wantTarget, Vector3 wantPosition, bool wantTracking)
+    protected virtual ProjectileBase Shot(MovableBase wanttarget, Vector3 wantPosition, bool wantTracking)
     {
-        // ½ºÅ³ ¿ÀºêÁ§Æ® ¼ÒÈ¯ÇÏ°í À§Ä¡ ÇÒ´ç
+        // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¯ï¿½Ï°ï¿½ ï¿½ï¿½Ä¡ ï¿½Ò´ï¿½
         ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
-        proj.Initialize(owner, wantTarget, wantTracking);
+        proj.Initialize(owner, wanttarget, wantTracking);
         wantPosition.y = 1f;
         proj.transform.position = wantPosition;
-
 
         return proj;
     }
 
-    // ½ºÅ³ÀÇ ¿ªÇÒ ¸Þ¼­µå
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
 }

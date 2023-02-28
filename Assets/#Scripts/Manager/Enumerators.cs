@@ -1,4 +1,4 @@
-public enum PartnerState // AIµ¿·á Ä³¸¯ÅÍÀÇ »óÅÂµé
+public enum PartnerState // AIï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Âµï¿½
 {
     Idle,
     Walk,
@@ -9,7 +9,7 @@ public enum PartnerState // AIµ¿·á Ä³¸¯ÅÍÀÇ »óÅÂµé
     Count
 }
 
-public enum MonsterState // ¸ó½ºÅÍÀÇ »óÅÂµé
+public enum MonsterState // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Âµï¿½
 {
     Idle,
     Walk,
@@ -26,21 +26,21 @@ public enum AttackType
     Long
 }
 
-public enum SceneType // Scene Á¾·ù
+public enum SceneType // Scene ï¿½ï¿½ï¿½ï¿½
 {
-    Unknown,    // µðÆúÆ®
+    Unknown,    // ï¿½ï¿½ï¿½ï¿½Æ®
 
-    Lobby,      // ·Îºñ
-    Inventory,  // ÀÎº¥
-    Stage,      // ½ºÅ×ÀÌÁö
+    Lobby,      // ï¿½Îºï¿½
+    Inventory,  // ï¿½Îºï¿½
+    Stage,      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    Count      // °³¼ö
+    Count      // ï¿½ï¿½ï¿½ï¿½
 }
 
 public enum SkillType
 {
-    Normal,     // ÀÏ¹Ý ½ºÅ³
-    Ultimate,   // ±Ã±Ø±â
+    Normal,     // ï¿½Ï¹ï¿½ ï¿½ï¿½Å³
+    Ultimate,   // ï¿½Ã±Ø±ï¿½
 
     Count
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Projectile_Continuous : ProjectileAction
 {
-    // °ø°Ý µô·¹ÀÌ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField] float attackDelay = 0.3f;
     float checkTime = 0f;
-    // ²ô°í Å³ ÄÝ¶óÀÌ´õ
+    // ï¿½ï¿½ï¿½ï¿½ Å³ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½
     Collider col;
 
     private void Start()
@@ -17,16 +17,16 @@ public class Projectile_Continuous : ProjectileAction
 
     private void Update()
     {
-        // µô·¹ÀÌ¸¶´Ù ÄÝ¶óÀÌ´õ Å°°í ²ô±â
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         checkTime += Time.deltaTime;
-        if (checkTime >= attackDelay)
+        if(checkTime >= attackDelay)
         {
             checkTime = 0f;
             StartCoroutine(ActiveCollier());
         }
     }
 
-    // ÄÝ¶óÀÌ´õ Å°°í ²ô±â
+    // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     IEnumerator ActiveCollier()
     {
         col.enabled = true;

@@ -8,7 +8,7 @@ public abstract class MovableBase : MonoBehaviour
     protected StatBase stat;
     public StatBase Stat
     {
-        set => stat=value;
+        set => stat = value;
         get
         {
             if (!stat)
@@ -18,12 +18,12 @@ public abstract class MovableBase : MonoBehaviour
             return stat;
         }
     }
-    protected Collider collider;        // ÄÝ¶óÀÌ´õ
-    public Animator anim;               // ¾Ö´Ï¸ÞÀÌÅÍ
-    public MovableBase focusTarget;     // ÀÌ Ä³¸¯ÅÍÀÇ ¸ñÇ¥¹°
-    public bool isAlly;                 // µ¿¸Í¿©ºÎ
-    // Ãß»ó ¸Þ¼­µåµé
-    abstract public float GetDamage(float damage, MovableBase from);   // ÇÇ°Ý°ü·Ã ¸Þ¼­µå
+    protected Collider collider;        // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½
+    public Animator anim;               // ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
+    public MovableBase focusTarget;     // ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½
+    public bool isAlly;                 // ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½
+    // ï¿½ß»ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½
+    abstract public float GetDamage(float damage, MovableBase from);   // ï¿½Ç°Ý°ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
    
     protected virtual void Start()
     {

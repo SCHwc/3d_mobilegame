@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get => _instance; }
 
-    public PlayeableCharacterBase player;
+    public PlayeableCharacterBase player; 
 
     void Awake()
     {
@@ -24,5 +24,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        
     }
 }

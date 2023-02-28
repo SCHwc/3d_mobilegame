@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ProjectileCollider : MonoBehaviour
 {
-    // ¹ß»çÃ¼ÀÇ Á¤º¸
+    // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     ProjectileBase from = null; 
 
     void Start()
     {
         if (from == null)
-        {       // ºÎ¸ð ¿ÀºêÁ§Æ®¿¡ ÀÖ´Â Á¤º¸ ÇÒ´çÇØÁÖ±â
+        {       // ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
                 from = GetComponentInParent<ProjectileBase>();
         }
         
