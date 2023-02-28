@@ -56,3 +56,4 @@ public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             Managers.Input.inputVector = Vector2.zero;
     }
 }
+

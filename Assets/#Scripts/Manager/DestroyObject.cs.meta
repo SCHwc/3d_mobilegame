@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/#Scripts/Manager/DestroyObject.cs.meta
 guid: 4402485c83f6e7a41b8a9247727e8702
+========
+guid: 3e4f0f3f0948ddb44be8c7dcb4f18a02
+>>>>>>>> re-paul:Assets/#Scripts/Manager/GameManager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

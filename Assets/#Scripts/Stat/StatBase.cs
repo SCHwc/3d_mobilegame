@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class StatBase : MonoBehaviour
 {
-    #region ½ºÅÈµé
-    [SerializeField] protected float _currentHp;         // ÇöÀçÃ¼·Â
-    [SerializeField] protected float _maxHp;             // ÃÖ´ëÃ¼·Â
-    [SerializeField] protected float _moveSpeed;         // ÀÌ¼Ó
-    [SerializeField] protected float _attackSpeed;       // °ø¼Ó
-    [SerializeField] protected float _attackDelay;       // µô·¹ÀÌ
-    [SerializeField] protected float _resistance;        // ÀúÇ×·Â
-    [SerializeField] protected float _attackPower;         // °ø°Ý·Â
-    [SerializeField] protected float _defensePower;        // ¹æ¾î·Â
-    [SerializeField] protected float _selfRecovery;        // Ã¼·ÂÁ¨
+    #region ï¿½ï¿½ï¿½Èµï¿½
+    [SerializeField] protected float _currentHp;         // ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½
+    [SerializeField] protected float _maxHp;             // ï¿½Ö´ï¿½Ã¼ï¿½ï¿½
+    [SerializeField] protected float _moveSpeed;         // ï¿½Ì¼ï¿½
+    [SerializeField] protected float _attackSpeed;       // ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] protected float _attackDelay;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] protected float _resistance;        // ï¿½ï¿½ï¿½×·ï¿½
+    [SerializeField] protected float _attackPower;         // ï¿½ï¿½ï¿½Ý·ï¿½
+    [SerializeField] protected float _defensePower;        // ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] protected float _selfRecovery;        // Ã¼ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField] protected float _skillCoolTime;
 
-    [SerializeField] protected float moveSpeedMultiflier = 2f;
+    public float moveSpeedMultiflier = 2f;
 
     public float CurrentHp
     {
         get => _currentHp;
         set => _currentHp = Mathf.Clamp(value, 0, _maxHp);
-    } // ÇöÀç Ã¼·Â Á¦ÇÑ
+    } // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float MaxHP { get => _maxHp; }
-    public float HPRate { get => _currentHp / _maxHp; } // Ã¼·ÂºñÀ²
+    public float HPRate { get => _currentHp / _maxHp; } // Ã¼ï¿½Âºï¿½ï¿½ï¿½
     public float MoveSpeed { get => _moveSpeed; }
     public float AttackSpeed
     {

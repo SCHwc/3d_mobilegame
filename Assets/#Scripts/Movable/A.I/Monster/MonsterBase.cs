@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class MState
 {
     protected float distance;
-    /// <summary> ÇØ´ç »óÅÂ¸¦ ½ÃÀÛÇÒ ¶§ 1È¸ È£Ãâ </summary>
+    /// <summary> ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1È¸ È£ï¿½ï¿½ </summary>
     public abstract void OnEnter(MonsterBase partner);
 
-    /// <summary> ÇØ´ç »óÅÂÀÇ ¾÷µ¥ÀÌÆ® È£Ãâ </summary>
+    /// <summary> ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È£ï¿½ï¿½ </summary>
     public abstract void OnUpdate(MonsterBase partner);
 
-    /// <summary> ÇØ´ç »óÅÂ¸¦ Á¾·áÇÒ ¶§ 1È¸ È£Ãâ </summary>
+    /// <summary> ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1È¸ È£ï¿½ï¿½ </summary>
     public abstract void OnExit(MonsterBase partner);
 }
 
@@ -20,7 +20,7 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
-    public int getHitStack = 0; // °ø°ÝÇÑ ÀûÀ» Å¸°ÙÀ¸·Î ÇÒ´çÇÏ±â À§ÇÑ º¯¼ö
+    public int getHitStack = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     protected override void Start()
     {
@@ -39,7 +39,7 @@ public class MonsterBase : AIBase
 
     public void Setup()
     {
-        // µ¿·á Ä³¸¯ÅÍ°¡ °¡Áú ¼ö ÀÖ´Â »óÅÂ °³¼ö¸¸Å­ ¸Þ¸ð¸® ÇÒ´ç, °¢ »óÅÂ¿¡ Å¬·¡½º ¸Þ¸ð¸® ÇÒ´ç
+        // ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½
         states = new MState[5];
         states[(int)MonsterState.Idle] = new MonsterStates.MIdle();
         states[(int)MonsterState.Walk] = new MonsterStates.MMove();
@@ -55,7 +55,7 @@ public class MonsterBase : AIBase
         base.GetDamage(damage, from);
 
         if (getHitStack == 0 && focusTarget != from)
-        {   // ÀüÅõ Áß ¸ó½ºÅÍ¸¦ °ø°ÝÇÏ´Â Ä³¸¯ÅÍ°¡ Å¸°ÙÀÌ ¾Æ´Ï¶ó¸é ±× °ø°ÝÇÑ Ä³¸¯ÅÍ¸¦ Å¸°ÙÀ¸·Î ¼³Á¤ (1È¸ ÇÑÁ¤)
+        {   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (1È¸ ï¿½ï¿½ï¿½ï¿½)
             focusTarget = from.GetComponent<MovableBase>();
             getHitStack++;
         }
@@ -70,10 +70,10 @@ public class MonsterBase : AIBase
 
     public void ChangeState(MonsterState newState)
     {
-        /// <summary> ¿¹¿ÜÃ³¸® </summary>
-        if (states[(int)newState] == null) { return; } // º¯°æÇÏ·Á´Â »óÅÂ°¡ ºñ¾îÀÖ´Â »óÅÂ¸é ¸®ÅÏ
-        /// <summary> ¿¹¿ÜÃ³¸® </summary>
-        if (currentState != null) { currentState.OnExit(this); } // ÇöÀç »óÅÂ°¡ ÀÖ´Ù¸é ³¡³»±â
+        /// <summary> ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ </summary>
+        if (states[(int)newState] == null) { return; } // ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// <summary> ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ </summary>
+        if (currentState != null) { currentState.OnExit(this); } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         currentState = states[(int)newState];
         currentState.OnEnter(this);
@@ -101,7 +101,7 @@ public class MonsterBase : AIBase
     }
 
     public void Anim_AttackTimeCheck()
-    {   // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ³¡³¯ ¶§ °ø°Ý ´ë±â½Ã°£À» ÃÊ±âÈ­ ÇÏ±â À§ÇØ ³Ö¾îÁÙ ÇÔ¼ö
+    {   // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
         Stat.AttackSpeed = Stat.AttackDelay;
     }
     

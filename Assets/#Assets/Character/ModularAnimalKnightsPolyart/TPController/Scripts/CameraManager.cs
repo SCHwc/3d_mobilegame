@@ -53,11 +53,11 @@ namespace DM
                 targetSpeed = controllerSpeed;
             }
 
-            FollowTarget(d);
+            Followtarget(d);
             HandleRotations(d, v, h, targetSpeed);
         }
 
-        void FollowTarget(float d)  //defines how camera follows the target.
+        void Followtarget(float d)  //defines how camera follows the target.
         {
             float speed = d * followSpeed;
             Vector3 targetPosition = Vector3.Lerp(transform.position, target.position, speed);

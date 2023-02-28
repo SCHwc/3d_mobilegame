@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - CharacterAttack
   - Monster
   - Partner
   layers:
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Skill
   - 
   - Player
   - Partner

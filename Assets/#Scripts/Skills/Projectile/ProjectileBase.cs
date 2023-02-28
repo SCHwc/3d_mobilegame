@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
 {
-    // ¹ß»çÃ¼ÀÇ ÁÖÀÎ
+    // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public MovableBase owner { get; protected set; }
 
-    // ¹ß»çÃ¼ÀÇ ¸ñÇ¥¹°
+    // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½
     public MovableBase focusTarget;
 
-    // ¹ß»çÃ¼°¡ ÇÒ ÀÏµé
+    // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½Ïµï¿½
     protected ProjectileAction[] actions;
 
-    // Ãæµ¹À» ¹«½ÃÇÒ ¸®½ºÆ®
+    // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     protected List<GameObject> ignoreList = new List<GameObject>();
 
-    //³ª°¡´Â ¹æÇâ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     protected Vector3 _direction;
     public Vector3 Direction
     {
@@ -27,46 +27,46 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-
-    // ¹ß»çÃ¼ÀÇ Æ¯¼º ¼öÄ¡
+    // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½Ä¡
     #region
-    [Tooltip("¹ß»çÃ¼ÀÇ ¼Óµµ")]
+    [Tooltip("ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½Óµï¿½")]
     public float currentSpeed;
-    //[Tooltip("¹ß»çÃ¼ÀÇ °¡¼Óµµ - ½Ã°£¿¡ µû¶ó Á¡ÁøÀûÀ¸·Î º¯È­ÇÏ´Â ¼Óµµ·®")]
+    //[Tooltip("ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½ - ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Óµï¿½ï¿½ï¿½")]
     //public float acceleration;
-    //[Tooltip("¹ß»çÃ¼ÀÇ °¢¼Óµµ - ½Ã°£ÀÌ Áö³ª¸é È¸Àü")]
+    //[Tooltip("ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½ - ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½")]
     //public float angularSpeed;
-    [Tooltip("ÀÌ ¹°Ã¼°¡ »ì¾Æ³²´Â ½Ã°£")]
+    [Tooltip("ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½")]
     public float leftTime;
-    [Tooltip("¹ß»çÃ¼°¡ ½ð º»ÀÎÇÑÅ×µµ ¸Â´Â°¡?")]
+    [Tooltip("ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×µï¿½ ï¿½Â´Â°ï¿½?")]
     public bool contactSelf;
-    [Tooltip("¹ß»çÃ¼°¡ ¸ñÇ¥¹°À» °è¼Ó µû¶ó°¡´Â°¡?")]
+    [Tooltip("ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡´Â°ï¿½?")]
     public bool isTracking;
-    [Tooltip("±¤¿ª±âÀÎ°¡?")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½?")]
     public bool isRangeAttack;
     #endregion
+
     void Start()
     {
         foreach (Collider current in GetComponentsInChildren<Collider>())
         {
-            // ÄÝ¶óÀÌ´õ°¡ ÀÖ´Â ¿ÀºêÁ§Æ®¿¡°Ô Ãæµ¹°¨Áö ±â´ÉÀ» ÇÒ´ç½ÃÅ²´Ù.
+            // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½Å²ï¿½ï¿½.
             current.gameObject.AddComponent<ProjectileCollider>();
         }
 
-        // ¹ß»çÃ¼ÀÇ Çàµ¿µéÀ» ¸ð¾Æ¼­ ÇÒ´ç½ÃÄÑµÎ±â
+        // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ÑµÎ±ï¿½
         actions = GetComponents<ProjectileAction>();
     }
 
     void Update()
     {
         if (leftTime <= 0 || focusTarget == null) { Destroy(gameObject); }
-        leftTime -= Time.deltaTime; // ¹ß»çÃ¼ÀÇ »ýÁ¸½Ã°£
+        leftTime -= Time.deltaTime; // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
 
-        // ½Ã°£ÀÌ Áö³¯¼ö·Ï °¡¼Ó
+        // ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         // currentSpeed += acceleration * Time.deltaTime;
 
         if (isTracking)
-        {  // ¸ñÇ¥¹°À» ÃßÀûÇÏµµ·Ï ¼³Á¤µÇÀÖ´Ù¸é ¸ñÇ¥¹°À» ¹Ù¶óº¸°Ô ¸¸µé°í °è¼Ó ÀüÁø
+        {  // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (focusTarget)
             {
                 Vector3 targetPosition = focusTarget.transform.position;
@@ -77,7 +77,7 @@ public class ProjectileBase : MonoBehaviour
         }
         else
         {
-            // ¹Ù¶óº¸´Â ¹æÇâ
+            // ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (currentSpeed > 0)
             {
                 Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
@@ -87,7 +87,7 @@ public class ProjectileBase : MonoBehaviour
             {
             }
 
-            // ÃßÀûÇÏÁö ¾Ê´Â´Ù¸é ÃÊ±âÈ­ ¸Þ¼­µå¿¡¼­ ÇÒ´ç¹ÞÀº ¹æÇâÀ¸·Î ÀüÁø
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½ ï¿½Ê±ï¿½È­ ï¿½Þ¼ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
             transform.position += movePosition;
 
@@ -99,7 +99,7 @@ public class ProjectileBase : MonoBehaviour
     }
 
     public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
-    {   // ¹ß»çÃ¼ ÃÊ±âÈ­ ÇÒ´ç
+    {   // ï¿½ß»ï¿½Ã¼ ï¿½Ê±ï¿½È­ ï¿½Ò´ï¿½
         owner = wantOnwer;
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
@@ -111,29 +111,29 @@ public class ProjectileBase : MonoBehaviour
 
     public virtual void Activate(GameObject other)
     {
-        // Ãæµ¹¹«½Ã ¿ÀºêÁ§Æ®¶ó¸é return
+        // ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ return
         if (ignoreList.Contains(other)) { return; }
-        // Ãæµ¹ÇÑ ¹°Ã¼°¡ °°Àº Áø¿µÀÌ¶ó¸é return
+        // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ return
         if (owner.isAlly == other.GetComponent<MovableBase>()?.isAlly) { return; }
 
-        // ¸ó½ºÅÍ¸¦ °ø°ÝÇÏ±â À§ÇÑ ·ÎÁ÷
+        // ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if ((owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
             || (isRangeAttack && other.gameObject.layer == LayerMask.NameToLayer("Monster")))
         {
             MonsterBase monster = other.GetComponent<MonsterBase>();
             if (monster != null)
-            {    // ÀÌ ½ºÅ³¿¡ ´Þ·ÁÀÖ´Â ÀÌº¥Æ®µéÀ» ¸ðµÎ ½ÇÇà½ÃÅ²´Ù.
+            {    // ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Þ·ï¿½ï¿½Ö´ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
                 foreach (ProjectileAction current in actions) { current?.Activate(this, monster, transform.position); }
             }
         }
 
-        // ÇÃ·¹ÀÌ¾î Áø¿µÀ» °ø°ÝÇÏ±â À§ÇÑ ·ÎÁ÷
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (owner.focusTarget.gameObject == other && (other.gameObject.layer == LayerMask.NameToLayer("Player")
             || other.gameObject.layer == LayerMask.NameToLayer("Partner")))
         {
             MovableBase target = other.GetComponent<MovableBase>();
             if (target != null)
-            {   // ÀÌ ½ºÅ³¿¡ ´Þ·ÁÀÖ´Â ÀÌº¥Æ®µéÀ» ¸ðµÎ ½ÇÇà½ÃÅ²´Ù.
+            {   // ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Þ·ï¿½ï¿½Ö´ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
                 foreach (ProjectileAction current in actions) { current?.Activate(this, target, transform.position); }
             }
         }
@@ -141,12 +141,12 @@ public class ProjectileBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // ÄÝ¶óÀÌ´õ¿¡¼­ Ãæµ¹À» °¨ÁöÇÏ¸é Ãæµ¹ÇÑ ¹°Ã¼ÀÇ Á¤º¸¸¦ ¿©±â¼­ ¹Þ¾Æ¿È > Activate ÇÔ¼ö·Î Á¤º¸ Àü´ÞÈÄ¿¡ Ãæµ¹ ÀÌº¥Æ® ½ÇÇà
+        // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½Þ¾Æ¿ï¿½ > Activate ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½æµ¹ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         Activate(other.gameObject);
     }
 
     public virtual void SetIgnore(GameObject target)
     {
-        ignoreList.Add(target); //´ë»óÀ» Ãæµ¹¹«½ÃÇÑ´Ù.(Layer¸¦ È°¿ëÇØ¼­ Ãæµ¹À» ³ª´©¸é ÀÌ ÇÔ¼ö ºÒÇÊ¿ä)
+        ignoreList.Add(target); //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.(Layerï¿½ï¿½ È°ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½)
     }
 }
