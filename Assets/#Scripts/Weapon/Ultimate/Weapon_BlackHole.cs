@@ -11,10 +11,15 @@ public class Weapon_BlackHole : WeaponBase
 
     protected override ProjectileBase Shot(MovableBase wanttarget, Vector3 wantPosition, bool wantTracking)
     {
-        // 스킬 오브젝트 소환하고 위치 할당
-        ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
-        proj.Initialize(owner, wanttarget, wantTracking);
-        proj.transform.position = wanttarget.transform.position;
+        ProjectileBase proj = null;
+
+        if (wanttarget != null)
+        {
+            // 스킬 오브젝트 소환하고 위치 할당
+            proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
+            proj.Initialize(owner, wanttarget, wantTracking);
+            proj.transform.position = wanttarget.transform.position;
+        }
 
         return proj;
     }

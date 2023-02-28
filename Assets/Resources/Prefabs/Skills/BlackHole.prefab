@@ -14747,16 +14747,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1220669486009758456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a457344d43274889817a3f80be9bc, type: 3}
+  m_Script: {fileID: 11500000, guid: bfb4ff1cef145084dbb6526650661ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focustarget: {fileID: 0}
-  actions: []
+  focusTarget: {fileID: 0}
   currentSpeed: 0
   leftTime: 5
   contactSelf: 0
   isTracking: 0
-  isRangeAttack: 1
+  isRangeAttack: 0
 --- !u!114 &2936523207631537992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14766,7 +14765,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1220669486009758456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0af6a43d9a8533b4693db122ff5eed10, type: 3}
+  m_Script: {fileID: 11500000, guid: cd5891d08a0751246ae40e4de084ab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4530078454208583405
@@ -14791,10 +14790,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1220669486009758456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b196b7647b8e59a47ba85b6c5d4f5277, type: 3}
+  m_Script: {fileID: 11500000, guid: 14f9796d0dc50db4dba4ad56eaf0e15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullingPower: 300
+  pullingPower: 200
 --- !u!1 &1222299379008806686
 GameObject:
   m_ObjectHideFlags: 0

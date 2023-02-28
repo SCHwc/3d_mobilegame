@@ -4907,11 +4907,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296210326916947490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a457344d43274889817a3f80be9bc, type: 3}
+  m_Script: {fileID: 11500000, guid: bfb4ff1cef145084dbb6526650661ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focustarget: {fileID: 0}
-  actions: []
+  focusTarget: {fileID: 0}
   currentSpeed: 0
   leftTime: 3
   contactSelf: 0
@@ -4939,7 +4938,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296210326916947490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0af6a43d9a8533b4693db122ff5eed10, type: 3}
+  m_Script: {fileID: 11500000, guid: cd5891d08a0751246ae40e4de084ab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2096071065986461256
