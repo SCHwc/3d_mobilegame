@@ -59,7 +59,7 @@ public class ProjectileBase : MonoBehaviour
 
     void Update()
     {
-        if (leftTime <= 0) { Destroy(gameObject); }
+        if (leftTime <= 0 || focusTarget == null) { Destroy(gameObject); }
         leftTime -= Time.deltaTime; // 발사체의 생존시간
 
         // 시간이 지날수록 가속

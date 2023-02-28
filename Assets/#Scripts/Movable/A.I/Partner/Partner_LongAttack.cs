@@ -32,6 +32,7 @@ public class Partner_LongAttack : PartnerBase
 
     public override void Anim_Attack()
     {
+        if (focusTarget == null) { return; }
         if (atkType == AttackType.Long)
         {
             // 해당 스킬이 가지고 있는 역할 실행
