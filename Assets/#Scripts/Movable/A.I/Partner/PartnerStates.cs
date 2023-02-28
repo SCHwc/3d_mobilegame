@@ -21,6 +21,19 @@ namespace PartnerStates
             int nearestIndex = -1;
             if (partner.focusTarget == null)
             {
+                float PlayerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
+                if (PlayerDistance > 2)
+                {
+                    partner.agent.enabled = true;
+                    partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
+                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                }
+                else
+                {
+                    partner.agent.enabled = false;
+                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                }
+
                 // 캐릭터의 감지범위만큼 적을 감지한다.
                 Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange, 1 << 11);
                 for (int i = 0; i < col.Length; i++)
@@ -162,6 +175,6 @@ namespace PartnerStates
         }
     }
 
-   
+
 }
 

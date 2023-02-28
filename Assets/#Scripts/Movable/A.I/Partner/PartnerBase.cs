@@ -42,7 +42,7 @@ public class PartnerBase : AIBase
     public virtual void Setup()
     {
         // ���� ĳ���Ͱ� ���� �� �ִ� ���� ������ŭ �޸� �Ҵ�, �� ���¿� Ŭ���� �޸� �Ҵ�
-        states = new PState[5];
+        states = new PState[4];
         states[(int)PartnerState.Idle] = new PartnerStates.PIdle();
         states[(int)PartnerState.Walk] = new PartnerStates.PMove();
         states[(int)PartnerState.Attack] = new PartnerStates.PAttack();

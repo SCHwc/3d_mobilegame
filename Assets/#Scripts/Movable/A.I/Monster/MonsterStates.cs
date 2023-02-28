@@ -9,7 +9,6 @@ namespace MonsterStates
         public override void OnEnter(MonsterBase monster)
         {
             monster.anim.SetBool("isBattle", false);
-            monster.getHitStack = 0;
         }
 
         public override void OnUpdate(MonsterBase monster)

@@ -48,6 +48,8 @@ public abstract class AIBase : MovableBase
 
     public override float GetDamage(float damage, MovableBase from)
     {
+        StartCoroutine(GetDamageMeshs());
+
         damage -= Stat.DefensePower;                               // 방어력만큼 데미지 감소
         damage = Mathf.Max(0, damage);                             // 0보다 작아지지 않게
         if (Stat.CurrentHp < damage) { damage = Stat.CurrentHp; }  // 데미지가 체력보다 높다면 데미지를 체력과 같게
@@ -57,6 +59,14 @@ public abstract class AIBase : MovableBase
 
         return damage;
     }
+    public IEnumerator GetDamageMeshs()
+    {
+        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.red; }
+        yield return new WaitForSeconds(0.25f);
+
+        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.white; }
+        yield break;
+    }
 
     public virtual void SkillCasting() { anim.SetTrigger("isSkill"); }
 
@@ -65,7 +75,7 @@ public abstract class AIBase : MovableBase
         collider.enabled = false;
     }
 
-    
+
 
     abstract public void Die();
 }

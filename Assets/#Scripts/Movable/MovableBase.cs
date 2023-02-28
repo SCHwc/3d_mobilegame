@@ -22,6 +22,7 @@ public abstract class MovableBase : MonoBehaviour
     public Animator anim;               // �ִϸ�����
     public MovableBase focusTarget;     // �� ĳ������ ��ǥ��
     public bool isAlly;                 // ���Ϳ���
+    public SkinnedMeshRenderer[] meshs;
     // �߻� �޼����
     abstract public float GetDamage(float damage, MovableBase from);   // �ǰݰ��� �޼���
    
@@ -30,6 +31,7 @@ public abstract class MovableBase : MonoBehaviour
         stat = GetComponent<StatBase>();
         collider = GetComponent<Collider>();
         anim = GetComponent<Animator>();
+        meshs=GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     public virtual void AddWeapon(string wantName) { }
