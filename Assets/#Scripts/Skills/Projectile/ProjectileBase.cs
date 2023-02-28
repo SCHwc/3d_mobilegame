@@ -73,9 +73,19 @@ public class ProjectileBase : MonoBehaviour
             transform.position += transform.forward * currentSpeed * Time.deltaTime;
         }
         else
-        {   // 아니라면 초기화 메서드에서 할당받은 방향으로 전진
-            Vector3 movePosition = Direction * currentSpeed * Time.deltaTime; // 날아가는 방향
-            Vector3 lookPos = new Vector3(Direction.x, 0, Direction.z).normalized; // 바라보는 방향
+        {   
+            // 바라보는 방향
+            if(currentSpeed > 0)
+            {
+                Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
+                transform.LookAt(transform.position + lookPosition);
+            }
+            else
+            {
+            }
+
+            // 추적하지 않는다면 초기화 메서드에서 할당받은 방향으로 전진
+            Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
             transform.position += movePosition;
 
         }
