@@ -99,7 +99,8 @@ public class ProjectileBase : MonoBehaviour
     }
 
     public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
-    {   // �߻�ü �ʱ�ȭ �Ҵ�
+    {
+        // 소환되면서 초기화
         owner = wantOnwer;
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
@@ -109,40 +110,43 @@ public class ProjectileBase : MonoBehaviour
 
     }
 
-    public virtual void Activate(GameObject other)
+    public virtual void Activate(MovableBase other)
     {
-        // �浹���� ������Ʈ��� return
-        if (ignoreList.Contains(other)) { return; }
-        // �浹�� ��ü�� ���� �����̶�� return
-        if (owner.isAlly == other.GetComponent<MovableBase>()?.isAlly) { return; }
+        // 예외처리1.충돌을 무시하기로한 물체라면 return
+        if (ignoreList.Contains(other.gameObject)) { return; }
+        // 예외처리2.같은 진영이라면 return
+        if (owner.isAlly == other.isAlly) { return; }
 
-        // ���͸� �����ϱ� ���� ����
-        if ((owner.focusTarget.gameObject == other && other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            || (isRangeAttack && other.gameObject.layer == LayerMask.NameToLayer("Monster")))
+        if (isTracking) // 현재 스킬이 추적 스킬이라면
         {
-            MonsterBase monster = other.GetComponent<MonsterBase>();
-            if (monster != null)
-            {    // �� ��ų�� �޷��ִ� �̺�Ʈ���� ��� �����Ų��.
-                foreach (ProjectileAction current in actions) { current?.Activate(this, monster, transform.position); }
-            }
+            // 타겟이 아니면 return
+            if (owner.focusTarget != other) { return; }
+            // 타겟이면 타겟 대상으로 액션 실행
+            else { ActionActivate(this, focusTarget, transform.position); }
         }
-
-        // �÷��̾� ������ �����ϱ� ���� ����
-        if (owner.focusTarget.gameObject == other && (other.gameObject.layer == LayerMask.NameToLayer("Player")
-            || other.gameObject.layer == LayerMask.NameToLayer("Partner")))
+        else
         {
-            MovableBase target = other.GetComponent<MovableBase>();
-            if (target != null)
-            {   // �� ��ų�� �޷��ִ� �̺�Ʈ���� ��� �����Ų��.
-                foreach (ProjectileAction current in actions) { current?.Activate(this, target, transform.position); }
+            if (owner.isAlly != other.isAlly)
+            {
+                ActionActivate(this, other, transform.position);
             }
         }
     }
 
+    void ActionActivate(ProjectileBase wantProj, MovableBase wantTarget, Vector3 wantPosition)
+    {
+        foreach (ProjectileAction current in actions) { current?.Activate(wantProj, wantTarget, wantPosition); }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
-        // �ݶ��̴����� �浹�� �����ϸ� �浹�� ��ü�� ������ ���⼭ �޾ƿ� > Activate �Լ��� ���� �����Ŀ� �浹 �̺�Ʈ ����
-        Activate(other.gameObject);
+        // 예외처리.캐릭터가 아니라면 return
+        if (other.GetComponent<MovableBase>() == null) { return; }
+        // 캐릭터 일때만 충돌 이벤트 함수 실행하게 설정
+        else
+        {
+            Activate(other.GetComponent<MovableBase>());
+        }
     }
 
     public virtual void SetIgnore(GameObject target)

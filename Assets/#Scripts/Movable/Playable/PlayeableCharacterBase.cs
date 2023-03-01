@@ -10,8 +10,6 @@ public class PlayeableCharacterBase : MovableBase
     float moveAttackSpeed = 0.5f;
 
     public Vector3 inputVector; // �Էº���
-
-    [SerializeField] protected Collider weaponCol;        // �����ݶ��̴�
     
     #region ��ų �̸� & WeaponBase
     [SerializeField] protected string normalWeaponName; // �븻��ų �̸�
@@ -92,7 +90,6 @@ public class PlayeableCharacterBase : MovableBase
         }
         #endregion
 
-        AttackMove(inputVector); // ���ݽ� ������ ���ݾ� �̵�
     }
 
     public virtual void Move(Vector3 inputDir)
@@ -162,7 +159,7 @@ public class PlayeableCharacterBase : MovableBase
                 if(isCool_normal != true)
                 {
                     isCool_normal = true;
-                    normalSkill.OnAttack(this, false);
+                    normalSkill.OnAttack(focusTarget, false);
                     anim.SetTrigger("OnSkill");
                 }
                 break;
@@ -179,12 +176,12 @@ public class PlayeableCharacterBase : MovableBase
 
     public virtual void ActiveAttackCol()
     {
-        weaponCol.enabled = true;
+        atkCollider.enabled = true;
     }
 
     public virtual void InActiveAttackCol()
     {
-        weaponCol.enabled = false;
+        atkCollider.enabled = false;
     }
     
     public override float GetDamage(float damage, MovableBase from) 

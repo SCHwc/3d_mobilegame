@@ -23,6 +23,9 @@ public abstract class MovableBase : MonoBehaviour
     public MovableBase focusTarget;     // �� ĳ������ ��ǥ��
     public bool isAlly;                 // ���Ϳ���
     public SkinnedMeshRenderer[] meshs;
+
+    public Collider atkCollider; // 근접공격에 필요한 콜라이더
+
     // �߻� �޼����
     abstract public float GetDamage(float damage, MovableBase from);   // �ǰݰ��� �޼���
    

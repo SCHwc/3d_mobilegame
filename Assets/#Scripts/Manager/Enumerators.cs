@@ -43,3 +43,8 @@ public enum SkillType
 
     Count
 }
+
+public enum Properties
+{
+
+}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShortAttack : MonoBehaviour
 {
-    AIBase owner;
+    MovableBase owner;
     Collider collider;
 
     void Start()
@@ -13,7 +13,7 @@ public class ShortAttack : MonoBehaviour
         if (owner == null)
         {
             // 주인을 찾고 그 주인에게 콜라이더 정보를 할당
-            owner = GetComponentInParent<AIBase>();
+            owner = GetComponentInParent<MovableBase>();
             owner.atkCollider = collider;
             collider.enabled = false;
         }
@@ -21,11 +21,9 @@ public class ShortAttack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체의 정보를 얻기 쉽게 하기 위해 함수로 돌린다.
-        if (other.gameObject == owner.focusTarget.gameObject)
-        {
-            Activate(owner.focusTarget);
-        }
+        // 예외처리.캐릭터가 아니라면 return
+        if (other.GetComponent<MovableBase>() == null) { return; }
+        // 캐릭터 일때만 충돌 이벤트 함수 실행하게 설정
         else
         {
             Activate(other.GetComponent<MovableBase>());
@@ -34,8 +32,11 @@ public class ShortAttack : MonoBehaviour
 
     void Activate(MovableBase wantTarget)
     {
-        if (wantTarget != null && wantTarget.isAlly != owner.isAlly)
+        if (wantTarget == null) { return; }
+
+        if (wantTarget.isAlly != owner.isAlly)
         {
+            GameObject effect = Instantiate(Managers.swordEffect, owner.atkCollider.transform);
             wantTarget.GetDamage(owner.Stat.AttackPower, owner);
         }
     }
