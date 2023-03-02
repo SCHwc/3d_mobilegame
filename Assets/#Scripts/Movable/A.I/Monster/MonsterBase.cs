@@ -20,6 +20,8 @@ public class MonsterBase : AIBase
     MState[] states;
     MState currentState;
 
+    public GameObject findEffect;
+
     protected override void Start()
     {
         base.Start();
@@ -45,6 +47,9 @@ public class MonsterBase : AIBase
         states[(int)MonsterState.Die] = new MonsterStates.MDie();
 
         ChangeState(MonsterState.Idle);
+
+        findEffect = Instantiate(GameManager.findEffect, this.transform);
+        findEffect.SetActive(false);
     }
 
 
@@ -79,10 +84,6 @@ public class MonsterBase : AIBase
         {
             case AttackType.Short:
                 atkCollider.enabled = true;
-                if (focusTarget != null)
-                {
-                    GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
-                }
                 Invoke("AttackColliderOff", 0.3f);
                 break;
             case AttackType.Long:

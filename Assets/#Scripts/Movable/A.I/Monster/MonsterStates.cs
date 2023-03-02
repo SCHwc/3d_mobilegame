@@ -30,7 +30,11 @@ namespace MonsterStates
                     }
                 }
 
-                if (nearestIndex > -1) { monster.focusTarget = col[nearestIndex].GetComponent<MovableBase>(); }
+                if (nearestIndex > -1)
+                {
+                    monster.focusTarget = col[nearestIndex].GetComponent<MovableBase>();
+                    monster.findEffect.SetActive(true);
+                }
                 else { monster.focusTarget = null; }
 
             }
@@ -144,7 +148,6 @@ namespace MonsterStates
     {
         public override void OnEnter(MonsterBase monster)
         {
-            Debug.Log($"{monster.gameObject.name}ÀÌ Á×¾ú´Ù!");
             monster.anim.SetTrigger("isDie");
         }
         public override void OnUpdate(MonsterBase monster)

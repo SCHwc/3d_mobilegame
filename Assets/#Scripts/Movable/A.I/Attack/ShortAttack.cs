@@ -6,6 +6,7 @@ public class ShortAttack : MonoBehaviour
 {
     MovableBase owner;
     Collider collider;
+    GameObject effect;
 
     void Start()
     {
@@ -17,6 +18,10 @@ public class ShortAttack : MonoBehaviour
             owner.atkCollider = collider;
             collider.enabled = false;
         }
+        if (owner.isAlly) { effect = Instantiate(GameManager.swordEffect, collider.transform); }
+        else { effect = Instantiate(GameManager.monsterAtkEffect, collider.transform); }
+
+        effect.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -36,7 +41,7 @@ public class ShortAttack : MonoBehaviour
 
         if (wantTarget.isAlly != owner.isAlly)
         {
-            GameObject effect = Instantiate(Managers.swordEffect, owner.atkCollider.transform);
+            effect.SetActive(true);
             wantTarget.GetDamage(owner.Stat.AttackPower, owner);
         }
     }

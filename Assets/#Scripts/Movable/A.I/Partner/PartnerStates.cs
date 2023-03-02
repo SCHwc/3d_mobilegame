@@ -10,7 +10,6 @@ namespace PartnerStates
     {
         public override void OnEnter(PartnerBase partner)
         {
-            Debug.Log("Idle 상태 진입");
             partner.anim.SetBool("isBattle", false);
 
         }
@@ -66,7 +65,6 @@ namespace PartnerStates
 
         public override void OnExit(PartnerBase partner)
         {
-            Debug.Log("Idle 상태 종료");
         }
     }
 
@@ -74,7 +72,6 @@ namespace PartnerStates
     {
         public override void OnEnter(PartnerBase partner)
         {
-            Debug.Log("Move 상태 진입");
             partner.agent.enabled = true;
         }
 
@@ -105,7 +102,6 @@ namespace PartnerStates
 
         public override void OnExit(PartnerBase partner)
         {
-            Debug.Log("Move 상태 종료");
             partner.agent.enabled = false;
         }
     }
@@ -114,8 +110,6 @@ namespace PartnerStates
     {
         public override void OnEnter(PartnerBase partner)
         {
-            Debug.Log("Attack 상태 진입");
-
             partner.Stat.AttackSpeed = 0f;
         }
 
@@ -140,12 +134,10 @@ namespace PartnerStates
             {
                 partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 partner.anim.SetBool("isBattle", true);
-                Debug.Log("공격!");
             }
 
             if (partner.Stat.AttackSpeed > 0)
             {
-                // Debug.Log($"공격 대기 남은시간 - {partner.Stat.AttackSpeed}");
                 partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 partner.anim.SetBool("isBattle", false);
                 partner.Stat.AttackSpeed -= Time.deltaTime;
@@ -154,7 +146,6 @@ namespace PartnerStates
 
         public override void OnExit(PartnerBase partner)
         {
-            Debug.Log("Attack 상태 종료");
             partner.anim.SetBool("isBattle", false);
         }
     }
