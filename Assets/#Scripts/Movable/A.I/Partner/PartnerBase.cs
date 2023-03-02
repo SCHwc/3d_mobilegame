@@ -81,10 +81,6 @@ public class PartnerBase : AIBase
         if (atkType == AttackType.Short)
         {
             atkCollider.enabled = true;
-            if (focusTarget != null)
-            {
-                GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
-            }
             Invoke("AttackColliderOff", 0.3f);
         }
     }

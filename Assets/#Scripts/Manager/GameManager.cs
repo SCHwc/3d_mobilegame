@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get => _instance; }
 
-    public PlayeableCharacterBase player; 
+    public PlayeableCharacterBase player;
+    public CameraShake cameraShaker;
+
+    public static GameObject swordEffect;
 
     void Awake()
     {
@@ -19,8 +22,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
+        cameraShaker = Camera.main.GetComponent<CameraShake>();
     }
- 
+
     void Update()
     {
 

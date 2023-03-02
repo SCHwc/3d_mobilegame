@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class PlayeableCharacterBase : MovableBase
 {
-    public bool isRun = false; // �޸��� ��������
-    protected bool isAttacking = false; // ��Ÿ������
-
     float moveAttackSpeed = 0.2f;
 
-    public Vector3 inputVector; // �Էº���
+    public Vector3 inputVector; // 이동입력값
 
-    [SerializeField] protected Collider weaponCol;        // �����ݶ��̴�
-    
-    #region ��ų �̸� & WeaponBase
-    [SerializeField] protected string normalWeaponName; // �븻��ų �̸�
-    WeaponBase normalSkill; // ��ų ��ũ��Ʈ
-    [SerializeField] protected string ultimateWeaponName; // �ñر� �̸�
-    WeaponBase ultimateSkill; // �ñر� ��ũ��Ʈ
+    #region 상태Bool값
+    public bool isRun = false; // 달리기 상태
+    public bool isDead = false; // 죽었는가
+    protected bool isAttacking = false; // 공격중인가
     #endregion
 
-    #region ��ų��Ÿ��
-    [SerializeField] protected float normalSkillCooldown; //�븻��ų ��Ÿ��
-    [SerializeField] protected float ultimateSkillCooldown; //�븻��ų ��Ÿ��
+    #region 스킬이름 & WeaponBase
+    [SerializeField] protected string normalWeaponName; // 일반스킬 이름
+    WeaponBase normalSkill; // 일반스킬
+    [SerializeField] protected string ultimateWeaponName; // 궁극기 이름
+    WeaponBase ultimateSkill; // 궁극기
+    #endregion
+
+    #region 스킬 쿨타임
+    [SerializeField] protected float normalSkillCooldown; // 일반스킬 쿨타임
+    [SerializeField] protected float ultimateSkillCooldown; // 궁극기 쿨타임
     protected float normalSkillCheckTime = 0;
     protected float ultimateSkillCheckTime = 0;
 
-    public float normalCoolDownRate // ���� �Ϲݽ�ų ��Ÿ�� ���� 0 ~ 1
+    public float normalCoolDownRate // 일반스킬 쿨타임 비율 0 ~ 1
     {
         get
         {
@@ -35,7 +36,7 @@ public class PlayeableCharacterBase : MovableBase
             else return 1;
         }
     }
-    public float ultimateCoolDownRate // ���� �ñر� ��Ÿ�� ���� 0 ~ 1
+    public float ultimateCoolDownRate // 궁극기 쿨타임 비율 0 ~ 1
     {
         get
         {
@@ -45,14 +46,14 @@ public class PlayeableCharacterBase : MovableBase
         }
     }
 
-    public bool isCool_normal { get; protected set; } = false; // �Ϲݽ�ų ��Ÿ�� ������
-    public bool isCool_ultimate { get; protected set; } = false; // �ñر� ��Ÿ�� ������
+    public bool isCool_normal { get; protected set; } = false; // 일반스킬이 쿨타임중인가
+    public bool isCool_ultimate { get; protected set; } = false; // 궁극기가 쿨타임중인가
     #endregion
 
-    #region �þ� ����
-    [SerializeField] protected float viewAngle = 130f; // �þ� ����
-    [SerializeField] protected float viewDistance = 10f; // �þ� �Ÿ�
-    [SerializeField] protected LayerMask targetMask; // Ÿ�� ����ũ
+    #region 시야 관련
+    [SerializeField] protected float viewAngle = 130f; // 시야각
+    [SerializeField] protected float viewDistance = 10f; // 시야거리
+    [SerializeField] protected LayerMask targetMask; // 몬스터 레이어
     #endregion
 
     protected override void Start()
@@ -65,12 +66,14 @@ public class PlayeableCharacterBase : MovableBase
 
     protected void Update()
     {
-        View(); // �þ߰��� ���� Ÿ�� üũ
+        if (stat.CurrentHp <= 0 && !isDead) Die(); // 사망
 
-        Move(inputVector); // �̵�
+        View(); // 시야각 내의 가장 가까운적을 타겟으로 설정
 
-        #region ��Ÿ�� üũ
-        // �븻 ��Ÿ�� üũ
+        Move(inputVector); // 입력받은 값에 따라 움직임
+
+        #region 쿨타임 체크
+        // 노말 쿨타임 체크
         if (isCool_normal)
         {
             normalSkillCheckTime += Time.deltaTime;
@@ -80,7 +83,7 @@ public class PlayeableCharacterBase : MovableBase
                 isCool_normal = false;
             }
         }
-        // �ñر� ��Ÿ�� üũ
+        // 궁극기 쿨타임 체크
         if (isCool_ultimate)
         {
             ultimateSkillCheckTime += Time.deltaTime;
@@ -91,7 +94,6 @@ public class PlayeableCharacterBase : MovableBase
             }
         }
         #endregion
-
     }
 
     public virtual void Move(Vector3 inputDir)
@@ -113,46 +115,13 @@ public class PlayeableCharacterBase : MovableBase
         }
     }
 
-    // ���ݽ� �����̴� �޼���
-    public virtual void AttackMove(Vector3 inputVector)
-    {
-        // ���ݽ� ������ ���� �̵�
-        if (isAttacking)
-        {
-            if (inputVector.magnitude > 0.1f) // �Է¹��������� �׹�������
-            {
-                float dirX = inputVector.x;
-                float dirZ = inputVector.y;
-                Vector3 moveDir = new Vector3(dirX, 0, dirZ).normalized;
-
-                transform.position += (moveDir * Time.deltaTime * moveAttackSpeed);
-
-                transform.LookAt(transform.position + moveDir);
-            }
-            else if (focusTarget != null) // �Է� ���ϰ� Ÿ�� ����� Ÿ�������� �����̸� ����
-            {
-                Vector3 moveDir = focusTarget.transform.position - transform.position;
-                moveDir.y = 0f;
-                moveDir = moveDir.normalized;
-
-                transform.position += moveDir * Time.deltaTime * moveAttackSpeed;
-
-                transform.LookAt(transform.position + moveDir);
-            }
-            else // Ÿ�پ��� �Է¾����� �ڱ��� �չ�������
-            {
-                transform.position += transform.forward.normalized * Time.deltaTime * moveAttackSpeed;
-            }
-        }
-    }
-
     public virtual void Attack(bool onAttack)
     {
         anim.SetBool("OnAttack", onAttack);
         isAttacking = onAttack;
     }
 
-    public virtual void Skill(SkillType skillType) // ��ų�ߵ�
+    public virtual void Skill(SkillType skillType) // 타입에 따른 스킬발동
     {
 
         switch (skillType)
@@ -175,27 +144,23 @@ public class PlayeableCharacterBase : MovableBase
                 break;
         }
     }
-
-    public virtual void ActiveAttackCol()
-    {
-        weaponCol.enabled = true;
-    }
-
-    public virtual void InActiveAttackCol()
-    {
-        weaponCol.enabled = false;
-    }
     
     public override float GetDamage(float damage, MovableBase from) 
     {
         stat.CurrentHp -= damage;
 
-        anim.SetTrigger("Hit");
+        anim.SetTrigger("OnHit");
 
         return damage;
     }
 
-    // �þ߰� + �þ� ���� ���� ������ ���� ����� �༮�� Ÿ������ �����������ϴ� �޼���
+    protected void Die() // 체력이 0이 되면 사망
+    {
+        isDead = true;
+        anim.SetTrigger("OnDead");
+    }
+
+    // 가장 가까운 적 타겟으로
     protected void View()
     {
         float nearesttargetDist = viewDistance + 1;
@@ -207,7 +172,7 @@ public class PlayeableCharacterBase : MovableBase
         {
             Transform _targetTf = _target[i].transform;
             Vector3 _direction = (_targetTf.position - transform.position).normalized;
-            // �þ߰�
+            // 시야각을 통해 검사
             float _angle = Vector3.Angle(_direction, transform.forward);
             if(_angle < viewAngle * 0.5f)
             {
@@ -239,5 +204,20 @@ public class PlayeableCharacterBase : MovableBase
         }
 
         return null;
+    }
+
+    public virtual void ActiveAttackCol()
+    {
+        atkCollider.enabled = true;
+    }
+
+    public virtual void InActiveAttackCol()
+    {
+        atkCollider.enabled = false;
+    }
+
+    public virtual void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

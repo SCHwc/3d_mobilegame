@@ -12,3 +12,4 @@ public class Projectile_Damage : ProjectileAction
         target?.GetDamage(proj.owner.Stat.AttackPower, proj.owner);
     }
 }
+

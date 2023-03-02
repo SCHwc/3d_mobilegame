@@ -31,8 +31,6 @@ public abstract class AIBase : MovableBase
     }
     public NavMeshAgent agent;
 
-    public Collider atkCollider; // 근접공격에 필요한 콜라이더
-
     protected WeaponBase equipSkill;
     public string skillName;
     public bool skillTracking;

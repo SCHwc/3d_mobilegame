@@ -4893,7 +4893,7 @@ GameObject:
   - component: {fileID: 8671610660186929448}
   - component: {fileID: 2128991018475720903}
   - component: {fileID: 1065784440391835707}
-  - component: {fileID: -7531023031918638423}
+  - component: {fileID: -7160472730291708812}
   m_Layer: 0
   m_Name: SwordImpact
   m_TagString: Untagged
@@ -9776,7 +9776,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-7531023031918638423
+--- !u!114 &-7160472730291708812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9785,10 +9785,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5734966937462309814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4402485c83f6e7a41b8a9247727e8702, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c2756d84cb228142bc8bff31cd6434c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTime: 0.8
+  leftTime: 0.4
 --- !u!1 &7756544200875850154
 GameObject:
   m_ObjectHideFlags: 0

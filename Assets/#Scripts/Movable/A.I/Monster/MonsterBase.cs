@@ -80,10 +80,6 @@ public class MonsterBase : AIBase
         {
             case AttackType.Short:
                 atkCollider.enabled = true;
-                if (focusTarget != null)
-                {
-                    GameObject effect = Instantiate(Managers.swordEffect, atkCollider.transform);
-                }
                 Invoke("AttackColliderOff", 0.3f);
                 break;
             case AttackType.Long:
