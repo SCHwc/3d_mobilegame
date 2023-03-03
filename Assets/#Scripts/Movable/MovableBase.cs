@@ -26,16 +26,61 @@ public abstract class MovableBase : MonoBehaviour
 
     public Collider atkCollider; // 근접공격에 필요한 콜라이더
 
-    // �߻� �޼����
+    // 함수를 담아두는 변수
+    System.Action MovableUpdate;
+    // 버프 목록
+    protected List<MovableBuff> buffs = new List<MovableBuff>();
+
     abstract public float GetDamage(float damage, MovableBase from);   // �ǰݰ��� �޼���
-   
+
     protected virtual void Start()
     {
         stat = GetComponent<StatBase>();
         collider = GetComponent<Collider>();
         anim = GetComponent<Animator>();
-        meshs=GetComponentsInChildren<SkinnedMeshRenderer>();
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        MovableUpdate += BuffUpdate;
     }
 
+    protected virtual void Update()
+    {
+        if (MovableUpdate != null) { MovableUpdate(); }
+    }
+
+
+
+
     public virtual void AddWeapon(string wantName) { }
+
+    void BuffUpdate()
+    {
+        for (int i = 0; i < buffs.Count; i++)
+        {
+            MovableBuff currentBuff = buffs[i];
+
+            currentBuff.leftTime -= Time.deltaTime;
+
+            // 버프 지속시간이 다된다면 버프를 끝내고 다시 앞번호로 땡기기(지워졌으니 뒷번호 버프가 앞으로 당겨지기 때문에)
+            if (currentBuff.leftTime <= 0)
+            {
+                RemoveBuff(currentBuff);
+                --i;
+            }
+        }
+    }
+
+    public void AddBuff(MovableBuff wantBuff)
+    {
+        buffs.Add(wantBuff);
+
+        if (wantBuff.BuffStart != null) { wantBuff.BuffStart(this); }
+    }
+
+    public void RemoveBuff(MovableBuff wantBuff)
+    {
+        buffs.Remove(wantBuff);
+
+        if (wantBuff.BuffExit != null) { wantBuff.BuffExit(this); }
+    }
 }

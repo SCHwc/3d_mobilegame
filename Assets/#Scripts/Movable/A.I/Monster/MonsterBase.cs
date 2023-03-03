@@ -29,8 +29,9 @@ public class MonsterBase : AIBase
         Setup();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (currentState != null)
         {
             currentState.OnUpdate(this);

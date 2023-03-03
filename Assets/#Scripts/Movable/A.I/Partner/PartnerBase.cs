@@ -31,8 +31,9 @@ public class PartnerBase : AIBase
         Setup();
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         if (currentState != null)
         {
             currentState.OnUpdate(this);
@@ -122,6 +123,7 @@ public class PartnerBase : AIBase
             case "FireShield":
                 break;
             case "IceSpear":
+                equipSkill = new Weapon_IceSpike(this);
                 break;
         }
     }

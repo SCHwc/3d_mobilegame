@@ -9,6 +9,7 @@ namespace MonsterStates
         public override void OnEnter(MonsterBase monster)
         {
             monster.anim.SetBool("isBattle", false);
+            monster.focusTarget = null;
         }
 
         public override void OnUpdate(MonsterBase monster)
@@ -33,7 +34,6 @@ namespace MonsterStates
                 if (nearestIndex > -1)
                 {
                     monster.focusTarget = col[nearestIndex].GetComponent<MovableBase>();
-                    monster.findEffect.SetActive(true);
                 }
                 else { monster.focusTarget = null; }
 
@@ -42,6 +42,7 @@ namespace MonsterStates
             if (monster.focusTarget != null)
             {
                 distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
+                monster.findEffect.SetActive(true);
 
                 if (distance > monster.AtkRange) // 공격범위보다 멀다면 이동
                 {
@@ -61,10 +62,11 @@ namespace MonsterStates
 
     public class MMove : MState
     {
+        float moveTime = 0f;
         public override void OnEnter(MonsterBase monster)
         {
-
             monster.agent.enabled = true;
+            moveTime = 0f;
         }
 
 
@@ -85,10 +87,17 @@ namespace MonsterStates
             if (distance > monster.AtkRange)
             {             // 공격범위보다 크다면 이동
                 monster.agent.SetDestination(monster.focusTarget.transform.position);
+                moveTime += Time.deltaTime;
+                if (moveTime >= 3.5f)
+                {
+                    monster.focusTarget = null;
+                    monster.ChangeState(MonsterState.Idle);
+                }
             }
             else if (distance <= monster.AtkRange)
             {             // 공격범위보다 작거나 같다면 공격으로 변경
                 monster.ChangeState(MonsterState.Attack);
+                if (moveTime > 0) { moveTime = 0f; }
             }
         }
         public override void OnExit(MonsterBase monster)
@@ -119,6 +128,7 @@ namespace MonsterStates
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
                 distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
+                monster.transform.LookAt(monster.focusTarget.transform);
             }
 
             if (monster.focusTarget != null && distance > monster.AtkRange)

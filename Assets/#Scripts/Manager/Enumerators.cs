@@ -44,7 +44,7 @@ public enum SkillType
     Count
 }
 
-public enum Properties
+public enum BuffType
 {
-
+    Speed
 }

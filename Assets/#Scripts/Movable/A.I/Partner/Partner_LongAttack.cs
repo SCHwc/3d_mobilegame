@@ -8,7 +8,7 @@ using UnityEngine;
 public class Partner_LongAttack : PartnerBase
 {
     // 캐릭터가 가지고 있는 스킬
-    WeaponBase currentWeapon; 
+    WeaponBase currentWeapon;
 
     // 원하는 스킬의 이름
     public string weaponName;
@@ -21,7 +21,7 @@ public class Partner_LongAttack : PartnerBase
         base.Start();
 
         // 스킬 할당
-        AddWeapon(weaponName);
+        AddNormalWeapon(weaponName);
 
     }
     protected override void Update()
@@ -40,7 +40,7 @@ public class Partner_LongAttack : PartnerBase
         }
     }
 
-    public override void AddWeapon(string wantName)
+    public void AddNormalWeapon(string wantName)
     {
         switch (wantName)
         {

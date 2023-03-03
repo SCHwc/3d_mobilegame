@@ -10,7 +10,7 @@ public class PlayeableCharacterBase : MovableBase
     float moveAttackSpeed = 0.5f;
 
     public Vector3 inputVector; // �Էº���
-    
+
     #region ��ų �̸� & WeaponBase
     [SerializeField] protected string normalWeaponName; // �븻��ų �̸�
     WeaponBase normalSkill; // ��ų ��ũ��Ʈ
@@ -61,7 +61,7 @@ public class PlayeableCharacterBase : MovableBase
         ultimateSkill = AddWeapon(ultimateWeaponName);
     }
 
-    protected void Update()
+    protected override void Update()
     {
         View(); // �þ߰��� ���� Ÿ�� üũ
 
@@ -156,7 +156,7 @@ public class PlayeableCharacterBase : MovableBase
         switch (skillType)
         {
             case SkillType.Normal:
-                if(isCool_normal != true)
+                if (isCool_normal != true)
                 {
                     isCool_normal = true;
                     normalSkill.OnAttack(focusTarget, false);
@@ -164,7 +164,7 @@ public class PlayeableCharacterBase : MovableBase
                 }
                 break;
             case SkillType.Ultimate:
-                if(isCool_ultimate != true)
+                if (isCool_ultimate != true)
                 {
                     isCool_ultimate = true;
                     ultimateSkill.OnAttack(focusTarget, false);
@@ -183,8 +183,8 @@ public class PlayeableCharacterBase : MovableBase
     {
         atkCollider.enabled = false;
     }
-    
-    public override float GetDamage(float damage, MovableBase from) 
+
+    public override float GetDamage(float damage, MovableBase from)
     {
         stat.CurrentHp -= damage;
 
@@ -201,15 +201,15 @@ public class PlayeableCharacterBase : MovableBase
 
         Collider[] _target = Physics.OverlapSphere(transform.position, viewDistance, targetMask);
 
-        for(int i = 0; i < _target.Length; i++)
+        for (int i = 0; i < _target.Length; i++)
         {
             Transform _targetTf = _target[i].transform;
             Vector3 _direction = (_targetTf.position - transform.position).normalized;
             // �þ߰�
             float _angle = Vector3.Angle(_direction, transform.forward);
-            if(_angle < viewAngle * 0.5f)
+            if (_angle < viewAngle * 0.5f)
             {
-                
+
                 float dist = (_targetTf.position - transform.position).magnitude;
                 if (dist < nearesttargetDist)
                 {

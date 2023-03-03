@@ -30,7 +30,7 @@ public abstract class AIBase : MovableBase
         }
     }
     public NavMeshAgent agent;
-   
+
     protected WeaponBase equipSkill;
     public string skillName;
     public bool skillTracking;
@@ -44,9 +44,12 @@ public abstract class AIBase : MovableBase
 
     }
 
+
+
     public override float GetDamage(float damage, MovableBase from)
     {
-        StartCoroutine(GetDamageMeshs());
+        if (buffs.Count < 1) { StartCoroutine(GetDamageMeshs()); }
+           
 
         damage -= Stat.DefensePower;                               // 방어력만큼 데미지 감소
         damage = Mathf.Max(0, damage);                             // 0보다 작아지지 않게
