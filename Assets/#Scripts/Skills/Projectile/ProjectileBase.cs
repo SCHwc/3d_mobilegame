@@ -91,9 +91,6 @@ public class ProjectileBase : MonoBehaviour
             Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
             transform.position += movePosition;
         }
-
-
-
     }
 
     public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)

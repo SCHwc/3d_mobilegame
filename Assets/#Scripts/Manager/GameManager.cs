@@ -27,9 +27,4 @@ public class GameManager : MonoBehaviour
         cameraShaker = Camera.main.GetComponent<CameraShake>();
     }
 
-    void Update()
-    {
-
-        
-    }
 }

@@ -3021,7 +3021,7 @@ MonoBehaviour:
   isRun: 0
   isDead: 0
   normalWeaponName: FloatingSword
-  ultimateWeaponName: BlackHole
+  ultimateWeaponName: SwordStorm
   normalSkillCooldown: 5
   ultimateSkillCooldown: 10
   viewAngle: 130

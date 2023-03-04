@@ -62,6 +62,7 @@ public class PlayeableCharacterBase : MovableBase
 
         normalSkill = AddWeapon(normalWeaponName);
         ultimateSkill = AddWeapon(ultimateWeaponName);
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     protected void Update()
@@ -149,7 +150,7 @@ public class PlayeableCharacterBase : MovableBase
     {
         stat.CurrentHp -= damage;
 
-        anim.SetTrigger("OnHit");
+        StartCoroutine(GetDamageMeshs());
 
         return damage;
     }
@@ -199,8 +200,8 @@ public class PlayeableCharacterBase : MovableBase
         {
             case "FloatingSword":
                 return new Weapon_FloatingSword(this);
-            case "BlackHole":
-                return new Weapon_BlackHole(this);
+            case "SwordStorm":
+                return new Weapon_SwordStorm(this);            
         }
 
         return null;
@@ -219,5 +220,14 @@ public class PlayeableCharacterBase : MovableBase
     public virtual void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public IEnumerator GetDamageMeshs()
+    {
+        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.red; }
+        yield return new WaitForSeconds(0.25f);
+
+        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.white; }
+        yield break;
     }
 }
