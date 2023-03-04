@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon_SwordStorm : WeaponBase
 {
-    public Weapon_SwordStorm(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_SwordStorm(MovableBase wantOwner, float wantCoolTime) : base(wantOwner, wantCoolTime)
     {
         spawnPrefab = Resources.Load<GameObject>($"Prefabs/Skills/SwordStorm");
     }

@@ -51,7 +51,7 @@ public abstract class MovableBase : MonoBehaviour
 
 
 
-    public virtual void AddWeapon(string wantName) { }
+    public virtual WeaponBase AddWeapon(string wantName, float wantCoolTime) { return null; }
 
     void BuffUpdate()
     {

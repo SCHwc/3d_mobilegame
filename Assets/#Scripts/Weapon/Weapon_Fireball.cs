@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon_Fireball : WeaponBase
 {
-    public Weapon_Fireball(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_Fireball(MovableBase wantOwner, float wantCoolTime) : base(wantOwner, wantCoolTime)
     {
         spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
     }

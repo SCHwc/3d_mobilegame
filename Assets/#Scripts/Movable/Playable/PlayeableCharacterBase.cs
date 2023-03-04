@@ -199,9 +199,9 @@ public class PlayeableCharacterBase : MovableBase
         switch (wantName)
         {
             case "FloatingSword":
-                return new Weapon_FloatingSword(this);
+                return new Weapon_FloatingSword(this, normalSkillCooldown);
             case "SwordStorm":
-                return new Weapon_SwordStorm(this);            
+                return new Weapon_SwordStorm(this, ultimateSkillCooldown);            
         }
 
         return null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon_FloatingSword : WeaponBase
 {
-    public Weapon_FloatingSword(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_FloatingSword(MovableBase wantOwner, float wantCoolTime) : base(wantOwner, wantCoolTime)
     {
         spawnPrefab = Resources.Load<GameObject>($"Prefabs/Skills/FloatingSword");
     }
