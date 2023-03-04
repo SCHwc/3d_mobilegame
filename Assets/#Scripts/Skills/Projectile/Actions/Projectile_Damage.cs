@@ -8,7 +8,8 @@ public class Projectile_Damage : ProjectileAction
 
     public override void Activate(ProjectileBase proj, MovableBase target, Vector3 position)
     {
-        // ÁÖÀÎÀÇ °ø°Ý·ÂÀ¸·Î Å¸°Ù¿¡°Ô µ¥¹ÌÁö¸¦ ÁØ´Ù. (¼Ó¼ºµ¥¹ÌÁö¸¦ ´õ ³ÖÀ¸·Á¸é º¯¼ö Ãß°¡)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½. (ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½)
         target?.GetDamage(proj.owner.Stat.AttackPower + damageValue, proj.owner);
     }
 }
+

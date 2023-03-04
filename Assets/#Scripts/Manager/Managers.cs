@@ -7,14 +7,12 @@ public class Managers : MonoBehaviour
     public static Managers _instance = null;
     public static Managers Instance { get => _instance; }
 
-    #region ÇÏÀ§ ¸Å´ÏÀú Á¤Àû ÇÊµå ¹× ÇÁ·ÎÆÛÆ¼
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼
     private static InputManager _input = new InputManager();
 
-    // ManagersÃÊ±âÈ­ Àü »ç¿ëÇÒ °æ¿ì ´ëºñÇÏ¿© get½Ã ÃÊ±âÈ­ ½ÇÇà ÈÄ ¹ÝÈ¯
+    // Managersï¿½Ê±ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ getï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
     public static InputManager Input { get { Init(); return _input; } }
     #endregion
-
-
 
     private void Awake()
     {
@@ -23,24 +21,24 @@ public class Managers : MonoBehaviour
 
     private static void Init()
     {
-        // ½Ì±ÛÅæ
+        // ï¿½Ì±ï¿½ï¿½ï¿½
         if (_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
             if (go == null)
                 go = new GameObject("@Managers");
 
-            // °ÔÀÓ¿ÀºêÁ§Æ®¿¡ Managers°¡ ÀÖ´Ù¸é °¡Á®¿À°í ¾ø´Ù¸é ºÙ¿©¼­ ¹ÝÈ¯
+            // ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Managersï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
             _instance = Utils.GetOrAddComponent<Managers>(go);
 
-            // ¾À ÀüÈ¯½Ã¿¡µµ ÆÄ±«µÇÁö ¾Êµµ·Ï Ã³¸®
+            // ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
             DontDestroyOnLoad(go);
 
-            #region ÇÏÀ§¸Å´ÏÀúµé ÃÊ±âÈ­
+            #region ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
             _input.Init();
             #endregion
 
-            // ¼º´É Çâ»óÀ» À§ÇÑ ÇÁ·¹ÀÓ °íÁ¤
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Application.targetFrameRate = 60;
         }
     }

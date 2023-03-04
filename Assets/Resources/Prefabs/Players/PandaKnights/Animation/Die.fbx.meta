@@ -1,32 +1,32 @@
 fileFormatVersion: 2
-guid: bfe8d7e281dcf7446a3c98a62cebbb19
+guid: d01bdf21574c9514bba6a6ecbebe9b7d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
     second: ball_l
   - first:
-      1: 100004
+      1: 100002
     second: ball_r
   - first:
-      1: 100006
+      1: 100004
     second: Body8
   - first:
-      1: 100008
+      1: 100006
     second: calf_l
   - first:
-      1: 100010
+      1: 100008
     second: calf_r
   - first:
-      1: 100012
+      1: 100010
     second: clavicle_l
   - first:
-      1: 100014
+      1: 100012
     second: clavicle_r
+  - first:
+      1: 100014
+    second: //RootNode
   - first:
       1: 100016
     second: Dog
@@ -218,28 +218,28 @@ ModelImporter:
     second: Weapon
   - first:
       4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
     second: ball_l
   - first:
-      4: 400004
+      4: 400002
     second: ball_r
   - first:
-      4: 400006
+      4: 400004
     second: Body8
   - first:
-      4: 400008
+      4: 400006
     second: calf_l
   - first:
-      4: 400010
+      4: 400008
     second: calf_r
   - first:
-      4: 400012
+      4: 400010
     second: clavicle_l
   - first:
-      4: 400014
+      4: 400012
     second: clavicle_r
+  - first:
+      4: 400014
+    second: //RootNode
   - first:
       4: 400016
     second: Dog
@@ -437,7 +437,7 @@ ModelImporter:
     second: Dog
   - first:
       74: 7400000
-    second: AttackCombo01
+    second: Die
   - first:
       95: 9500000
     second: //RootNode
@@ -477,11 +477,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: AttackCombo01
+      name: Die
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 18
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -501,15 +501,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5
-        functionName: ActiveAttackCol
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6241635
-        functionName: InActiveAttackCol
+      - time: 0.9739414
+        functionName: Destroy
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -1022,23 +1015,23 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: AttackCombo01(Clone)
+    - name: DIe(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Body8
-      parentName: AttackCombo01(Clone)
+      parentName: DIe(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: Dog
-      parentName: AttackCombo01(Clone)
+      parentName: DIe(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: root
-      parentName: AttackCombo01(Clone)
+      parentName: DIe(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
       scale: {x: 1, y: 0.9999995, z: 0.9999995}

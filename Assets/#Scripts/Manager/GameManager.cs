@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     public PlayeableCharacterBase player;
 
 
-    // ÀÎ°ÔÀÓ¿¡¼­ »ç¿ëµÉ ÀÌÆåÆ®µé
+    // ï¿½Î°ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
     public static GameObject swordEffect;
     public static GameObject monsterAtkEffect;
     public static GameObject findEffect;
+    public CameraShake cameraShaker;
 
     void Awake()
     {
@@ -29,11 +30,7 @@ public class GameManager : MonoBehaviour
         swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
         monsterAtkEffect = Resources.Load<GameObject>("Prefabs/Effects/MonsterAtkEffect");
         findEffect = Resources.Load<GameObject>("Prefabs/Effects/FindEffect");
+        cameraShaker = Camera.main.GetComponent<CameraShake>();
     }
  
-    void Update()
-    {
-
-        
-    }
 }

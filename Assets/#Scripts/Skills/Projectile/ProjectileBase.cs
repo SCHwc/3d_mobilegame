@@ -90,12 +90,7 @@ public class ProjectileBase : MonoBehaviour
             // �������� �ʴ´ٸ� �ʱ�ȭ �޼��忡�� �Ҵ���� �������� ����
             Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
             transform.position += movePosition;
-
-
         }
-
-
-
     }
 
     public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
@@ -105,8 +100,34 @@ public class ProjectileBase : MonoBehaviour
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
 
-        focusTarget = wantTarget;
-        Direction = focusTarget.transform.position - owner.transform.position;
+        if(focusTarget != null)
+        {
+            focusTarget = wantTarget;
+            Direction = focusTarget.transform.position - owner.transform.position;
+        }
+    }
+
+    public virtual void Activate(MovableBase other)
+    {
+        // 예외처리1.충돌을 무시하기로한 물체라면 return
+        if (ignoreList.Contains(other.gameObject)) { return; }
+        // 예외처리2.같은 진영이라면 return
+        if (owner.isAlly == other.GetComponent<MovableBase>()?.isAlly) { return; }
+
+        if(isTracking)
+        {
+            // 타겟이 아니면 return
+            if(owner.focusTarget.gameObject != other) { return; }
+            // 타겟이면 타겟 대상으로 액션 실행
+            else { ActionActivate(this, focusTarget, transform.position); }
+        }
+        else
+        {
+            if(owner.isAlly != other.isAlly)
+            {
+                ActionActivate(this, other, transform.position);
+            }
+        }
 
     }
 

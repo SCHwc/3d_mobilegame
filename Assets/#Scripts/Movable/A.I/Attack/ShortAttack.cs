@@ -13,7 +13,7 @@ public class ShortAttack : MonoBehaviour
         collider = GetComponent<Collider>();
         if (owner == null)
         {
-            // ÁÖÀÎÀ» Ã£°í ±× ÁÖÀÎ¿¡°Ô ÄÝ¶óÀÌ´õ Á¤º¸¸¦ ÇÒ´ç
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
             owner = GetComponentInParent<MovableBase>();
             owner.atkCollider = collider;
             collider.enabled = false;
@@ -26,9 +26,9 @@ public class ShortAttack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // ¿¹¿ÜÃ³¸®.Ä³¸¯ÅÍ°¡ ¾Æ´Ï¶ó¸é return
-        if (other.GetComponent<MovableBase>() == null) { return; }
-        // Ä³¸¯ÅÍ ÀÏ¶§¸¸ Ãæµ¹ ÀÌº¥Æ® ÇÔ¼ö ½ÇÇàÇÏ°Ô ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½.Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ return
+        if(other.GetComponent<MovableBase>() == null) { return; }
+        // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½Ìºï¿½Æ® ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
         else
         {
             Activate(other.GetComponent<MovableBase>());
@@ -37,9 +37,9 @@ public class ShortAttack : MonoBehaviour
 
     void Activate(MovableBase wantTarget)
     {
-        if (wantTarget == null) { return; }
+        if(wantTarget == null) { return; }
 
-        if (wantTarget.isAlly != owner.isAlly)
+        if(wantTarget.isAlly != owner.isAlly)
         {
             effect.SetActive(true);
             wantTarget.GetDamage(owner.Stat.AttackPower, owner);

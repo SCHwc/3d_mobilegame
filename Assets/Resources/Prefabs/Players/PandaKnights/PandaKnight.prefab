@@ -840,6 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4598507526983224813}
   - component: {fileID: 4598507526983224812}
+  - component: {fileID: 1345690565}
   m_Layer: 0
   m_Name: WeaponCol
   m_TagString: Untagged
@@ -855,7 +856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4598507526983224810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.645, z: 0.701}
+  m_LocalPosition: {x: 0, y: 0.645, z: 0.935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -871,10 +872,22 @@ BoxCollider:
   m_GameObject: {fileID: 4598507526983224810}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1345690565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598507526983224810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cabe757c95c29448dda0068719dc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4598507527288233364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,10 +2993,12 @@ MonoBehaviour:
   _maxHp: 100
   _moveSpeed: 3
   _attackSpeed: 0
+  _attackDelay: 0
   _resistance: 0
   _attackPower: 10
   _defensePower: 10
   _selfRecovery: 0
+  _skillCoolTime: 0
   moveSpeedMultiflier: 1.5
 --- !u!114 &4470503390899380974
 MonoBehaviour:
@@ -3000,11 +3015,13 @@ MonoBehaviour:
   anim: {fileID: 0}
   focusTarget: {fileID: 0}
   isAlly: 1
-  isRun: 0
+  meshs: []
+  atkCollider: {fileID: 4598507526983224812}
   inputVector: {x: 0, y: 0, z: 0}
-  weaponCol: {fileID: 4598507526983224812}
+  isRun: 0
+  isDead: 0
   normalWeaponName: FloatingSword
-  ultimateWeaponName: BlackHole
+  ultimateWeaponName: SwordStorm
   normalSkillCooldown: 5
   ultimateSkillCooldown: 10
   viewAngle: 130

@@ -19,7 +19,7 @@ namespace MonsterStates
                 float nearestDistance = 10f;
                 int nearestIndex = -1;
 
-                // Ä³¸¯ÅÍÀÇ °¨Áö¹üÀ§¸¸Å­ ÀûÀ» °¨ÁöÇÑ´Ù.
+                // Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
                 Collider[] col = Physics.OverlapSphere(monster.gameObject.transform.position, monster.FindRange, 1 << 9 | 1 << 10);
                 for (int i = 0; i < col.Length; i++)
                 {
@@ -44,11 +44,11 @@ namespace MonsterStates
                 distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
                 monster.findEffect.SetActive(true);
 
-                if (distance > monster.AtkRange) // °ø°Ý¹üÀ§º¸´Ù ¸Ö´Ù¸é ÀÌµ¿
+                if (distance > monster.AtkRange) // ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½Ìµï¿½
                 {
                     monster.ChangeState(MonsterState.Walk);
                 }
-                else                             // °ø°Ý¹üÀ§º¸´Ù °¡±î¿ì¸é °ø°Ý
+                else                             // ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 {
                     monster.ChangeState(MonsterState.Attack);
                 }
@@ -85,7 +85,7 @@ namespace MonsterStates
             monster.anim.SetFloat("isMove", monster.agent.velocity.magnitude);
 
             if (distance > monster.AtkRange)
-            {             // °ø°Ý¹üÀ§º¸´Ù Å©´Ù¸é ÀÌµ¿
+            {             // ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½Ìµï¿½
                 monster.agent.SetDestination(monster.focusTarget.transform.position);
                 moveTime += Time.deltaTime;
                 if (moveTime >= 3.5f)
@@ -95,7 +95,7 @@ namespace MonsterStates
                 }
             }
             else if (distance <= monster.AtkRange)
-            {             // °ø°Ý¹üÀ§º¸´Ù ÀÛ°Å³ª °°´Ù¸é °ø°ÝÀ¸·Î º¯°æ
+            {             // ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 monster.ChangeState(MonsterState.Attack);
                 if (moveTime > 0) { moveTime = 0f; }
             }
@@ -121,12 +121,12 @@ namespace MonsterStates
         public override void OnUpdate(MonsterBase monster)
         {
             if (monster.focusTarget == null)
-            {   // Å¸°ÙÀÌ ¾ø´Ù¸é ÇÒ´çµÈ Å¸°ÙÀ» Áö¿ì°í ´Ù½Ã ´ë±â»óÅÂ·Î µ¹¾Æ°£´Ù.
+            {   // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Ò´ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½.
                 distance = 0;
                 monster.ChangeState(MonsterState.Idle);
             }
             else
-            {   // Å¸°ÙÀÌ ÀÖ´Ù¸é Å¸°Ù°úÀÇ °Å¸® ÇÒ´ç
+            {   // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ Å¸ï¿½Ù°ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½Ò´ï¿½
                 distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
                 monster.transform.LookAt(monster.focusTarget.transform);
             }
