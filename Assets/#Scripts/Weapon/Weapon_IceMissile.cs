@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon_IceMissile : WeaponBase
 {
-    public Weapon_IceMissile(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_IceMissile(MovableBase wantOwner, float wantCoolTime) : base(wantOwner, wantCoolTime)
     {
         // 오브젝트 할당
        spawnPrefab= Resources.Load<GameObject>("Prefabs/Projectiles/IceMissile");

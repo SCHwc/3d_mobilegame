@@ -25,9 +25,12 @@ public abstract class MovableBase : MonoBehaviour
     public SkinnedMeshRenderer[] meshs;
 
     public Collider atkCollider; // 근접공격에 필요한 콜라이더
+    public WeaponBase equipSkill;
+    public string skillName;
+    public float skillCoolTime;
 
     // 함수를 담아두는 변수
-    System.Action MovableUpdate;
+    protected System.Action MovableUpdate;
     // 버프 목록
     protected List<MovableBuff> buffs = new List<MovableBuff>();
 
@@ -40,6 +43,8 @@ public abstract class MovableBase : MonoBehaviour
         anim = GetComponent<Animator>();
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
 
+        equipSkill = AddWeapon(skillName, skillCoolTime);
+        MovableUpdate += CoolTimeCycle;
         MovableUpdate += BuffUpdate;
     }
 
@@ -51,7 +56,7 @@ public abstract class MovableBase : MonoBehaviour
 
 
 
-    public virtual void AddWeapon(string wantName) { }
+    public virtual WeaponBase AddWeapon(string wantName, float wantCoolTime) { return null; }
 
     void BuffUpdate()
     {
@@ -67,6 +72,14 @@ public abstract class MovableBase : MonoBehaviour
                 RemoveBuff(currentBuff);
                 --i;
             }
+        }
+    }
+
+    void CoolTimeCycle()
+    {
+        if(equipSkill != null && equipSkill.CurrentCoolTime > 0)
+        {
+            equipSkill.CurrentCoolTime -= Time.deltaTime;
         }
     }
 

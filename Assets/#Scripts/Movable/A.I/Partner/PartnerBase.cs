@@ -113,19 +113,19 @@ public class PartnerBase : AIBase
         equipSkill.OnAttack(focusTarget.GetComponent<MonsterBase>(), skillTracking);
     }
 
-    public override void AddWeapon(string wantName)
+    public override WeaponBase AddWeapon(string wantName, float wantCoolTime)
     {
         switch (wantName)
         {
             case "Provoke":
-                equipSkill = new Weapon_Provoke(this);
-                break;
+                return new Weapon_Provoke(this, wantCoolTime);
             case "FireShield":
-                break;
+                return null;
             case "IceSpear":
-                equipSkill = new Weapon_IceSpike(this);
-                break;
+                return new Weapon_IceSpike(this, wantCoolTime);
         }
+
+        return null;
     }
 
     public override void Die()

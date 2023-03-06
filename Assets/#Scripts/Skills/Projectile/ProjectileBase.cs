@@ -59,7 +59,7 @@ public class ProjectileBase : MonoBehaviour
 
     void Update()
     {
-        if (leftTime <= 0 || focusTarget == null) { Destroy(gameObject); }
+        if (leftTime <= 0) { Destroy(gameObject); }
         leftTime -= Time.deltaTime; // �߻�ü�� �����ð�
 
         // �ð��� �������� ����
@@ -67,6 +67,8 @@ public class ProjectileBase : MonoBehaviour
 
         if (isTracking)
         {  // ��ǥ���� �����ϵ��� �������ִٸ� ��ǥ���� �ٶ󺸰� ����� ��� ����
+            if(focusTarget == null) { Destroy(gameObject); }
+
             if (focusTarget)
             {
                 Vector3 targetPosition = focusTarget.transform.position;
@@ -80,11 +82,14 @@ public class ProjectileBase : MonoBehaviour
             // �ٶ󺸴� ����
             if (currentSpeed > 0)
             {
+                if (focusTarget == null) { Destroy(gameObject); }
                 Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
                 transform.LookAt(transform.position + lookPosition);
             }
             else
             {
+                Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
+                transform.LookAt(transform.position + lookPosition);
             }
 
             // �������� �ʴ´ٸ� �ʱ�ȭ �޼��忡�� �Ҵ���� �������� ����
@@ -93,15 +98,25 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
+    public void Initialize(MovableBase wantOwner, MovableBase wantTarget, bool wantTracking)
     {
         // 소환되면서 초기화
-        owner = wantOnwer;
+        owner = wantOwner;
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
 
         focusTarget = wantTarget;
         Direction = focusTarget.transform.position - owner.transform.position;
+    }
+
+    public void Initialize(MovableBase wantOwner)
+    {
+        owner = wantOwner;
+        isTracking = false;
+        if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
+
+        focusTarget = null;
+        Direction = owner.transform.forward;
     }
 
     public virtual void Activate(MovableBase other)

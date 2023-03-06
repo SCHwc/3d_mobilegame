@@ -4,12 +4,34 @@ using UnityEngine;
 
 public class WeaponBase
 {
-    protected MovableBase owner;       // ����
-    protected GameObject spawnPrefab;  // ������Ʈ
+    protected MovableBase owner;      
+    protected GameObject spawnPrefab;
 
-    public WeaponBase(MovableBase wantOwner)
+    // 해당 스킬의 쿨타임
+    protected float _coolTime;
+    public float CoolTime
+    {
+        get => _coolTime;
+        set
+        {
+            _coolTime = value;
+        }
+    }
+    // 해당 스킬의 현재 쿨타임
+    protected float _currentCoolTime;
+    public float CurrentCoolTime    
+    {
+        get => _currentCoolTime;
+        set => _currentCoolTime = Mathf.Clamp(value, 0, CoolTime);
+    }
+    // 해당 스킬의 쿨타임 비율
+    public float coolTimeRate { get => CurrentCoolTime / CoolTime; }
+
+    public WeaponBase(MovableBase wantOwner, float wantCoolTime)
     {
         owner = wantOwner;
+        CoolTime = wantCoolTime;
+        CurrentCoolTime = 0;
     }
 
     protected virtual ProjectileBase Shot(MovableBase wanttarget, Vector3 wantPosition, bool wantTracking)
@@ -24,4 +46,6 @@ public class WeaponBase
     }
 
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
+    public virtual void OnAttack() { }
+
 }

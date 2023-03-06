@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon_IceSpike : WeaponBase
 {
-    public Weapon_IceSpike(MovableBase wantOwner) : base(wantOwner)
+    public Weapon_IceSpike(MovableBase wantOwner, float wantCoolTime) : base(wantOwner, wantCoolTime)
     {
         spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/IceSpike");
     }

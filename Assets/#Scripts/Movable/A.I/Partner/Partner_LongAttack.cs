@@ -45,10 +45,10 @@ public class Partner_LongAttack : PartnerBase
         switch (wantName)
         {
             case "IceMissile":
-                currentWeapon = new Weapon_IceMissile(this);
+                currentWeapon = new Weapon_IceMissile(this, 0);
                 break;
             case "Fireball":
-                currentWeapon = new Weapon_Fireball(this);
+                currentWeapon = new Weapon_Fireball(this, 0);
                 break;
         }
     }

@@ -31,8 +31,6 @@ public abstract class AIBase : MovableBase
     }
     public NavMeshAgent agent;
 
-    protected WeaponBase equipSkill;
-    public string skillName;
     public bool skillTracking;
 
     protected override void Start()
@@ -40,8 +38,6 @@ public abstract class AIBase : MovableBase
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = this.stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
-        AddWeapon(skillName);
-
     }
 
 
@@ -75,8 +71,6 @@ public abstract class AIBase : MovableBase
     {
         collider.enabled = false;
     }
-
-
 
     abstract public void Die();
 }

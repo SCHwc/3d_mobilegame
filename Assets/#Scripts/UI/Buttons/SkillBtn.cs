@@ -15,18 +15,18 @@ public class SkillBtn : ButtonBase
             switch(type)
             {
                 case SkillType.Normal:
-                    if (GameManager.Instance.player.isCool_normal)
+                    if (GameManager.Instance.player.equipSkill.coolTimeRate > 0)
                     {
-                        coolDownImage.fillAmount = 1 - GameManager.Instance.player.normalCoolDownRate;
+                        coolDownImage.fillAmount = GameManager.Instance.player.equipSkill.coolTimeRate;
                     }
                     else
                         coolDownImage.fillAmount = 0;
                     break;
 
                 case SkillType.Ultimate:
-                    if (GameManager.Instance.player.isCool_ultimate)
+                    if (GameManager.Instance.player.ultimateSkill.coolTimeRate > 0)
                     {
-                        coolDownImage.fillAmount = 1 - GameManager.Instance.player.ultimateCoolDownRate;
+                        coolDownImage.fillAmount = GameManager.Instance.player.ultimateSkill.coolTimeRate;
                     }
                     else
                         coolDownImage.fillAmount = 0;
