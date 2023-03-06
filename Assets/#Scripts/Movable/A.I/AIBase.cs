@@ -31,18 +31,15 @@ public abstract class AIBase : MovableBase
     }
     public NavMeshAgent agent;
 
-    protected WeaponBase equipSkill;
-    public string skillName;
+   
     public bool skillTracking;
-    public float skillCoolTime;
+    
 
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = this.stat.MoveSpeed; // 네브메쉬의 속도를 캐릭터의 이동속도로 설정
-        equipSkill = AddWeapon(skillName, skillCoolTime);
-
     }
 
     public override float GetDamage(float damage, MovableBase from)
@@ -73,7 +70,7 @@ public abstract class AIBase : MovableBase
         if (focusTarget != null && equipSkill.CurrentCoolTime <= 0)
         {
             anim.SetTrigger("isSkill");
-            StartCoroutine(CoolTimeCycle(equipSkill));
+            equipSkill.CurrentCoolTime = equipSkill.CoolTime;
         }
         else { return; }
     }
@@ -82,17 +79,6 @@ public abstract class AIBase : MovableBase
     {
         collider.enabled = false;
     }
-
-    IEnumerator CoolTimeCycle(WeaponBase currentWeapon)
-    {
-        currentWeapon.CurrentCoolTime = currentWeapon.CoolTime;
-        while (currentWeapon.CurrentCoolTime > 0)
-        {
-            currentWeapon.CurrentCoolTime -= Time.deltaTime;
-        }
-
-        yield return null;
-    }
-
+    
     abstract public void Die();
 }

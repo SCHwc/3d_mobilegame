@@ -93,15 +93,20 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public void Initialize(MovableBase wantOnwer, MovableBase wantTarget, bool wantTracking)
+    public void Initialize(MovableBase wantOwner, MovableBase wantTarget, bool wantTracking)
     {
         // 소환되면서 초기화
-        owner = wantOnwer;
+        owner = wantOwner;
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
 
         focusTarget = wantTarget;
         Direction = focusTarget.transform.position - owner.transform.position;
+    }
+    public void Initialize(MovableBase wantOwner)
+    {
+        owner = wantOwner;
+        Direction = owner.transform.forward;
     }
 
     public virtual void Activate(MovableBase other)

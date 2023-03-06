@@ -13,14 +13,14 @@ public class Weapon_SwordStorm : WeaponBase
     {
         // 스킬 오브젝트 소환하고 위치 할당
         ProjectileBase proj = GameObject.Instantiate(spawnPrefab, owner.transform).GetComponent<ProjectileBase>();
-        proj.Initialize(owner, wanttarget, wantTracking);
+        proj.Initialize(owner);
 
         return proj;
     }
 
-    public override void OnAttack(MovableBase target, bool wantTracking)
+    public override void OnAttack()
     {
-        Shot(target, owner.transform.position, wantTracking);
+        Shot(null, owner.transform.position, false);
     }
 
 

@@ -14,16 +14,16 @@ public class WeaponBase
         get => _coolTime;
         set
         {
-            value = _coolTime;
+            _coolTime = value;
         }
-    }    
-    
+    }
+
     // 해당 스킬의 현재 쿨타임
     protected float _currentCoolTime;
     public float CurrentCoolTime
     {
         get => _currentCoolTime;
-        set => Mathf.Clamp(value, 0, CoolTime);
+        set => _currentCoolTime = Mathf.Clamp(value, 0, CoolTime);
     }
     public float coolTimeRate { get => CurrentCoolTime / CoolTime; }
 
@@ -46,6 +46,5 @@ public class WeaponBase
     }
 
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
-
-
+    public virtual void OnAttack() { }
 }
