@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public PlayeableCharacterBase player;
 
+    public static Stack<ClosableUI> windowList = new Stack<ClosableUI>();
 
     // �ΰ��ӿ��� ���� ����Ʈ��
     public static GameObject swordEffect;
@@ -33,4 +34,12 @@ public class GameManager : MonoBehaviour
         cameraShaker = Camera.main.GetComponent<CameraShake>();
     }
  
+    public static void AddWindow()
+    {
+
+    }
+    public static void RemoveWindow()
+    {
+
+    }
 }

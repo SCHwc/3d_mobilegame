@@ -59,7 +59,7 @@ public class ProjectileBase : MonoBehaviour
 
     void Update()
     {
-        if (leftTime <= 0 || focusTarget == null) { Destroy(gameObject); }
+        if (leftTime <= 0) { Destroy(gameObject); }
         leftTime -= Time.deltaTime; // �߻�ü�� �����ð�
 
         // �ð��� �������� ����
@@ -67,6 +67,8 @@ public class ProjectileBase : MonoBehaviour
 
         if (isTracking)
         {  // ��ǥ���� �����ϵ��� �������ִٸ� ��ǥ���� �ٶ󺸰� ����� ��� ����
+            if (focusTarget == null) { Destroy(gameObject); }
+
             if (focusTarget)
             {
                 Vector3 targetPosition = focusTarget.transform.position;
@@ -80,6 +82,7 @@ public class ProjectileBase : MonoBehaviour
             // �ٶ󺸴� ����
             if (currentSpeed > 0)
             {
+                if (focusTarget == null) { Destroy(gameObject); }
                 Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
                 transform.LookAt(transform.position + lookPosition);
             }

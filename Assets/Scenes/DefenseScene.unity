@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 69540974}
   - component: {fileID: 69540973}
   - component: {fileID: 69540972}
+  - component: {fileID: 69540975}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -155,13 +156,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1335978407}
+  - {fileID: 616386534}
   m_Father: {fileID: 1800041165}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 590, y: -224}
-  m_SizeDelta: {x: 244.1317, y: 91.5203}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &69540972
 MonoBehaviour:
@@ -239,8 +241,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -257,6 +259,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69540970}
   m_CullTransparentMesh: 1
+--- !u!114 &69540975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69540970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece4aa2067e14134f86ce91f61d3ed75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1146793028}
+  cooltime: {fileID: 616386535}
 --- !u!1001 &181956333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -789,13 +805,13 @@ MonoBehaviour:
   isAlly: 0
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: 
+  skillCoolTime: 0
   atkType: 0
   _atkRange: 1.5
   _findRange: 6.83
   agent: {fileID: 0}
-  skillName: 
   skillTracking: 0
-  skillCoolTime: 0
   findEffect: {fileID: 0}
 --- !u!114 &181956336
 MonoBehaviour:
@@ -3395,13 +3411,13 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: Provoke
+  skillCoolTime: 0
   atkType: 0
   _atkRange: 1.7
   _findRange: 5
   agent: {fileID: 0}
-  skillName: Provoke
   skillTracking: 0
-  skillCoolTime: 0
 --- !u!114 &547081101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3483,6 +3499,82 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &616386533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 616386534}
+  - component: {fileID: 616386536}
+  - component: {fileID: 616386535}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &616386534
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616386533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 69540971}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 170, y: 170}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &616386535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616386533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &616386536
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616386533}
+  m_CullTransparentMesh: 1
 --- !u!1001 &625790397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4660,13 +4752,13 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: FireShield
+  skillCoolTime: 0
   atkType: 1
   _atkRange: 5.86
   _findRange: 5.2
   agent: {fileID: 0}
-  skillName: FireShield
   skillTracking: 0
-  skillCoolTime: 0
   weaponName: Fireball
   isTracking: 1
 --- !u!136 &625790402
@@ -6459,13 +6551,13 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: IceSpear
+  skillCoolTime: 5
   atkType: 1
   _atkRange: 4.86
   _findRange: 8.4
   agent: {fileID: 0}
-  skillName: IceSpear
   skillTracking: 1
-  skillCoolTime: 0
   weaponName: IceMissile
   isTracking: 1
 --- !u!114 &1146793029
@@ -7533,13 +7625,13 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: IceSpear
+  skillCoolTime: 0
   atkType: 1
   _atkRange: 4.86
   _findRange: 8.4
   agent: {fileID: 0}
-  skillName: IceSpear
   skillTracking: 1
-  skillCoolTime: 0
   weaponName: IceMissile
   isTracking: 1
 --- !u!136 &1339672552
@@ -7877,13 +7969,13 @@ MonoBehaviour:
   isAlly: 0
   meshs: []
   atkCollider: {fileID: 0}
+  skillName: 
+  skillCoolTime: 0
   atkType: 0
   _atkRange: 1.5
   _findRange: 3
   agent: {fileID: 0}
-  skillName: 
   skillTracking: 0
-  skillCoolTime: 0
   findEffect: {fileID: 0}
 --- !u!114 &1974251803
 MonoBehaviour:
