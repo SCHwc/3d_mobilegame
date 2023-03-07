@@ -48,3 +48,12 @@ public enum BuffType
 {
     Speed
 }
+
+public enum PartnerType
+{
+    Defense,
+    Attack,
+    Support,
+
+    Count
+}

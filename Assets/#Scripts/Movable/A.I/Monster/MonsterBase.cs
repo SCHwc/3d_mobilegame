@@ -22,6 +22,8 @@ public class MonsterBase : AIBase
 
     public GameObject findEffect;
 
+    public GameObject hpUI;
+
     protected override void Start()
     {
         base.Start();

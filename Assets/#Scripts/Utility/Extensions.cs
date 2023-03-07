@@ -4,54 +4,54 @@ using UnityEngine;
 
 public static class Extensions
 {
-   
-
-    public static Vector3 ToDirection(this float value)
+   public static string TextSetting(this string target, Color wantColor, params string[] tags)
     {
-        //                                        이걸 곱하시면
-        //                                         360도가 2PI가 돼요!
-        return new Vector3(Mathf.Cos(value * Mathf.Deg2Rad), Mathf.Sin(value * Mathf.Deg2Rad));
-    }
+        //<#ffffff> 내용 </color>
+        //일단 아무렇게나 쓸 수 있게 결과물을 미리 준비해둡시다!
+        string result = target;
 
-    /// <summary> 수평, 수직 각도를 전달을 해준다라고 한다면 거기에 맞게끔 3차원 방향을 알려줘요! </summary>
-    /// <param name="angles"> 내용을 넣을 벡터입니다! x에 수평각도, y에 수직각도를 넣어주세요! </param>
-    public static Vector3 ToDirection(this Vector2 angles)
-    {
-        Vector3 result;
+        //Color라고 하는 녀석은 RGBA 순서로 되어있고! 0 ~ 1사이의 값으로 되어있어요!
+        int red = Mathf.RoundToInt(wantColor.r * 255);
+        int green = Mathf.RoundToInt(wantColor.g * 255);
+        int blue = Mathf.RoundToInt(wantColor.b * 255);
 
-        
-        angles.x *= Mathf.Deg2Rad;
-        angles.y *= Mathf.Deg2Rad;
+        //쌍따옴표처럼 "기능"이 있는 글자를 쓰실 때에는 앞에 \ 를 넣어주세요!
+        // \ 는 특수한 기능 문자인데, \' \" \\ 요거는 뒤에 있는 글자를 기능 없이 쓰겠다!
+        //                       이거.. 글자로!
+        //                             근데 16진수로!
+        result = $"<#{red.ToString("X2")}{green.ToString("X2")}{blue.ToString("X2")}>" + result + "</color>";
+        //                     16진수 2자리
 
-        result.x = Mathf.Cos(angles.x) * Mathf.Abs(Mathf.Cos(angles.y));
-        result.z = Mathf.Sin(angles.x) * Mathf.Abs(Mathf.Cos(angles.y));
-        result.y = Mathf.Sin(angles.y);
+        //<b> Bold           굵은 글씨 
+        //<i> Italic         기울임
+        //<u> UnderLine      밑줄
+        //<s> Strike Through 취소선
+        foreach (var current in tags)
+        {
+            result = $"<{current}>" + result + $"</{current}>";
+        };
 
         return result;
     }
 
-    public static Vector3 ToDirection(float horAngle, float verAngle)
+    public static string PartnerTypeToText(this PartnerType target)
     {
-        return new Vector2(horAngle, verAngle);
+        switch (target)
+        {
+            case PartnerType.Defense: return "탱커".TextSetting(Color.blue);
+            case PartnerType.Attack: return"딜러".TextSetting(Color.red);
+            case PartnerType.Support: return "서포터".TextSetting(Color.green);
+            default: return "오류";
+        }
     }
 
-    public static float ToAngle(this Vector3 value)
+    public static string AttackTypeToText(this AttackType target)
     {
-        //                                          2PI  360
-        //각도를 계산해주고 갑니다!     이건 반대로 각도로 만들어줘요!
-        return Mathf.Atan2(value.y, value.x) * Mathf.Rad2Deg;
-    }
-
-    public static float ToHorizontalAngle(this Vector3 value)
-    {
-        value.y = 0;
-        value.Normalize();
-
-        return Mathf.Atan2(value.z, value.x) * Mathf.Rad2Deg;
-    }
-
-    public static float ToVerticalAngle(this Vector3 value)
-    {
-        return 90 - Mathf.Acos(value.y) * Mathf.Rad2Deg;
+        switch (target)
+        {
+            case AttackType.Short: return "근접공격".TextSetting(Color.gray);
+            case AttackType.Long: return "원거리공격".TextSetting(Color.yellow);
+            default: return "오류";
+        }
     }
 }
