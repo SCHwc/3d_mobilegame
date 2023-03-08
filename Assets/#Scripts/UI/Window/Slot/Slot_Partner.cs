@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot_Partner : MonoBehaviour
+public class Slot_Partner : SlotBase
 {
     PartnerListWindow parent;
-    public PartnerInfo info;
+    
 
-    Image iconImg;
-    GameObject selectImg;
-
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         parent = GetComponentInParent<PartnerListWindow>();
-        iconImg = transform.GetChild(1).gameObject.GetComponent<Image>();
-        selectImg = transform.GetChild(0).gameObject;
-        selectImg.SetActive(false);
+        
     }
 
     void Update()
@@ -43,9 +39,25 @@ public class Slot_Partner : MonoBehaviour
 
     public void SelectPartner()
     {
-        if (GameManager.Instance.currentInfo != null) { GameManager.Instance.currentInfo = null; }
+        // 선택한 동료의 정보가 비어있지 않을 때
+        if (GameManager.Instance.currentInfo != null)
+        {
+            if (GameManager.Instance.currentInfo == info)
+            {
+                // 만약 같은 칸을 터치한거라면 null
+                GameManager.Instance.currentInfo = null;
+            }
+            else
+            {
+                // 아니라면 비우고 선택한 칸의 정보를 넘기기
+                GameManager.Instance.currentInfo = null;
+                GameManager.Instance.currentInfo = info;
+            }
+        }
+        else
+        {
+            GameManager.Instance.currentInfo = info;
+        }
 
-        GameManager.Instance.currentInfo = info;
-        parent.contextText.text = GameManager.Instance.currentInfo.GetContext();
     }
 }

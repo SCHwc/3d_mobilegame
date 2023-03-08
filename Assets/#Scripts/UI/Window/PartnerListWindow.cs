@@ -22,6 +22,17 @@ public class PartnerListWindow : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.currentInfo != null)
+        {
+            contextText.text = GameManager.Instance.currentInfo.GetContext();
+        }
+        else
+        {
+            contextText.text = "이름 :\n역할 :\n공격타입 :\n스킬 :";
+        }
+    }
     private void OnDisable()
     {
         // 해당 창을 끈다면 선택되어있는 칸을 해제한다.
