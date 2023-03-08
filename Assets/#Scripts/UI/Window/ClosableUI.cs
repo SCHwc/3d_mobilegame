@@ -31,21 +31,29 @@ public class ClosableUI : MonoBehaviour
 
     public void PlayOpen()
     {
-
+        gameObject.SetActive(true);
     }
 
     public void PlayClose()
     {
-
+        if (anim) { anim.SetTrigger("isClose"); }
+        else { Disable(); }
     }
 
     public void Disable()
     {
-        
+        gameObject.SetActive(false);
     }
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
+        if (!uiDic.ContainsKey(windowName))
+        {
+            uiDic.Add(windowName, this);
+        }
+
         if (!isOpen)
         {
             Invoke("Disable", 0.3f);

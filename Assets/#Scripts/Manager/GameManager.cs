@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     // 동료캐릭터 목록
     public static Dictionary<string, PartnerInfo> partnerList;
     // 부대 편성을 진행할 때 사용할 배열
-    public MovableBase[] party = new MovableBase[3];
+    public PartnerInfo[] party = new PartnerInfo[3];
+    public PartnerInfo currentInfo;
 
     // 인게임에 사용할 이펙트
     public static GameObject swordEffect;
