@@ -39,6 +39,15 @@ public class SkillBtn : ButtonBase
     public void Click()
     {
         GameManager.Instance.player.Skill(type);
+
+        // ±Ã±Ø±â »ç¿ë½Ã QTE¹ßµ¿
+        if (type == SkillType.Ultimate)
+            Invoke("QTE", 1f);
+    }
+
+    private void QTE()
+    {
+        GameManager.Instance.OnQTE(0);
     }
 
 }

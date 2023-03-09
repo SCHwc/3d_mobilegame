@@ -10,6 +10,7 @@ namespace MonsterStates
         {
             monster.anim.SetBool("isBattle", false);
             monster.focusTarget = null;
+            monster.hpUI.SetActive(false);
         }
 
         public override void OnUpdate(MonsterBase monster)
@@ -57,6 +58,7 @@ namespace MonsterStates
 
         public override void OnExit(MonsterBase monster)
         {
+            monster.hpUI.SetActive(true);
         }
     }
 

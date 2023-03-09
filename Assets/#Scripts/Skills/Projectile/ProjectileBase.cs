@@ -88,8 +88,7 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
-                Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
-                transform.LookAt(transform.position + lookPosition);
+                
             }
 
             // �������� �ʴ´ٸ� �ʱ�ȭ �޼��忡�� �Ҵ���� �������� ����

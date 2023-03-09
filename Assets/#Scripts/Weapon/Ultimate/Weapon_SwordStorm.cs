@@ -15,6 +15,7 @@ public class Weapon_SwordStorm : WeaponBase
         ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
         proj.Initialize(owner);
         proj.transform.position = wantPosition;
+        proj.transform.rotation = Quaternion.LookRotation(owner.transform.forward);
 
         return proj;
     }
