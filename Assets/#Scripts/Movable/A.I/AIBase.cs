@@ -6,9 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AIBase : MovableBase
 {
-    public AttackType atkType; // ÀÌ Ä³¸¯ÅÍÀÇ ÀüÅõ¹æ½Ä (±ÙÁ¢, ¿ø°Å¸®)
+    public AttackType atkType; // ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Å¸ï¿½)
 
-    [SerializeField, Tooltip("Ä³¸¯ÅÍÀÇ °ø°Ý¹üÀ§"), InspectorName("°ø°Ý¹üÀ§")]
+    [SerializeField, Tooltip("Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½"), InspectorName("ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½")]
     protected float _atkRange = 0f;
     public float AtkRange
     {
@@ -19,7 +19,7 @@ public abstract class AIBase : MovableBase
         }
     }
 
-    [SerializeField, Tooltip("Ä³¸¯ÅÍÀÇ °¨Áö¹üÀ§"), InspectorName("°¨Áö¹üÀ§")]
+    [SerializeField, Tooltip("Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"), InspectorName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     protected float _findRange = 0f;
     public float FindRange
     {
@@ -31,15 +31,13 @@ public abstract class AIBase : MovableBase
     }
     public NavMeshAgent agent;
 
-   
     public bool skillTracking;
     
-
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = this.stat.MoveSpeed; // ³×ºê¸Þ½¬ÀÇ ¼Óµµ¸¦ Ä³¸¯ÅÍÀÇ ÀÌµ¿¼Óµµ·Î ¼³Á¤
+        agent.speed = this.stat.MoveSpeed; // ï¿½×ºï¿½Þ½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     public override float GetDamage(float damage, MovableBase from)
@@ -47,12 +45,12 @@ public abstract class AIBase : MovableBase
         if (buffs.Count < 1) { StartCoroutine(GetDamageMeshs()); }
 
 
-        damage -= Stat.DefensePower;                               // ¹æ¾î·Â¸¸Å­ µ¥¹ÌÁö °¨¼Ò
-        damage = Mathf.Max(0, damage);                             // 0º¸´Ù ÀÛ¾ÆÁöÁö ¾Ê°Ô
-        if (Stat.CurrentHp < damage) { damage = Stat.CurrentHp; }  // µ¥¹ÌÁö°¡ Ã¼·Âº¸´Ù ³ô´Ù¸é µ¥¹ÌÁö¸¦ Ã¼·Â°ú °°°Ô
+        damage -= Stat.DefensePower;                               // ï¿½ï¿½ï¿½Â¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        damage = Mathf.Max(0, damage);                             // 0ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½
+        if (Stat.CurrentHp < damage) { damage = Stat.CurrentHp; }  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½Âºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (damage == 0) { return 0; }
 
-        Stat.CurrentHp -= damage;                                  // ¿¹¿ÜÃ³¸®µéÀ» ³¡³»°í³ª¼­ µ¥¹ÌÁö ¹Þ±â
+        Stat.CurrentHp -= damage;                                  // ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 
         return damage;
     }

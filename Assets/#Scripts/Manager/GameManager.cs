@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, PartnerInfo> partnerList;
     // 부대 편성을 진행할 때 사용할 배열
     public PartnerInfo[] party = new PartnerInfo[3];
+    // QTE 를 위한 스킬버튼 배열
+    public GameObject[] skillBtns = new GameObject[3];
 
     public PartnerInfo currentInfo;
 
@@ -104,6 +106,12 @@ public class GameManager : MonoBehaviour
                 )
                 );
         }
+    }
+ 
+    // QTE발동 메서드 -> 스킬버튼 누르면Invoke
+    public void OnQTE(int currentType)
+    {
+        skillBtns[currentType].SetActive(true);
     }
 }
 

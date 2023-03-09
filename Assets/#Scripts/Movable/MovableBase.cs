@@ -77,7 +77,7 @@ public abstract class MovableBase : MonoBehaviour
 
     void CoolTimeCycle()
     {
-        if (equipSkill != null && equipSkill.CurrentCoolTime > 0)
+        if(equipSkill != null && equipSkill.CurrentCoolTime > 0)
         {
             equipSkill.CurrentCoolTime -= Time.deltaTime;
         }

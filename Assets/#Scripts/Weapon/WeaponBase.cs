@@ -17,14 +17,14 @@ public class WeaponBase
             _coolTime = value;
         }
     }
-
     // 해당 스킬의 현재 쿨타임
     protected float _currentCoolTime;
-    public float CurrentCoolTime
+    public float CurrentCoolTime    
     {
         get => _currentCoolTime;
         set => _currentCoolTime = Mathf.Clamp(value, 0, CoolTime);
     }
+    // 해당 스킬의 쿨타임 비율
     public float coolTimeRate { get => CurrentCoolTime / CoolTime; }
 
     public WeaponBase(MovableBase wantOwner, float wantCoolTime)

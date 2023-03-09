@@ -15,9 +15,13 @@ public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 inputDirection;
     private bool isInput;
 
+    // 너비 절반
+    float widthHalf;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        widthHalf = rectTransform.sizeDelta.x * 0.5f;
     }
 
     // 드래그 시작시
@@ -40,12 +44,16 @@ public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         isInput = false;
     }
 
+    Vector2 inputPos;
+    Vector2 inputVector;
     private void JoyStickControll(PointerEventData eventData)
     {
-        var inputPos = eventData.position - rectTransform.anchoredPosition;
-        var inputVector = inputPos.magnitude < leverRange ? inputPos : inputPos.normalized * leverRange;
-        lever.anchoredPosition = inputVector;
-        inputDirection = inputVector / leverRange; // 스틱의 움직인 양을 0 ~ 1사이로 정규화
+        // 조이스틱이 앵커에서 떨어진 만큼 빼서 계산을 조이스틱 중심으로 할 수 있도록 한다 && 정규화(0~1)사이로
+        inputPos = (eventData.position - rectTransform.anchoredPosition) / widthHalf;
+        inputVector = inputPos.magnitude < 1 ? inputPos : inputPos.normalized;
+        Debug.Log(eventData.position);
+        lever.anchoredPosition = inputVector * widthHalf;
+        inputDirection = inputVector; // 스틱의 움직인 양을 0 ~ 1사이로 정규화
     }
 
     private void Update()

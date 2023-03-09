@@ -13,7 +13,7 @@ public class Weapon_FloatingSword : WeaponBase
     {
         // 스킬 오브젝트 소환하고 위치 할당
         ProjectileBase proj = GameObject.Instantiate(spawnPrefab, owner.transform).GetComponent<ProjectileBase>();
-        proj.Initialize(owner, wanttarget, wantTracking);
+        proj.Initialize(owner);
         Vector3 wantPos = Vector3.zero;
         wantPos.y += 0.7f;
         proj.transform.position = owner.transform.position + wantPos;

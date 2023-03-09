@@ -67,7 +67,7 @@ public class ProjectileBase : MonoBehaviour
 
         if (isTracking)
         {  // ��ǥ���� �����ϵ��� �������ִٸ� ��ǥ���� �ٶ󺸰� ����� ��� ����
-            if (focusTarget == null) { Destroy(gameObject); }
+            if(focusTarget == null) { Destroy(gameObject); }
 
             if (focusTarget)
             {
@@ -88,6 +88,7 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
+                
             }
 
             // �������� �ʴ´ٸ� �ʱ�ȭ �޼��忡�� �Ҵ���� �������� ����
@@ -109,6 +110,16 @@ public class ProjectileBase : MonoBehaviour
     public void Initialize(MovableBase wantOwner)
     {
         owner = wantOwner;
+        Direction = owner.transform.forward;
+    }
+
+    public void Initialize(MovableBase wantOwner)
+    {
+        owner = wantOwner;
+        isTracking = false;
+        if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
+
+        focusTarget = null;
         Direction = owner.transform.forward;
     }
 

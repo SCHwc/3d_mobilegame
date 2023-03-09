@@ -11,9 +11,11 @@ public class Weapon_SwordStorm : WeaponBase
 
     protected override ProjectileBase Shot(MovableBase wanttarget, Vector3 wantPosition, bool wantTracking)
     {
-        // ½ºÅ³ ¿ÀºêÁ§Æ® ¼ÒÈ¯ÇÏ°í À§Ä¡ ÇÒ´ç
-        ProjectileBase proj = GameObject.Instantiate(spawnPrefab, owner.transform).GetComponent<ProjectileBase>();
+        // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¯ï¿½Ï°ï¿½ ï¿½ï¿½Ä¡ ï¿½Ò´ï¿½
+        ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
         proj.Initialize(owner);
+        proj.transform.position = wantPosition;
+        proj.transform.rotation = Quaternion.LookRotation(owner.transform.forward);
 
         return proj;
     }

@@ -6,7 +6,7 @@ public class PlayeableCharacterBase : MovableBase
 {
     float moveAttackSpeed = 0.2f;
 
-    public Vector3 inputVector; // 이동입력값
+    [HideInInspector] public Vector3 inputVector; // 이동입력값
 
     #region 상태Bool값
     public bool isRun = false; // 달리기 상태
@@ -15,39 +15,12 @@ public class PlayeableCharacterBase : MovableBase
     #endregion
 
     #region 스킬이름 & WeaponBase
-    [SerializeField] protected string normalWeaponName; // 일반스킬 이름
-    WeaponBase normalSkill; // 일반스킬
     [SerializeField] protected string ultimateWeaponName; // 궁극기 이름
-    WeaponBase ultimateSkill; // 궁극기
+    [HideInInspector] public WeaponBase ultimateSkill; // 궁극기
     #endregion
 
     #region 스킬 쿨타임
-    [SerializeField] protected float normalSkillCooldown; // 일반스킬 쿨타임
     [SerializeField] protected float ultimateSkillCooldown; // 궁극기 쿨타임
-    protected float normalSkillCheckTime = 0;
-    protected float ultimateSkillCheckTime = 0;
-
-    public float normalCoolDownRate // 일반스킬 쿨타임 비율 0 ~ 1
-    {
-        get
-        {
-            if (normalSkillCheckTime == 0) return 0;
-            else if (normalSkillCheckTime < normalSkillCooldown) return normalSkillCheckTime / normalSkillCooldown;
-            else return 1;
-        }
-    }
-    public float ultimateCoolDownRate // 궁극기 쿨타임 비율 0 ~ 1
-    {
-        get
-        {
-            if (ultimateSkillCheckTime == 0) return 0;
-            else if (ultimateSkillCheckTime < ultimateSkillCooldown) return ultimateSkillCheckTime / ultimateSkillCooldown;
-            else return 1;
-        }
-    }
-
-    public bool isCool_normal { get; protected set; } = false; // 일반스킬이 쿨타임중인가
-    public bool isCool_ultimate { get; protected set; } = false; // 궁극기가 쿨타임중인가
     #endregion
 
     #region 시야 관련
@@ -59,42 +32,21 @@ public class PlayeableCharacterBase : MovableBase
     protected override void Start()
     {
         base.Start();
-
-        normalSkill = AddWeapon(normalWeaponName);
-        ultimateSkill = AddWeapon(ultimateWeaponName);
+        ultimateSkill = AddWeapon(ultimateWeaponName, ultimateSkillCooldown);
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
+        // 궁극기 쿨타임 사이클 추가
+        MovableUpdate += UltimateCoolTimeCycle;
     }
 
     protected override void Update()
     {
+        base.Update();
+
         if (stat.CurrentHp <= 0 && !isDead) Die(); // 사망
 
         View(); // 시야각 내의 가장 가까운적을 타겟으로 설정
 
         Move(inputVector); // 입력받은 값에 따라 움직임
-
-        #region 쿨타임 체크
-        // 노말 쿨타임 체크
-        if (isCool_normal)
-        {
-            normalSkillCheckTime += Time.deltaTime;
-            if (normalSkillCheckTime >= normalSkillCooldown)
-            {
-                normalSkillCheckTime = 0f;
-                isCool_normal = false;
-            }
-        }
-        // 궁극기 쿨타임 체크
-        if (isCool_ultimate)
-        {
-            ultimateSkillCheckTime += Time.deltaTime;
-            if (ultimateSkillCheckTime >= ultimateSkillCooldown)
-            {
-                ultimateSkillCheckTime = 0f;
-                isCool_ultimate = false;
-            }
-        }
-        #endregion
     }
 
     public virtual void Move(Vector3 inputDir)
@@ -128,19 +80,23 @@ public class PlayeableCharacterBase : MovableBase
         switch (skillType)
         {
             case SkillType.Normal:
-                if (isCool_normal != true)
                 {
-                    isCool_normal = true;
-                    normalSkill.OnAttack(focusTarget, false);
-                    anim.SetTrigger("OnSkill");
+                    if(equipSkill.CurrentCoolTime <= 0)
+                    {
+                        equipSkill.CurrentCoolTime = equipSkill.CoolTime;
+                        equipSkill.OnAttack(focusTarget, false);
+                        anim.SetTrigger("OnSkill");
+                    }
                 }
                 break;
             case SkillType.Ultimate:
-                if(isCool_ultimate != true && focusTarget != null)
                 {
-                    isCool_ultimate = true;
-                    ultimateSkill.OnAttack(focusTarget, false);
-                    anim.SetTrigger("OnSkill");
+                    if(ultimateSkill.CurrentCoolTime <= 0)
+                    {
+                        ultimateSkill.CurrentCoolTime = equipSkill.CoolTime;
+                        ultimateSkill.OnAttack(focusTarget, false);
+                        anim.SetTrigger("OnSkill");
+                    }
                 }
                 break;
         }
@@ -194,14 +150,14 @@ public class PlayeableCharacterBase : MovableBase
 
     }
 
-    public WeaponBase AddWeapon(string wantName)
+    public override WeaponBase AddWeapon(string wantName, float coolTime)
     {
         switch (wantName)
         {
             case "FloatingSword":
-                return new Weapon_FloatingSword(this, normalSkillCooldown);
+                return new Weapon_FloatingSword(this, coolTime);
             case "SwordStorm":
-                return new Weapon_SwordStorm(this, ultimateSkillCooldown);            
+                return new Weapon_SwordStorm(this, coolTime);            
         }
 
         return null;
@@ -229,5 +185,13 @@ public class PlayeableCharacterBase : MovableBase
 
         foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.white; }
         yield break;
+    }
+
+    void UltimateCoolTimeCycle()
+    {
+        if (ultimateSkill != null && ultimateSkill.CurrentCoolTime > 0)
+        {
+            ultimateSkill.CurrentCoolTime -= Time.deltaTime;
+        }
     }
 }
