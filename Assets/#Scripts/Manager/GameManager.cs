@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, PartnerInfo> partnerList;
     // 부대 편성을 진행할 때 사용할 배열
     public PartnerInfo[] party = new PartnerInfo[3];
+
     public PartnerInfo currentInfo;
 
     // 인게임에 사용할 이펙트

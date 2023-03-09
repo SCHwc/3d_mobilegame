@@ -10,6 +10,8 @@ public class Slot_Party : SlotBase
     protected override void Start()
     {
         base.Start();
+        closeImg.SetActive(false);
+        
     }
 
     void Update()
@@ -25,8 +27,10 @@ public class Slot_Party : SlotBase
     {
         if (info == null)
         {
+            // 담고 있는 정보가 없고 선택한 동료가 없다면 return
             if (GameManager.Instance.currentInfo == null) { return; }
-            // 담고있는 정보가 없다면 담아주기
+
+            // 담고있는 정보가 없다면 선택한 동료의 정보를 옮기고 선택한 동료는 null
             info = GameManager.Instance.currentInfo;
             GameManager.Instance.currentInfo = null;
             iconImg.sprite = info.icon;
@@ -34,9 +38,19 @@ public class Slot_Party : SlotBase
         }
         else
         {
-            info = null;
-            iconImg.sprite = null;
-            GameManager.Instance.party[index] = null;
+            if (GameManager.Instance.currentInfo == null)
+            {
+                info = null;
+                iconImg.sprite = null;
+                GameManager.Instance.party[index] = null;
+            }
+            else
+            {
+                info = GameManager.Instance.currentInfo;
+                GameManager.Instance.currentInfo = null;
+                iconImg.sprite = info.icon;
+                GameManager.Instance.party[index] = info;
+            }
         }
     }
 }

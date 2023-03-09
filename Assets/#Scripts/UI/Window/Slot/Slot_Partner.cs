@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class Slot_Partner : SlotBase
 {
     PartnerListWindow parent;
-    
+
 
     protected override void Start()
     {
         base.Start();
         parent = GetComponentInParent<PartnerListWindow>();
-        
+
     }
 
     void Update()
@@ -20,6 +20,20 @@ public class Slot_Partner : SlotBase
         if (info != null)
         {
             iconImg.sprite = info.icon;
+
+            for (int i = 0; i < GameManager.Instance.party.Length; i++)
+            {
+                if (GameManager.Instance.party[i] == info)
+                {
+                    closeImg.SetActive(true);
+                    break;
+                }
+                else
+                {
+                    closeImg.SetActive(false);
+                }
+                
+            }
         }
 
         if (info == GameManager.Instance.currentInfo)
@@ -30,6 +44,8 @@ public class Slot_Partner : SlotBase
         {
             selectImg.SetActive(false);
         }
+
+
     }
 
     public void SetInfo(PartnerInfo wantInfo)
