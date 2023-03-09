@@ -41,7 +41,7 @@ public class AllyHpBar : MonoBehaviour
         }
         else
         {
-            _stat = GameManager.Instance.party[(int)wantType].Stat;
+            _stat = BattleSceneManager.Instance.partners[(int)wantType].Stat;
         }
     }
 }

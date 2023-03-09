@@ -107,11 +107,6 @@ public class ProjectileBase : MonoBehaviour
         focusTarget = wantTarget;
         Direction = focusTarget.transform.position - owner.transform.position;
     }
-    public void Initialize(MovableBase wantOwner)
-    {
-        owner = wantOwner;
-        Direction = owner.transform.forward;
-    }
 
     public void Initialize(MovableBase wantOwner)
     {

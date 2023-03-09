@@ -19,7 +19,7 @@ public class AllySkillBtn : ButtonBase
     private void Start()
     {
         // 형변환하여 파트너 베이스 할당
-        _target = (PartnerBase)GameManager.Instance.party[(int)type];
+        _target = BattleSceneManager.Instance.partners[(int)type];
         GameManager.Instance.skillBtns[(int)type] = this.gameObject;
         gameObject.SetActive(false);
     }
