@@ -391,10 +391,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4591609038221732593}
   - component: {fileID: 7590958748077666443}
-  - component: {fileID: 181956340}
   - component: {fileID: 181956341}
   - component: {fileID: 181956335}
   - component: {fileID: 181956336}
+  - component: {fileID: 181956340}
   - component: {fileID: 181956337}
   m_Layer: 11
   m_Name: Armadil_03
@@ -418,6 +418,7 @@ Transform:
   - {fileID: 8250289169321596288}
   - {fileID: 859920668081866699}
   - {fileID: 2046310058}
+  - {fileID: 3097915171618169350}
   - {fileID: 2750040607591696137}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -442,22 +443,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &181956340
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815530453459120203}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!65 &181956341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -520,6 +505,22 @@ MonoBehaviour:
   _selfRecovery: 1
   _skillCoolTime: 0
   moveSpeedMultiflier: 2
+--- !u!54 &181956340
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815530453459120203}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!195 &181956337
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -806,6 +807,64 @@ Transform:
   m_Father: {fileID: 4530159754055680660}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -9.268114, y: -14.694055, z: 12.844889}
+--- !u!1 &7308964078298596979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3097915171618169350}
+  - component: {fileID: 8369509962441482142}
+  - component: {fileID: 4991466568310903513}
+  m_Layer: 13
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3097915171618169350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308964078298596979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.285, z: 1.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4591609038221732593}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8369509962441482142
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308964078298596979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 0.44, z: 0.56}
+  m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &4991466568310903513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308964078298596979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cabe757c95c29448dda0068719dc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7343387993064442324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 2750040608577141942, guid: fed5335565c2b9e4ab20d9657bda4c85,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2750040608577141942, guid: fed5335565c2b9e4ab20d9657bda4c85,
         type: 3}
@@ -1154,6 +1213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterHpBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750040608577141963, guid: fed5335565c2b9e4ab20d9657bda4c85,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fed5335565c2b9e4ab20d9657bda4c85, type: 3}

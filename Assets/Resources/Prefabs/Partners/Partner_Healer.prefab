@@ -2068,7 +2068,7 @@ MonoBehaviour:
   meshs: []
   atkCollider: {fileID: 0}
   skillName: IceSpear
-  skillCoolTime: 0
+  skillCoolTime: 7
   atkType: 1
   _atkRange: 4.86
   _findRange: 8.4

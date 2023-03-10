@@ -11,6 +11,6 @@ public class Weapon_Provoke : WeaponBase
 
     public override void OnAttack(MovableBase target, bool wantTracking)
     {
-        Shot(target, owner.transform.position, wantTracking);
+        Shot(null, owner.transform.position, wantTracking);
     }
 }

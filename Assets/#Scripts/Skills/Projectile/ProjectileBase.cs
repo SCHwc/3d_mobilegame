@@ -41,8 +41,6 @@ public class ProjectileBase : MonoBehaviour
     public bool contactSelf;
     [Tooltip("�߻�ü�� ��ǥ���� ��� ���󰡴°�?")]
     public bool isTracking;
-    [Tooltip("�������ΰ�?")]
-    public bool isRangeAttack;
     #endregion
 
     void Start()
@@ -104,8 +102,11 @@ public class ProjectileBase : MonoBehaviour
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
 
-        focusTarget = wantTarget;
-        Direction = focusTarget.transform.position - owner.transform.position;
+        if(focusTarget != null)
+        {
+            focusTarget = wantTarget;
+            Direction = focusTarget.transform.position - owner.transform.position;
+        }
     }
 
     public void Initialize(MovableBase wantOwner)

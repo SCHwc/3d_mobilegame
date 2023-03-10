@@ -3684,7 +3684,7 @@ MonoBehaviour:
   meshs: []
   atkCollider: {fileID: 0}
   skillName: FireShield
-  skillCoolTime: 0
+  skillCoolTime: 7
   atkType: 1
   _atkRange: 5.86
   _findRange: 5.2
