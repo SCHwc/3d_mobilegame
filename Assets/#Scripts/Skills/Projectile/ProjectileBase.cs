@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
 {
-    // �߻�ü�� ����
+    // 주인
     public MovableBase owner { get; protected set; }
 
-    // �߻�ü�� ��ǥ��
+    // 목표물
     public MovableBase focusTarget;
 
-    // �߻�ü�� �� �ϵ�
+    // 충돌이벤트들
     protected ProjectileAction[] actions;
 
-    // �浹�� ������ ����Ʈ
+    // 충돌무시 리스트
     protected List<GameObject> ignoreList = new List<GameObject>();
 
-    //������ ����
+    // 방향
     protected Vector3 _direction;
     public Vector3 Direction
     {
@@ -29,20 +29,22 @@ public class ProjectileBase : MonoBehaviour
 
     // �߻�ü�� Ư�� ��ġ
     #region
-    [Tooltip("�߻�ü�� �ӵ�")]
+    [Tooltip("발사체의 특성")]
     public float currentSpeed;
     //[Tooltip("�߻�ü�� ���ӵ� - �ð��� ���� ���������� ��ȭ�ϴ� �ӵ���")]
     //public float acceleration;
     //[Tooltip("�߻�ü�� ���ӵ� - �ð��� ������ ȸ��")]
     //public float angularSpeed;
-    [Tooltip("�� ��ü�� ��Ƴ��� �ð�")]
+    [Tooltip("해당 발사체의 생존 시간")]
     public float leftTime;
-    [Tooltip("�߻�ü�� �� �������׵� �´°�?")]
+    [Tooltip("주인과 충돌이 가능한가?")]
     public bool contactSelf;
-    [Tooltip("�߻�ü�� ��ǥ���� ��� ���󰡴°�?")]
+    [Tooltip("타겟을 계속 추적할 것인가?")]
     public bool isTracking;
     [Tooltip("�������ΰ�?")]
     public bool isRangeAttack;
+    [Tooltip("버프인가?")]
+    public bool isBuff;
     #endregion
 
     void Start()
@@ -65,9 +67,10 @@ public class ProjectileBase : MonoBehaviour
         // �ð��� �������� ����
         // currentSpeed += acceleration * Time.deltaTime;
 
-        if (isTracking)
-        {  // ��ǥ���� �����ϵ��� �������ִٸ� ��ǥ���� �ٶ󺸰� ����� ��� ����
-            if(focusTarget == null) { Destroy(gameObject); }
+        if (isTracking && !isBuff)
+        {
+            // 추적하는 스킬이라면, 타겟이 없을 때 사라지게 하고 있다면 타겟을 바라보고 계속 전진하게 한다.
+            if (focusTarget == null) { Destroy(gameObject); }
 
             if (focusTarget)
             {
@@ -77,23 +80,24 @@ public class ProjectileBase : MonoBehaviour
                 transform.position += transform.forward * currentSpeed * Time.deltaTime;
             }
         }
-        else
+        else if (!isTracking && !isBuff)
         {
-            // �ٶ󺸴� ����
+            // 추적하는 스킬이 아니라면, 스피드가 있을 때 초기화 부분에서 받은 방향으로 바라보게 만든다.
+            // 스피드가 없다면 방향조절을 하지 않을거기 때문에 나누었다.
             if (currentSpeed > 0)
             {
                 if (focusTarget == null) { Destroy(gameObject); }
                 Vector3 lookPosition = new Vector3(Direction.x, 0, Direction.z).normalized;
                 transform.LookAt(transform.position + lookPosition);
             }
-            else
-            {
-                
-            }
 
-            // �������� �ʴ´ٸ� �ʱ�ȭ �޼��忡�� �Ҵ���� �������� ����
+
             Vector3 movePosition = Direction * currentSpeed * Time.deltaTime;
             transform.position += movePosition;
+        }
+        else if (isBuff && focusTarget != null)
+        {
+            transform.position = focusTarget.transform.position;
         }
     }
 
@@ -104,8 +108,11 @@ public class ProjectileBase : MonoBehaviour
         isTracking = wantTracking;
         if (!contactSelf && owner != null) { SetIgnore(owner.gameObject); }
 
-        focusTarget = wantTarget;
-        Direction = focusTarget.transform.position - owner.transform.position;
+        if (wantTarget != null)
+        {
+            focusTarget = wantTarget;
+            Direction = focusTarget.transform.position - owner.transform.position;
+        }
     }
 
     public void Initialize(MovableBase wantOwner)
@@ -118,12 +125,24 @@ public class ProjectileBase : MonoBehaviour
         Direction = owner.transform.forward;
     }
 
+    public void BuffInitialize(MovableBase wantOwner, MovableBase wantTarget, bool wantBuff)
+    {
+        owner = wantOwner;
+
+        if (wantTarget != null)
+        {
+            focusTarget = wantTarget;
+            transform.position = wantTarget.transform.position;
+        }
+        isBuff = wantBuff;
+    }
+
     public virtual void Activate(MovableBase other)
     {
         // 예외처리1.충돌을 무시하기로한 물체라면 return
         if (ignoreList.Contains(other.gameObject)) { return; }
         // 예외처리2.같은 진영이라면 return
-        if (owner.isAlly == other.isAlly) { return; }
+        if (owner.isAlly == other.isAlly && !isBuff) { return; }
 
         if (isTracking) // 현재 스킬이 추적 스킬이라면
         {
@@ -134,6 +153,11 @@ public class ProjectileBase : MonoBehaviour
         }
         else
         {
+            if (owner.isAlly == other.isAlly && isBuff)
+            {
+                ActionActivate(this, other, transform.position);
+            }
+
             if (owner.isAlly != other.isAlly)
             {
                 ActionActivate(this, other, transform.position);

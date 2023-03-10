@@ -11,6 +11,9 @@ public class Weapon_IceSpike : WeaponBase
 
     public override void OnAttack(MovableBase target, bool wantTracking)
     {
-        Shot(target, target.transform.position, false);
+        if (target != null)
+        {
+            Shot(target, target.transform.position, false);
+        }
     }
 }

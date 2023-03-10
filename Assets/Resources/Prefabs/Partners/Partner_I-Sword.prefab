@@ -3305,7 +3305,7 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
-  skillName: IceSpear
+  skillName: IceSpike
   skillCoolTime: 5
   atkType: 1
   _atkRange: 4.86

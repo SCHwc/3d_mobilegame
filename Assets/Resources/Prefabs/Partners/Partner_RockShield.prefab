@@ -2141,7 +2141,7 @@ MonoBehaviour:
   meshs: []
   atkCollider: {fileID: 0}
   skillName: Provoke
-  skillCoolTime: 0
+  skillCoolTime: 7
   atkType: 0
   _atkRange: 1.7
   _findRange: 5

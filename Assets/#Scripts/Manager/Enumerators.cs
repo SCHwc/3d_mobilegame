@@ -46,7 +46,9 @@ public enum SkillType
 
 public enum BuffType
 {
-    Speed
+    Speed,
+    Defense,
+    Heal
 }
 
 public enum PartnerType

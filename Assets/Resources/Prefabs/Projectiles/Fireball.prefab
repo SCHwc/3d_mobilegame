@@ -14784,7 +14784,9 @@ MonoBehaviour:
   currentSpeed: 7
   leftTime: 2.5
   contactSelf: 0
-  isTracking: 1
+  isTracking: 0
+  isRangeAttack: 0
+  isBuff: 0
 --- !u!114 &-7331018676736132753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14811,3 +14813,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5891d08a0751246ae40e4de084ab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageValue: 0

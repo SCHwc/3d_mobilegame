@@ -10,6 +10,7 @@ public class BattleSceneManager : MonoBehaviour
 
     // 실제 게임 창에서 
     public PartnerBase[] partners = new PartnerBase[3];
+    public Transform[] spawnPosition;
 
     void Awake()
     {
@@ -27,6 +28,5 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Initialize()
     {
-        
     }
 }

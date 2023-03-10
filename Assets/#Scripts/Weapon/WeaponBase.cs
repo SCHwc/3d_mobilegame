@@ -19,7 +19,7 @@ public class WeaponBase
     }
     // 해당 스킬의 현재 쿨타임
     protected float _currentCoolTime;
-    public float CurrentCoolTime    
+    public float CurrentCoolTime
     {
         get => _currentCoolTime;
         set => _currentCoolTime = Mathf.Clamp(value, 0, CoolTime);
@@ -45,6 +45,16 @@ public class WeaponBase
         return proj;
     }
 
+    protected virtual ProjectileBase BuffShot(MovableBase wantTarget, bool isBuff)
+    {
+        ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
+        proj.BuffInitialize(owner, wantTarget, isBuff);
+        proj.transform.position = wantTarget.transform.position;
+        return proj;
+    }
+
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
     public virtual void OnAttack() { }
+
+    public virtual void OnBuff() { }
 }

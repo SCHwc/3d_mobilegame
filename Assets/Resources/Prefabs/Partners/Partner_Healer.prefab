@@ -2067,11 +2067,11 @@ MonoBehaviour:
   isAlly: 1
   meshs: []
   atkCollider: {fileID: 0}
-  skillName: IceSpear
-  skillCoolTime: 0
+  skillName: Healing
+  skillCoolTime: 7
   atkType: 1
-  _atkRange: 4.86
-  _findRange: 8.4
+  _atkRange: 5
+  _findRange: 6
   agent: {fileID: 0}
   skillTracking: 1
   weaponName: IceMissile

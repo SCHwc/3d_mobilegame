@@ -45,7 +45,14 @@ public class StatBase : MonoBehaviour
     }
     public float Resistance { get => _resistance; }
     public float AttackPower { get => _attackPower; }
-    public float DefensePower { get => _defensePower; }
+    public float DefensePower
+    {
+        get => _defensePower;
+        set
+        {
+            _defensePower = value;
+        }
+    }
     public float SelfRecovery { get => _selfRecovery; }
 
     public float SkillCoolTime

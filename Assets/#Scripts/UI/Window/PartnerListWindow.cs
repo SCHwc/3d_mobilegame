@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PartnerListWindow : MonoBehaviour
@@ -39,5 +40,9 @@ public class PartnerListWindow : MonoBehaviour
         GameManager.Instance.currentInfo = null;
     }
 
+    public void BattleStart()
+    {
+        SceneManager.LoadScene("DefenseScene");
+    }
 
 }

@@ -34,6 +34,8 @@ public class MovableBuff
             switch (type)
             {
                 case BuffType.Speed: return SpeedStart;
+                case BuffType.Defense: return DefenseStart;
+                case BuffType.Heal: return HealStart;
                 default: return null;
             }
         }
@@ -46,6 +48,8 @@ public class MovableBuff
             switch (type)
             {
                 case BuffType.Speed: return SpeedExit;
+                case BuffType.Defense: return DefenseExit;
+                case BuffType.Heal: return HealExit;
                 default: return null;
             }
         }
@@ -60,5 +64,22 @@ public class MovableBuff
     {
         target.anim.speed += buffValue;
         foreach (SkinnedMeshRenderer mesh in target.meshs) { mesh.material.color = Color.white; }
+    }
+
+    void DefenseStart(MovableBase target)
+    {
+        target.Stat.DefensePower += buffValue;
+    }
+    void DefenseExit(MovableBase target)
+    {
+        target.Stat.DefensePower -= buffValue;
+    }
+    void HealStart(MovableBase target)
+    {
+        target.Stat.CurrentHp += buffValue;
+    }
+    void HealExit(MovableBase target)
+    {
+        
     }
 }
