@@ -35,11 +35,6 @@ public class GameManager : MonoBehaviour
         }
 
         Initialize();
-
-        // 임시 할당 삭제 필요!!!
-        party[0] = partnerList["RockShield"];
-        party[1] = partnerList["I-Sword"];
-        party[2] = partnerList["I-Sword"];
     }
 
     void Initialize()

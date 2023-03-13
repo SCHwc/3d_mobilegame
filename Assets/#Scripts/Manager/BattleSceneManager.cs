@@ -12,8 +12,6 @@ public class BattleSceneManager : MonoBehaviour
     public PartnerBase[] partners = new PartnerBase[3];
     public Transform[] spawnPosition;
 
-    // ���� ���۽� ������ ��ġ �迭 ( 0~2:����, 3:�÷��̾� )
-    public Transform[] spawnPosition;
     // QTE �� ���� ���� ��ų��ư
     public AllySkillBtn skillBtn;
     // ��ų ��ư �̹��� �迭
