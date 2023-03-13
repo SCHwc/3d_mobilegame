@@ -97,7 +97,9 @@ public class ProjectileBase : MonoBehaviour
         }
         else if (isBuff && focusTarget != null)
         {
-            transform.position = focusTarget.transform.position;
+            Vector3 position = focusTarget.transform.position;
+            position.y = 1;
+            transform.position = position;
         }
     }
 

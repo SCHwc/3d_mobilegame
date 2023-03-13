@@ -45,7 +45,11 @@ namespace PartnerStates
                     }
                 }
 
-                if (nearestIndex > -1) { partner.focusTarget = col[nearestIndex].GetComponent<MovableBase>(); }
+                if (nearestIndex > -1) 
+                {
+                    partner.focusTarget = col[nearestIndex].GetComponent<MovableBase>(); 
+
+                }
                 else { partner.focusTarget = null; }
             }
 
@@ -84,7 +88,9 @@ namespace PartnerStates
                 partner.ChangeState(PartnerState.Idle);
             }
             else
-            {    // 타겟이 있으면 거리 할당
+            {
+                if (partner.focusTarget.Stat.CurrentHp < 0) { partner.focusTarget = null; }
+                // 타겟이 있으면 거리 할당
                 distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
             }
 
@@ -122,6 +128,7 @@ namespace PartnerStates
             }
             else
             {   // 타겟이 있다면 타겟과의 거리 할당
+                if (partner.focusTarget.Stat.CurrentHp < 0) { partner.focusTarget = null; }
                 distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
                 partner.transform.LookAt(partner.focusTarget.transform);
             }

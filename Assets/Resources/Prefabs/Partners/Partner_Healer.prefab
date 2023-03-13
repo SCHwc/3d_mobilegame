@@ -2048,7 +2048,6 @@ MonoBehaviour:
   _attackPower: 20
   _defensePower: 1
   _selfRecovery: 0
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!114 &5836018550487069030
 MonoBehaviour:
@@ -2074,7 +2073,7 @@ MonoBehaviour:
   _findRange: 6
   agent: {fileID: 0}
   skillTracking: 1
-  weaponName: IceMissile
+  weaponName: HolyMissile
   isTracking: 1
 --- !u!1 &5834882728961648095
 GameObject:

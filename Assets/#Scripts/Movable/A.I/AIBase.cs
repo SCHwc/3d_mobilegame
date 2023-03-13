@@ -8,6 +8,8 @@ public abstract class AIBase : MovableBase
 {
     public AttackType atkType; // �� ĳ������ ������� (����, ���Ÿ�)
 
+    public MovableBase oldFocusTarget;
+
     [SerializeField, Tooltip("ĳ������ ���ݹ���"), InspectorName("���ݹ���")]
     protected float _atkRange = 0f;
     public float AtkRange

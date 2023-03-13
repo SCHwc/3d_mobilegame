@@ -50,6 +50,10 @@ public class Partner_LongAttack : PartnerBase
             case "Fireball":
                 currentWeapon = new Weapon_Fireball(this, 0);
                 break;
+            case "HolyMissile":
+                currentWeapon = new Weapon_HolyMissile(this, 0);
+                break;
+                break;
         }
     }
 }

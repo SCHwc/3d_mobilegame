@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
 public abstract class PState
 {
     protected float distance;
@@ -71,6 +66,7 @@ public class PartnerBase : AIBase
         anim.SetTrigger("GetHit");
         if (Stat.CurrentHp <= 0)
         {
+            this.gameObject.layer = 0;
             ChangeState(PartnerState.Die);
         }
 
@@ -120,9 +116,11 @@ public class PartnerBase : AIBase
             case "Provoke":
                 return new Weapon_Provoke(this, wantCoolTime);
             case "FireShield":
-                return null;
+                return new Weapon_FireShield(this, wantCoolTime);
             case "IceSpike":
                 return new Weapon_IceSpike(this, wantCoolTime);
+            case "Healing":
+                return new Weapon_Healing(this, wantCoolTime);
         }
 
         return null;

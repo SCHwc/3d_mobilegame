@@ -40,7 +40,7 @@ public class MonsterBase : AIBase
         }
     }
 
-    public void Setup()
+    public virtual void Setup()
     {
         // ���� ĳ���Ͱ� ���� �� �ִ� ���� ������ŭ �޸� �Ҵ�, �� ���¿� Ŭ���� �޸� �Ҵ�
         states = new MState[5];
@@ -64,6 +64,7 @@ public class MonsterBase : AIBase
 
         if (Stat.CurrentHp <= 0)
         {
+            this.gameObject.layer = 0;
             ChangeState(MonsterState.Die);
         }
 
