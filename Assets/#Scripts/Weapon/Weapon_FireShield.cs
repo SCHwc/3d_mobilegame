@@ -9,7 +9,7 @@ public class Weapon_FireShield : WeaponBase
         spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/FireShield");
     }
 
-    public override void OnBuff()
+    public override void OnAttack(MovableBase wantTarget, bool wantTracking)
     {
         if (GameManager.Instance.player.gameObject.activeSelf == true)
         {

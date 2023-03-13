@@ -9,7 +9,7 @@ public class Weapon_Healing : WeaponBase
         spawnPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Healing");
     }
 
-    public override void OnBuff()
+    public override void OnAttack(MovableBase wantTarget, bool wantTracking)
     {
         if (GameManager.Instance.player.gameObject.activeSelf == true)
         {
