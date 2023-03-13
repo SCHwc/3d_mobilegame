@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, PartnerInfo> partnerList;
     // 부대 편성을 진행할 때 사용할 배열
     public PartnerInfo[] party = new PartnerInfo[3];
-    // QTE 를 위한 스킬버튼 배열
-    public GameObject[] skillBtns = new GameObject[3];
-
     public PartnerInfo currentInfo;
 
     // 인게임에 사용할 이펙트
@@ -38,6 +35,11 @@ public class GameManager : MonoBehaviour
         }
 
         Initialize();
+
+        // 임시 할당 삭제 필요!!!
+        party[0] = partnerList["RockShield"];
+        party[1] = partnerList["I-Sword"];
+        party[2] = partnerList["I-Sword"];
     }
 
     void Initialize()
@@ -108,13 +110,7 @@ public class GameManager : MonoBehaviour
                 );
         }
     }
- 
-    // QTE발동 메서드 -> 스킬버튼 누르면Invoke
-    public void OnQTE(int currentType)
-    {
-        skillBtns[currentType].SetActive(true);
-    }
-}
+ }
 
 public class PartnerInfo
 {
