@@ -81,7 +81,7 @@ public class MonsterBase : AIBase
         currentState.OnEnter(this);
     }
 
-    public void Anim_Attack()
+    public virtual void Anim_Attack()
     {
         switch (atkType)
         {
