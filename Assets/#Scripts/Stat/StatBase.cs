@@ -15,8 +15,6 @@ public class StatBase : MonoBehaviour
     [SerializeField] protected float _defensePower;        // ����
     [SerializeField] protected float _selfRecovery;        // ü����
 
-    [SerializeField] protected float _skillCoolTime;
-
     public float moveSpeedMultiflier = 2f;
 
     public float CurrentHp
@@ -54,15 +52,6 @@ public class StatBase : MonoBehaviour
         }
     }
     public float SelfRecovery { get => _selfRecovery; }
-
-    public float SkillCoolTime
-    {
-        get => _skillCoolTime;
-        set
-        {
-            _skillCoolTime = value;
-        }
-    }
     #endregion
 
 }

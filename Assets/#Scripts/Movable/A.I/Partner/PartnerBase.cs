@@ -120,9 +120,11 @@ public class PartnerBase : AIBase
             case "Provoke":
                 return new Weapon_Provoke(this, wantCoolTime);
             case "FireShield":
-                return null;
+                return new Weapon_FireShield(this, wantCoolTime);
             case "IceSpike":
                 return new Weapon_IceSpike(this, wantCoolTime);
+            case "Healing":
+                return new Weapon_Healing(this, wantCoolTime);
         }
 
         return null;

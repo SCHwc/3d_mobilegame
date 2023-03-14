@@ -907,8 +907,6 @@ GameObject:
   - component: {fileID: 4726004998276562357}
   - component: {fileID: 4726004998276562346}
   - component: {fileID: 4726004998161748803}
-  - component: {fileID: 4726004998161748824}
-  - component: {fileID: 4726004998161748807}
   - component: {fileID: 4726004998161748806}
   m_Layer: 11
   m_Name: Boss_1F
@@ -1035,55 +1033,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4726004998161748824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459264485481997073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d7e6cb9e979b24293a8caee168f6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  focusTarget: {fileID: 0}
-  isAlly: 0
-  meshs: []
-  atkCollider: {fileID: 0}
-  skillName: 
-  skillCoolTime: 0
-  atkType: 0
-  _atkRange: 1.5
-  _findRange: 6.83
-  agent: {fileID: 0}
-  skillTracking: 0
-  findEffect: {fileID: 0}
-  hpUI: {fileID: 0}
---- !u!114 &4726004998161748807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459264485481997073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHp: 400
-  _maxHp: 400
-  _moveSpeed: 3
-  _attackSpeed: 0
-  _attackDelay: 1.3
-  _resistance: 1
-  _attackPower: 30
-  _defensePower: 5
-  _selfRecovery: 1
-  _skillCoolTime: 0
-  moveSpeedMultiflier: 2
 --- !u!195 &4726004998161748806
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1264,6 +1213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterHpBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750040608577141963, guid: fed5335565c2b9e4ab20d9657bda4c85,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fed5335565c2b9e4ab20d9657bda4c85, type: 3}

@@ -31,7 +31,7 @@ public class BattleSceneManager : MonoBehaviour
     int qteIdx;
     #endregion
 
-    void Start()
+    void Awake()
     {
         if (_instance == null)
         {

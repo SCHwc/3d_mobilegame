@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         }
 
         Initialize();
+
     }
 
     void Initialize()
