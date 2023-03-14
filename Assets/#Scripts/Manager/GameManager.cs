@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get => _instance; }
 
     public PlayeableCharacterBase player;
+    GameObject playerPrefab;
 
     // 동료캐릭터 목록
     public static Dictionary<string, PartnerInfo> partnerList;
@@ -35,10 +36,17 @@ public class GameManager : MonoBehaviour
         }
 
         Initialize();
+        SpawnPlayerCharacter();
+    }
+
+    public static void AddPlayer(PlayeableCharacterBase target)
+    {
+        Instance.player = target;
     }
 
     void Initialize()
     {
+        playerPrefab = Resources.Load<GameObject>("Prefabs/Players/PandaKnights/PandaKnight");
 
         // 이펙트 초기할당
         swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
@@ -105,7 +113,13 @@ public class GameManager : MonoBehaviour
                 );
         }
     }
- }
+
+    public void SpawnPlayerCharacter()
+    {
+        GameObject clonePlayer = Instantiate(playerPrefab);
+        player = clonePlayer.GetComponent<PlayeableCharacterBase>();
+    }
+}
 
 public class PartnerInfo
 {

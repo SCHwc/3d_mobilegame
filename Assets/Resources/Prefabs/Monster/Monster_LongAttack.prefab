@@ -892,7 +892,8 @@ MonoBehaviour:
   atkCollider: {fileID: 0}
   skillName: 
   skillCoolTime: 0
-  atkType: 0
+  atkType: 1
+  oldFocusTarget: {fileID: 0}
   _atkRange: 3
   _findRange: 4
   agent: {fileID: 0}
@@ -922,7 +923,6 @@ MonoBehaviour:
   _attackPower: 10
   _defensePower: 0
   _selfRecovery: 0
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!195 &4767685659389754614
 NavMeshAgent:

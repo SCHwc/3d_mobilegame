@@ -35,7 +35,7 @@ public class Monster_LongAttack : MonsterBase
         if (atkType == AttackType.Long)
         {
             // 해당 스킬이 가지고 있는 역할 실행
-            currentWeapon.OnAttack(focusTarget.GetComponent<MonsterBase>(), isTracking);
+            currentWeapon.OnAttack(focusTarget.GetComponent<MovableBase>(), isTracking);
         }
     }
 

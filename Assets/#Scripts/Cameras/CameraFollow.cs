@@ -10,6 +10,8 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        if (target == null) { target = GameManager.Instance.player.transform; }
+
         if (!target || target.gameObject.activeInHierarchy == false)
         {
             transform.position = new Vector3(0, 6f, 0);
