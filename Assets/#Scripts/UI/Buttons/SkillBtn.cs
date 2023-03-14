@@ -41,7 +41,8 @@ public class SkillBtn : ButtonBase
         GameManager.Instance.player.Skill(type);
 
         // ±Ã±Ø±â »ç¿ë½Ã QTE¹ßµ¿
-        BattleSceneManager.Instance.StartQTE();
+        if(type == SkillType.Ultimate)
+            BattleSceneManager.Instance.StartQTE();
     }
 
 }
