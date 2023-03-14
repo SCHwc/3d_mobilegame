@@ -130,7 +130,7 @@ namespace MonsterStates
             }
             else
             {   // Ÿ���� �ִٸ� Ÿ�ٰ��� �Ÿ� �Ҵ�
-                if (monster.focusTarget.Stat.CurrentHp < 0) { monster.focusTarget = null; }
+                if (monster.focusTarget.Stat.CurrentHp <= 0) { monster.focusTarget = null; }
                 distance = (monster.focusTarget.transform.position - monster.gameObject.transform.position).magnitude;
                 monster.transform.LookAt(monster.focusTarget.transform);
             }

@@ -31,7 +31,7 @@ public class BattleSceneManager : MonoBehaviour
     int qteIdx;
     #endregion
 
-    void Start()
+    void Awake()
     {
         if (_instance == null)
         {
@@ -47,6 +47,7 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Initialize()
     {
+        GameManager.Instance.SpawnPlayerCharacter();
         GameManager.Instance.player.gameObject.transform.position = spawnPosition[3].position;
 
         // ���Ḧ ��ȣ�� ���� ������ ������ġ�� ����
