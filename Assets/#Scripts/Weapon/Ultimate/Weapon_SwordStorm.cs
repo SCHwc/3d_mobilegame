@@ -20,10 +20,9 @@ public class Weapon_SwordStorm : WeaponBase
         return proj;
     }
 
-    public override void OnAttack()
+    public override void OnAttack(MovableBase target, bool wantTracking)
     {
         Shot(null, owner.transform.position, false);
     }
-
 
 }
