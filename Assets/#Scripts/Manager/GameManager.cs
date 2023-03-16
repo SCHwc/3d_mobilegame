@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public CameraShake cameraShaker;
 
-    void Awake()
+    void OnEnable()
     {
         if (_instance == null)
         {
