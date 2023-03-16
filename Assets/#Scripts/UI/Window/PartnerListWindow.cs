@@ -42,7 +42,7 @@ public class PartnerListWindow : MonoBehaviour
 
     public void BattleStart()
     {
-        SceneManager.LoadScene("DefenseScene");
+        SceneManager.LoadScene("StageScene");
     }
 
 }

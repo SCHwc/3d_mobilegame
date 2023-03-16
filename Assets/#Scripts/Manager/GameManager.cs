@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public static GameObject swordEffect;
     public static GameObject monsterAtkEffect;
     public static GameObject findEffect;
+    public static GameObject pickerEffect;
 
     public CameraShake cameraShaker;
 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         swordEffect = Resources.Load<GameObject>("Prefabs/Effects/SwordImpact");
         monsterAtkEffect = Resources.Load<GameObject>("Prefabs/Effects/MonsterAtkEffect");
         findEffect = Resources.Load<GameObject>("Prefabs/Effects/FindEffect");
+        pickerEffect = Resources.Load<GameObject>("Prefabs/Effects/Picker");
 
         cameraShaker = Camera.main.GetComponent<CameraShake>();
 

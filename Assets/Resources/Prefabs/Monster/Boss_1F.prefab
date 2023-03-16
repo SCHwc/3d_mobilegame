@@ -985,15 +985,17 @@ MonoBehaviour:
   isAlly: 0
   meshs: []
   atkCollider: {fileID: 0}
-  skillName: 
-  skillCoolTime: 0
+  skillName: SpikeField
+  skillCoolTime: 7
   atkType: 0
+  oldFocusTarget: {fileID: 0}
   _atkRange: 1.5
   _findRange: 6.83
   agent: {fileID: 0}
   skillTracking: 0
   findEffect: {fileID: 0}
   hpUI: {fileID: 7474919700472910894}
+  hitStack: 0
 --- !u!114 &4726004998276562346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,7 +1017,6 @@ MonoBehaviour:
   _attackPower: 30
   _defensePower: 5
   _selfRecovery: 1
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!54 &4726004998161748803
 Rigidbody:

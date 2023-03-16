@@ -155,6 +155,17 @@ namespace MonsterStates
                 monster.anim.SetBool("isBattle", false);
                 monster.Stat.AttackSpeed -= Time.deltaTime;
             }
+
+            if (monster.equipSkill != null && monster.Stat.HPRate < 0.7f && monster.hitStack == 0)
+            {
+                monster.SkillCasting();
+                monster.hitStack++;
+            }
+            if (monster.equipSkill != null && monster.Stat.HPRate < 0.3f && monster.hitStack == 1)
+            {
+                monster.SkillCasting();
+                monster.hitStack++;
+            }
         }
         public override void OnExit(MonsterBase monster)
         {
