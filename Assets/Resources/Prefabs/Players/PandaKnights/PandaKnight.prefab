@@ -3028,6 +3028,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 2304
+  maxSlopeAngle: 50
 --- !u!1 &7780216755276329648
 GameObject:
   m_ObjectHideFlags: 0

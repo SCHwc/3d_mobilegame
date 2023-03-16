@@ -10,7 +10,7 @@ public class BattleSceneManager : MonoBehaviour
 
     // ���� ���� â���� ������ ���� �迭 
     public PartnerBase[] partners = new PartnerBase[3];
-    public Transform[] spawnPosition;
+    public Transform spawnPosition;
 
     // QTE �� ���� ���� ��ų��ư
     public AllySkillBtn skillBtn;
@@ -48,14 +48,31 @@ public class BattleSceneManager : MonoBehaviour
     private void Initialize()
     {
         GameManager.Instance.SpawnPlayerCharacter();
-        GameManager.Instance.player.gameObject.transform.position = spawnPosition[3].position;
+        GameManager.Instance.player.gameObject.transform.position = spawnPosition.position;
 
         // ���Ḧ ��ȣ�� ���� ������ ������ġ�� ����
         for(int i = 0; i < partners.Length; i++)
         {
             PartnerInfo currentInfo = GameManager.Instance.party[i];
             partners[i] = Instantiate(currentInfo.prefab).GetComponent<PartnerBase>();
-            partners[i].gameObject.transform.position = spawnPosition[i].position;
+            partners[i].gameObject.SetActive(false);
+
+            Vector3 spawnPos = spawnPosition.position;
+            spawnPos.z -= 1f;
+            switch (i)
+            {
+                case 1:
+                    spawnPos.x -= 1f;
+                    break;
+                case 2:
+                    spawnPos.x += 1f;
+                    break;
+                default:
+                    break;
+            }
+
+            partners[i].gameObject.transform.position = spawnPos;
+            partners[i].gameObject.SetActive(true);
             skillIcons[i] = currentInfo.icon;
         }
     }

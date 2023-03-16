@@ -13,7 +13,10 @@ EditorBuildSettings:
     guid: e6c2842676c96c146963818f73f7b118
   - enabled: 1
     path: Assets/Scenes/DefenseScene.unity
-    guid: ca3f3dad20574ab4486b39c88c4c98e2
+    guid: 4111525cc518e5c4fa0ed9de5fda6218
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: bdecbdf8f04309d428fa990045d7f8ef, type: 2}

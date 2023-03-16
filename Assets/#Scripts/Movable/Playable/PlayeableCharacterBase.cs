@@ -8,6 +8,8 @@ public class PlayeableCharacterBase : MovableBase
 
     [HideInInspector] public Vector3 inputVector; // 이동입력값
 
+    Rigidbody rigid;
+
     #region 상태Bool값
     public bool isRun = false; // 달리기 상태
     public bool isDead = false; // 죽었는가
@@ -29,9 +31,14 @@ public class PlayeableCharacterBase : MovableBase
     [SerializeField] protected LayerMask targetMask; // 몬스터 레이어
     #endregion
 
+    // 허용최대 경사각
+    public float maxSlopeAngle;
+
     protected override void Start()
     {
         base.Start();
+        rigid = GetComponent<Rigidbody>();
+
         ultimateSkill = AddWeapon(ultimateWeaponName, ultimateSkillCooldown);
         meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
         // 궁극기 쿨타임 사이클 추가
@@ -60,11 +67,17 @@ public class PlayeableCharacterBase : MovableBase
             float dirZ = inputDir.y;
             Vector3 moveDir = new Vector3(dirX, 0, dirZ);
 
+            // 경사도라면 방향 수정
+            bool isOnSlope = IsOnSlope();
+            moveDir = isOnSlope ? DirectionToSlope(moveDir) : moveDir;
+            rigid.useGravity = isOnSlope ? false : true;
+
             transform.position += (moveDir * stat.MoveSpeed * Time.deltaTime) * (isRun ? stat.moveSpeedMultiflier : 1f);
 
             anim.SetBool("IsRun", isRun);
 
-            transform.LookAt(transform.position + moveDir);
+            if(!isOnSlope)
+                transform.LookAt(transform.position + moveDir);
         }
     }
 
@@ -193,5 +206,27 @@ public class PlayeableCharacterBase : MovableBase
         {
             ultimateSkill.CurrentCoolTime -= Time.deltaTime;
         }
+    }
+
+    private const float Ray_Dist = 2f;
+    private RaycastHit slopeHit;
+    
+    // 내가 지정한 경사도 이내인지
+    protected bool IsOnSlope()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if(Physics.Raycast(ray, out slopeHit, Ray_Dist))
+        {
+            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle != 0f && angle < maxSlopeAngle;
+        }
+
+        return false;
+    }
+
+    // 경사도에 맞춰 이동 방향을 바꿔주는 메서드
+    protected Vector3 DirectionToSlope(Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal);
     }
 }

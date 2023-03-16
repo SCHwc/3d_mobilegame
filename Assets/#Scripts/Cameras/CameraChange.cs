@@ -7,7 +7,6 @@ public class CameraChange : MonoBehaviour
     public Camera mainCam;
     public Camera subCam;
 
-
     public void ShowSubCam()
     {
         mainCam.gameObject.SetActive(false);
@@ -19,4 +18,6 @@ public class CameraChange : MonoBehaviour
         mainCam.gameObject.SetActive(true);
         subCam.gameObject.SetActive(false);
     }
+
+
 }
