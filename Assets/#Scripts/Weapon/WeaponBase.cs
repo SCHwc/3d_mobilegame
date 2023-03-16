@@ -39,7 +39,7 @@ public class WeaponBase
         // ��ų ������Ʈ ��ȯ�ϰ� ��ġ �Ҵ�
         ProjectileBase proj = GameObject.Instantiate(spawnPrefab).GetComponent<ProjectileBase>();
         proj.Initialize(owner, wanttarget, wantTracking);
-        wantPosition.y = 1f;
+        wantPosition.y += 0.5f;
         proj.transform.position = wantPosition;
 
         return proj;
@@ -56,5 +56,5 @@ public class WeaponBase
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
     public virtual void OnAttack() { }
 
-   
+
 }

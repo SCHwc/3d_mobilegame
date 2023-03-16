@@ -126,9 +126,12 @@ namespace PartnerStates
                 distance = 0;
                 partner.ChangeState(PartnerState.Idle);
             }
-            else
-            {   // 타겟이 있다면 타겟과의 거리 할당
-                if (partner.focusTarget.Stat.CurrentHp <= 0) { partner.focusTarget = null; }
+            else if (partner.focusTarget != null && partner.focusTarget.Stat.CurrentHp <= 0)
+            {
+                partner.focusTarget = null;
+            }
+            else if (partner.focusTarget.Stat.CurrentHp > 0)
+            {
                 distance = (partner.focusTarget.transform.position - partner.gameObject.transform.position).magnitude;
                 partner.transform.LookAt(partner.focusTarget.transform);
             }

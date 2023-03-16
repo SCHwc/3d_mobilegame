@@ -75,7 +75,7 @@ public class ProjectileBase : MonoBehaviour
             if (focusTarget)
             {
                 Vector3 targetPosition = focusTarget.transform.position;
-                targetPosition.y = 1;
+                targetPosition.y += 0.5f;
                 transform.LookAt(targetPosition);
                 transform.position += transform.forward * currentSpeed * Time.deltaTime;
             }
