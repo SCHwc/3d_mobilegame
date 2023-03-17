@@ -21,11 +21,13 @@ public class MonsterCountManager : MonoBehaviour
 
     void Update()
     {
-        foreach (var current in monsters)
+        for(int i = 0; i < monsters.Count; i++)
         {
+            var current = monsters[i];
             if (current == null)
             {
                 monsters.Remove(current);
+                i--;
             }
 
         }
