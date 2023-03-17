@@ -20,39 +20,18 @@ namespace PartnerStates
             int nearestIndex = -1;
             if (partner.focusTarget == null)
             {
-                switch (partner.atkType)
-                {
-                    // 근접공격이면 플레이어의 정면으로 배치, 원거리는 플레이어 뒤로
-                    case AttackType.Short:
-                        Vector3 wantPosition = GameManager.Instance.player.gameObject.transform.position + Vector3.forward * 2f;
-                        float wantDistance = (wantPosition - partner.gameObject.transform.position).magnitude;
-                        if (wantDistance > 1.5f)
-                        {
-                            partner.agent.enabled = true;
-                            partner.agent.SetDestination(wantPosition);
-                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                        }
-                        else
-                        {
-                            partner.agent.enabled = false;
-                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                        }
-                        break;
-                    case AttackType.Long:
-                        float playerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
-                        if (playerDistance > 2)
-                        {
-                            partner.agent.enabled = true;
-                            partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
-                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                        }
-                        else
-                        {
-                            partner.agent.enabled = false;
-                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                        }
+                float playerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
 
-                        break;
+                if (playerDistance > 2)
+                {
+                    partner.agent.enabled = true;
+                    partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
+                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                }
+                else
+                {
+                    partner.agent.enabled = false;
+                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
                 }
             }
             else

@@ -67,19 +67,13 @@ public class PlayeableCharacterBase : MovableBase
             float dirZ = inputDir.y;
             Vector3 moveDir = new Vector3(dirX, 0, dirZ);
 
-            // 경사도라면 방향 수정
-            bool isOnSlope = IsOnSlope();
-            moveDir = isOnSlope ? DirectionToSlope(moveDir) : moveDir;
-            rigid.useGravity = !isOnSlope;
-
             transform.position += (moveDir * stat.MoveSpeed * Time.deltaTime) * (isRun ? stat.moveSpeedMultiflier : 1f);
 
             anim.SetBool("IsRun", isRun);
 
             Vector3 lookPos = new Vector3(moveDir.x, 0, moveDir.z);
 
-            if(!isOnSlope)
-                transform.LookAt(transform.position + lookPos);
+            transform.LookAt(transform.position + lookPos);
         }
     }
 
@@ -96,7 +90,7 @@ public class PlayeableCharacterBase : MovableBase
         {
             case SkillType.Normal:
                 {
-                    if(equipSkill.CurrentCoolTime <= 0)
+                    if (equipSkill.CurrentCoolTime <= 0)
                     {
                         equipSkill.CurrentCoolTime = equipSkill.CoolTime;
                         equipSkill.OnAttack(focusTarget, false);
@@ -106,7 +100,7 @@ public class PlayeableCharacterBase : MovableBase
                 break;
             case SkillType.Ultimate:
                 {
-                    if(ultimateSkill.CurrentCoolTime <= 0)
+                    if (ultimateSkill.CurrentCoolTime <= 0)
                     {
                         ultimateSkill.CurrentCoolTime = equipSkill.CoolTime;
                         ultimateSkill.OnAttack(focusTarget, false);
@@ -116,8 +110,8 @@ public class PlayeableCharacterBase : MovableBase
                 break;
         }
     }
-    
-    public override float GetDamage(float damage, MovableBase from) 
+
+    public override float GetDamage(float damage, MovableBase from)
     {
         stat.CurrentHp -= damage;
 
@@ -172,7 +166,7 @@ public class PlayeableCharacterBase : MovableBase
             case "FloatingSword":
                 return new Weapon_FloatingSword(this, coolTime);
             case "SwordStorm":
-                return new Weapon_SwordStorm(this, coolTime);            
+                return new Weapon_SwordStorm(this, coolTime);
         }
 
         return null;
@@ -212,12 +206,12 @@ public class PlayeableCharacterBase : MovableBase
 
     private const float Ray_Dist = 2f;
     private RaycastHit slopeHit;
-    
+
     // 내가 지정한 경사도 이내인지
     protected bool IsOnSlope()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
-        if(Physics.Raycast(ray, out slopeHit, Ray_Dist))
+        if (Physics.Raycast(ray, out slopeHit, Ray_Dist))
         {
             var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle != 0f && angle < maxSlopeAngle;
