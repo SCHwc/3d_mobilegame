@@ -20,38 +20,65 @@ namespace PartnerStates
             int nearestIndex = -1;
             if (partner.focusTarget == null)
             {
-                float PlayerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
-                if (PlayerDistance > 2)
+                switch (partner.atkType)
                 {
-                    partner.agent.enabled = true;
-                    partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
-                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                }
-                else
-                {
-                    partner.agent.enabled = false;
-                    partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
-                }
+                    // 근접공격이면 플레이어의 정면으로 배치, 원거리는 플레이어 뒤로
+                    case AttackType.Short:
+                        Vector3 wantPosition = GameManager.Instance.player.gameObject.transform.position + Vector3.forward * 2f;
+                        float wantDistance = (wantPosition - partner.gameObject.transform.position).magnitude;
+                        if (wantDistance > 1.5f)
+                        {
+                            partner.agent.enabled = true;
+                            partner.agent.SetDestination(wantPosition);
+                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                        }
+                        else
+                        {
+                            partner.agent.enabled = false;
+                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                        }
+                        break;
+                    case AttackType.Long:
+                        float playerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
+                        if (playerDistance > 2)
+                        {
+                            partner.agent.enabled = true;
+                            partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
+                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                        }
+                        else
+                        {
+                            partner.agent.enabled = false;
+                            partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+                        }
 
-                // 캐릭터의 감지범위만큼 적을 감지한다.
-                Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange, 1 << 11);
-                for (int i = 0; i < col.Length; i++)
-                {
-                    float tempDistance = (col[i].gameObject.transform.position - partner.gameObject.transform.position).magnitude;
-                    if (tempDistance < nearestDistance)
-                    {
-                        nearestDistance = tempDistance;
-                        nearestIndex = i;
-                    }
+                        break;
                 }
-
-                if (nearestIndex > -1)
-                {
-                    partner.focusTarget = col[nearestIndex].GetComponent<MovableBase>();
-
-                }
-                else { partner.focusTarget = null; }
             }
+            else
+            {
+                partner.agent.enabled = false;
+                partner.anim.SetFloat("isMove", partner.agent.velocity.magnitude);
+            }
+
+            // 캐릭터의 감지범위만큼 적을 감지한다.
+            Collider[] col = Physics.OverlapSphere(partner.gameObject.transform.position, partner.FindRange, 1 << 11);
+            for (int i = 0; i < col.Length; i++)
+            {
+                float tempDistance = (col[i].gameObject.transform.position - partner.gameObject.transform.position).magnitude;
+                if (tempDistance < nearestDistance)
+                {
+                    nearestDistance = tempDistance;
+                    nearestIndex = i;
+                }
+            }
+
+            if (nearestIndex > -1)
+            {
+                partner.focusTarget = col[nearestIndex].GetComponent<MovableBase>();
+
+            }
+            else { partner.focusTarget = null; }
 
             if (partner.focusTarget != null) // 타겟이 있을 때
             {                                    // 타겟과의 거리
@@ -71,6 +98,7 @@ namespace PartnerStates
         {
         }
     }
+
 
     public class PMove : PState
     {
@@ -175,7 +203,4 @@ namespace PartnerStates
         {
         }
     }
-
-
 }
-

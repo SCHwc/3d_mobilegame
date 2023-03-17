@@ -3308,6 +3308,7 @@ MonoBehaviour:
   skillName: IceSpike
   skillCoolTime: 5
   atkType: 1
+  oldFocusTarget: {fileID: 0}
   _atkRange: 4.86
   _findRange: 8.4
   agent: {fileID: 0}
@@ -3328,14 +3329,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHp: 90
   _maxHp: 90
-  _moveSpeed: 3
+  _moveSpeed: 3.5
   _attackSpeed: 0
   _attackDelay: 0.9
   _resistance: 0
   _attackPower: 20
   _defensePower: 1
   _selfRecovery: 0
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!195 &4727054310427343342
 NavMeshAgent:
@@ -3351,7 +3351,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
