@@ -9,10 +9,6 @@ public class CameraChange : MonoBehaviour
     public Camera mainCam;
     public Camera subCam;
 
-    public GameObject col;
-
-
-
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -23,7 +19,6 @@ public class CameraChange : MonoBehaviour
     {
         mainCam.gameObject.SetActive(false);
         subCam.gameObject.SetActive(true);
-        col.gameObject.SetActive(false);
     }
 
     public void ShowMainCam()
