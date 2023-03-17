@@ -6,17 +6,18 @@ using UnityEngine.UI;
 public class HpBar : MonoBehaviour
 {
     // 자신의 rectTransform
-    RectTransform _rectTransform;
+    protected RectTransform _rectTransform;
     // 부모 트랜스폼
-    Transform parent; 
+    protected Transform parent; 
     // 받아올 스탯
-    StatBase _stat;
+    protected StatBase _stat;
     // 체력의 크기 보여줄 슬라이더
-    Slider _slider;
+    protected Slider _slider;
     // 부모 콜라이더 (높이를 받기 위해)
-    Collider _col;
+    protected Collider _col;
 
-    void Start()
+
+    protected virtual void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
         parent = transform.parent;
@@ -26,7 +27,7 @@ public class HpBar : MonoBehaviour
         _slider = GetComponentInChildren<Slider>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // 주인의 머리 위에 뜨도록
         _rectTransform.anchoredPosition = Vector3.up * (2f);

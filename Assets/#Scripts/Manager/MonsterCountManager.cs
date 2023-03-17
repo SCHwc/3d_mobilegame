@@ -6,6 +6,9 @@ public class MonsterCountManager : MonoBehaviour
 {
     public GameObject animDoorObj;
 
+    // º¸½º ÇÁ¸®ÆÕ
+    public GameObject Boss;
+
     [SerializeField] List<GameObject> monsters = new List<GameObject>();
     public int monsterCount
     {
@@ -34,6 +37,7 @@ public class MonsterCountManager : MonoBehaviour
         if (monsterDisable == true)
         {
             animDoorObj.SetActive(true);
+            Boss.SetActive(true);
             Destroy(this.gameObject);
         }
     }
