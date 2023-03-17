@@ -24,8 +24,6 @@ public class Monster_LongAttack : MonsterBase
     protected override void Update()
     {
         base.Update();
-
-        Debug.Log(currentWeapon);
     }
 
 

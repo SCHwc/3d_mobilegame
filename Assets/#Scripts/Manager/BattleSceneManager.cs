@@ -16,7 +16,7 @@ public class BattleSceneManager : MonoBehaviour
     public AllySkillBtn skillBtn;
     // ��ų ��ư �̹��� �迭
     Sprite[] skillIcons = new Sprite[3];
-
+   
     #region QTE���� �ʵ�
     // qte ���� �ð�
     public float qteTime;
@@ -51,7 +51,7 @@ public class BattleSceneManager : MonoBehaviour
         GameManager.Instance.player.gameObject.transform.position = spawnPosition.position;
 
         // ���Ḧ ��ȣ�� ���� ������ ������ġ�� ����
-        for(int i = 0; i < partners.Length; i++)
+        for (int i = 0; i < partners.Length; i++)
         {
             PartnerInfo currentInfo = GameManager.Instance.party[i];
             partners[i] = Instantiate(currentInfo.prefab).GetComponent<PartnerBase>();
@@ -79,21 +79,21 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Update()
     {
-        if(isQTEStarted)
-        {            
+        if (isQTEStarted)
+        {
             qteTimer += Time.deltaTime; // qte Ÿ�̸� ����
 
-            if(qteTimer > qteTime)
+            if (qteTimer > qteTime)
             {
                 isQTEStarted = false; // qte����
                 skillBtn.gameObject.SetActive(false); // ��ư ��Ȱ��ȭ
             }
 
             // QTE�� �����ߴٸ�
-            if(isQTESuccess)
+            if (isQTESuccess)
             {
                 // ������QTE�� �����ٸ�
-                if(qteIdx >= partners.Length -1)
+                if (qteIdx >= partners.Length - 1)
                 {
                     isQTEStarted = false; // qte����
                     skillBtn.gameObject.SetActive(false); // ��ư ��Ȱ��ȭ
@@ -120,6 +120,8 @@ public class BattleSceneManager : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     // QTE�ߵ� �޼���

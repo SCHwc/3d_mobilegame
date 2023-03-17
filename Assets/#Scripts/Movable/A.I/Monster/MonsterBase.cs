@@ -24,6 +24,10 @@ public class MonsterBase : AIBase
 
     public GameObject hpUI;
 
+    // 스킬 사용을 위한 변수들
+    public int hitStack;
+    Vector3 skillPosition;
+
     protected override void Start()
     {
         base.Start();
@@ -53,6 +57,8 @@ public class MonsterBase : AIBase
 
         findEffect = Instantiate(GameManager.findEffect, this.transform);
         findEffect.SetActive(false);
+
+        hitStack = 0;
     }
 
 
@@ -102,6 +108,41 @@ public class MonsterBase : AIBase
     public void Anim_AttackTimeCheck()
     {   // ���� �ִϸ��̼��� ���� �� ���� ���ð��� �ʱ�ȭ �ϱ� ���� �־��� �Լ�
         Stat.AttackSpeed = Stat.AttackDelay;
+    }
+
+    public override void SkillCasting()
+    {
+        if (focusTarget != null && equipSkill.CurrentCoolTime <= 0)
+        {
+            GameObject picker = GameObject.Instantiate(GameManager.pickerEffect);
+            picker.transform.position = focusTarget.transform.position;
+            skillPosition = focusTarget.transform.position;
+            GameObject.Destroy(picker, 2f);
+            Invoke("SkillSpawn", 2f);
+        }
+
+        else { return; }
+    }
+    void SkillSpawn()
+    {
+        anim.SetTrigger("isSkill");
+        equipSkill.CurrentCoolTime = equipSkill.CoolTime;
+    }
+
+    public void Anim_Skill()
+    {
+        equipSkill.OnAttack(focusTarget.GetComponent<MovableBase>(), skillPosition, skillTracking);
+    }
+
+    public override WeaponBase AddWeapon(string wantName, float wantCoolTime)
+    {
+        switch (wantName)
+        {
+            case "SpikeField":
+                return new Weapon_SpikeField(this, wantCoolTime);
+        }
+
+        return null;
     }
 
     public override void Die()

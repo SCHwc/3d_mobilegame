@@ -55,6 +55,7 @@ public class WeaponBase
 
     public virtual void OnAttack(MovableBase target, bool wantTracking) { }
     public virtual void OnAttack() { }
+    public virtual void OnAttack(MovableBase target, Vector3 wantPosition, bool wantTracking) { }
 
 
 }
