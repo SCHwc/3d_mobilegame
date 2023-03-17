@@ -70,14 +70,17 @@ public class PlayeableCharacterBase : MovableBase
             // 경사도라면 방향 수정
             bool isOnSlope = IsOnSlope();
             moveDir = isOnSlope ? DirectionToSlope(moveDir) : moveDir;
-            rigid.useGravity = isOnSlope ? false : true;
+            rigid.useGravity = !isOnSlope;
 
+            Debug.Log(moveDir);
             transform.position += (moveDir * stat.MoveSpeed * Time.deltaTime) * (isRun ? stat.moveSpeedMultiflier : 1f);
 
             anim.SetBool("IsRun", isRun);
 
+            Vector3 lookPos = new Vector3(moveDir.x, 0, moveDir.z);
+
             if(!isOnSlope)
-                transform.LookAt(transform.position + moveDir);
+                transform.LookAt(transform.position + lookPos);
         }
     }
 
