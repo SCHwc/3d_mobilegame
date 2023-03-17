@@ -29,7 +29,7 @@ public class HpBar : MonoBehaviour
     void Update()
     {
         // 주인의 머리 위에 뜨도록
-        _rectTransform.anchoredPosition = Vector3.up * (_col.bounds.size.y + parent.position.y);
+        _rectTransform.anchoredPosition = Vector3.up * (2f);
 
         // UI의 회전방향을 카메라의 회전방향과 같도록 
         transform.rotation = Camera.main.transform.rotation;
