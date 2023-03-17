@@ -72,7 +72,6 @@ public class PlayeableCharacterBase : MovableBase
             moveDir = isOnSlope ? DirectionToSlope(moveDir) : moveDir;
             rigid.useGravity = !isOnSlope;
 
-            Debug.Log(moveDir);
             transform.position += (moveDir * stat.MoveSpeed * Time.deltaTime) * (isRun ? stat.moveSpeedMultiflier : 1f);
 
             anim.SetBool("IsRun", isRun);

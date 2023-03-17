@@ -2143,6 +2143,7 @@ MonoBehaviour:
   skillName: Provoke
   skillCoolTime: 7
   atkType: 0
+  oldFocusTarget: {fileID: 0}
   _atkRange: 1.7
   _findRange: 5
   agent: {fileID: 0}
@@ -2161,14 +2162,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHp: 200
   _maxHp: 200
-  _moveSpeed: 3
+  _moveSpeed: 3.5
   _attackSpeed: 0
   _attackDelay: 0.8
   _resistance: 0
   _attackPower: 7
   _defensePower: 5
   _selfRecovery: 1
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!195 &1853402774161598037
 NavMeshAgent:
