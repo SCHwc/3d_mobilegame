@@ -4916,6 +4916,7 @@ MonoBehaviour:
   contactSelf: 0
   isTracking: 0
   isRangeAttack: 1
+  isBuff: 0
 --- !u!114 &-2118420137716120772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4928,7 +4929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9f1f254fb6c2e46a6f27745ae969c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.3
+  attackDelay: 0.5
 --- !u!114 &6245050046804409093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,6 +4942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5891d08a0751246ae40e4de084ab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageValue: 0
 --- !u!1 &2096071065986461256
 GameObject:
   m_ObjectHideFlags: 0

@@ -925,12 +925,14 @@ MonoBehaviour:
   skillName: 
   skillCoolTime: 0
   atkType: 0
+  oldFocusTarget: {fileID: 0}
   _atkRange: 1.5
   _findRange: 3
   agent: {fileID: 0}
   skillTracking: 0
   findEffect: {fileID: 0}
   hpUI: {fileID: 2171882748123809562}
+  hitStack: 0
 --- !u!114 &4039175291063215245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,8 +945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHp: 50
-  _maxHp: 50
+  _currentHp: 300
+  _maxHp: 300
   _moveSpeed: 2.5
   _attackSpeed: 0
   _attackDelay: 1
@@ -952,7 +954,6 @@ MonoBehaviour:
   _attackPower: 7
   _defensePower: 0
   _selfRecovery: 0
-  _skillCoolTime: 0
   moveSpeedMultiflier: 2
 --- !u!54 &4039175290036620982
 Rigidbody:
