@@ -11,14 +11,14 @@ public class Weapon_Healing : WeaponBase
 
     public override void OnAttack(MovableBase wantTarget, bool wantTracking)
     {
-        if (GameManager.Instance.player.gameObject.activeSelf == true)
+        if (GameManager.Instance.player != null)
         {
             BuffShot(GameManager.Instance.player, true);
         }
 
         for (int i = 0; i < BattleSceneManager.Instance.partners.Length; i++)
         {
-            if(BattleSceneManager.Instance.partners[i] != null)
+            if (BattleSceneManager.Instance.partners[i] != null)
             {
                 BuffShot((BattleSceneManager.Instance.partners[i]), true);
             }
