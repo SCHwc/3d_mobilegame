@@ -8,6 +8,8 @@ public class SkillBtn : ButtonBase
     [SerializeField] SkillType type;      // ¹«½¼ ½ºÅ³ÀÇ ¹öÆ°ÀÎÁö
     [SerializeField] Image coolDownImage; // ÄðÅ¸ÀÓ ±×¸²ÀÚ
 
+    float _fillAmount = 0f;
+
     private void Update()
     {
         if(GameManager.Instance.player != null)
@@ -17,32 +19,36 @@ public class SkillBtn : ButtonBase
                 case SkillType.Normal:
                     if (GameManager.Instance.player.equipSkill.coolTimeRate > 0)
                     {
-                        coolDownImage.fillAmount = GameManager.Instance.player.equipSkill.coolTimeRate;
+                        _fillAmount = GameManager.Instance.player.equipSkill.coolTimeRate;
                     }
                     else
-                        coolDownImage.fillAmount = 0;
+                        _fillAmount = 0;
                     break;
 
                 case SkillType.Ultimate:
                     if (GameManager.Instance.player.ultimateSkill.coolTimeRate > 0)
                     {
-                        coolDownImage.fillAmount = GameManager.Instance.player.ultimateSkill.coolTimeRate;
+                        _fillAmount = GameManager.Instance.player.ultimateSkill.coolTimeRate;
                     }
                     else
-                        coolDownImage.fillAmount = 0;
+                        _fillAmount = 0;
                     break;
             }
 
+            coolDownImage.fillAmount = _fillAmount;
         }
     }
 
     public void Click()
     {
-        GameManager.Instance.player.Skill(type);
+        if(_fillAmount <= 0f)
+        {
+            GameManager.Instance.player.Skill(type);
 
-        // ±Ã±Ø±â »ç¿ë½Ã QTE¹ßµ¿
-        if(type == SkillType.Ultimate)
-            BattleSceneManager.Instance.StartQTE();
+            // ±Ã±Ø±â »ç¿ë½Ã QTE¹ßµ¿
+            if (type == SkillType.Ultimate)
+                BattleSceneManager.Instance.StartQTE();
+        }
     }
 
 }

@@ -18,7 +18,7 @@ public class Weapon_Healing : WeaponBase
 
         for (int i = 0; i < BattleSceneManager.Instance.partners.Length; i++)
         {
-            if (BattleSceneManager.Instance.partners[i].gameObject.activeSelf == true)
+            if(BattleSceneManager.Instance.partners[i] != null)
             {
                 BuffShot((BattleSceneManager.Instance.partners[i]), true);
             }
