@@ -4976,7 +4976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wantBuff:
     type: 2
-    buffValue: 30
+    buffValue: 100
     leftTime: 0.1
 --- !u!114 &4184045766265389023
 MonoBehaviour:

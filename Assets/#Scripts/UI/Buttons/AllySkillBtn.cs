@@ -13,6 +13,8 @@ public class AllySkillBtn : ButtonBase
     // 스킬을 발동시킬 동료
     PartnerBase _target;
 
+    float _fillAmount = 0f;
+
     private void Start()
     {
         BattleSceneManager.Instance.skillBtn = this;
@@ -26,14 +28,16 @@ public class AllySkillBtn : ButtonBase
 
         // 쿨타임 표시
         if (_target.equipSkill.coolTimeRate > 0)
-            coolDownImage.fillAmount = _target.equipSkill.coolTimeRate;
+            _fillAmount = _target.equipSkill.coolTimeRate;
         else
-            coolDownImage.fillAmount = 0f;
+            _fillAmount = 0f;
+
+        coolDownImage.fillAmount = _fillAmount;
     }
 
     public override void ButtonDown()
     {
-        if(_target != null)
+        if(_target != null && _fillAmount <= 0f)
         {
             _target.SkillCasting();
             BattleSceneManager.Instance.isQTESuccess = true;

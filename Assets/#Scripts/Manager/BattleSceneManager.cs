@@ -96,6 +96,7 @@ public class BattleSceneManager : MonoBehaviour
             // QTE�� �����ߴٸ�
             if (isQTESuccess)
             {
+                qteTimer = 0f;
                 // ������QTE�� �����ٸ�
                 if (qteIdx >= partners.Length - 1)
                 {
