@@ -901,6 +901,7 @@ MonoBehaviour:
   skillTracking: 0
   findEffect: {fileID: 0}
   hpUI: {fileID: 2750040607183372255}
+  hitStack: 0
   weaponName: AcidMissile
   isTracking: 0
 --- !u!114 &4767685659389754615
@@ -915,8 +916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16266febaaaacda4980ad003c41ed0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHp: 70
-  _maxHp: 70
+  _currentHp: 300
+  _maxHp: 300
   _moveSpeed: 3
   _attackSpeed: 0
   _attackDelay: 1.3
