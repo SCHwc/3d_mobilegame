@@ -19,7 +19,7 @@ public class BattleSceneManager : MonoBehaviour
     public AllySkillBtn skillBtn;
     // ��ų ��ư �̹��� �迭
     Sprite[] skillIcons = new Sprite[3];
-   
+
     #region QTE���� �ʵ�
     // qte ���� �ð�
     public float qteTime;
@@ -76,6 +76,7 @@ public class BattleSceneManager : MonoBehaviour
             }
 
             partners[i].gameObject.transform.position = spawnPos;
+
             partners[i].gameObject.SetActive(true);
             skillIcons[i] = currentInfo.icon;
         }
@@ -126,7 +127,14 @@ public class BattleSceneManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < partners.Length; i++)
+        {
+            if (partners[i] != null)
+            {
 
+                partners[i].idlePosition = GameManager.Instance.player.partnerPos[i];
+            }
+        }
     }
 
     // QTE�ߵ� �޼���

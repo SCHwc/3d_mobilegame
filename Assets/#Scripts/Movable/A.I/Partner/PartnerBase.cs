@@ -1,3 +1,4 @@
+
 public abstract class PState
 {
     protected float distance;
@@ -18,6 +19,8 @@ public class PartnerBase : AIBase
 
     protected PState[] states;
     protected PState currentState;
+
+    public UnityEngine.Transform idlePosition;
 
     protected override void Start()
     {

@@ -31,6 +31,8 @@ public class PlayeableCharacterBase : MovableBase
     [SerializeField] protected LayerMask targetMask; // 몬스터 레이어
     #endregion
 
+    public Transform[] partnerPos;
+
     // 허용최대 경사각
     public float maxSlopeAngle;
 
@@ -102,7 +104,7 @@ public class PlayeableCharacterBase : MovableBase
                 {
                     if (ultimateSkill.CurrentCoolTime <= 0)
                     {
-                        ultimateSkill.CurrentCoolTime = equipSkill.CoolTime;
+                        ultimateSkill.CurrentCoolTime = ultimateSkill.CoolTime;
                         ultimateSkill.OnAttack(focusTarget, false);
                         anim.SetTrigger("OnSkill");
                     }
