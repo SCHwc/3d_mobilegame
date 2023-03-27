@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.DeviceSimulation;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -151,4 +152,6 @@ public class PartnerInfo
 
         return result;
     }
+
+   
 }

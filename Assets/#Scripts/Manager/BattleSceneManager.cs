@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class BattleSceneManager : MonoBehaviour
     public PartnerBase[] partners = new PartnerBase[3];
     public Transform spawnPosition;
 
-    public TextMeshProUGUI[] partnersHp = new TextMeshProUGUI[3];
+    public Image[] partnersHp = new Image[3];
 
     // QTE �� ���� ���� ��ų��ư
     public AllySkillBtn skillBtn;
@@ -59,7 +59,7 @@ public class BattleSceneManager : MonoBehaviour
             PartnerInfo currentInfo = GameManager.Instance.party[i];
             partners[i] = Instantiate(currentInfo.prefab).GetComponent<PartnerBase>();
             partners[i].gameObject.SetActive(false);
-            partnersHp[i].text = currentInfo.name;
+            partnersHp[i].sprite = currentInfo.icon;
 
             Vector3 spawnPos = spawnPosition.position;
             spawnPos.z -= 1f;

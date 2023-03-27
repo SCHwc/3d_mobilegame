@@ -117,8 +117,6 @@ public class PlayeableCharacterBase : MovableBase
     {
         stat.CurrentHp -= damage;
 
-        StartCoroutine(GetDamageMeshs());
-
         return damage;
     }
 
@@ -189,15 +187,6 @@ public class PlayeableCharacterBase : MovableBase
         Destroy(gameObject);
     }
 
-    public IEnumerator GetDamageMeshs()
-    {
-        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.red; }
-        yield return new WaitForSeconds(0.25f);
-
-        foreach (SkinnedMeshRenderer mesh in meshs) { mesh.material.color = Color.white; }
-        yield break;
-    }
-
     void UltimateCoolTimeCycle()
     {
         if (ultimateSkill != null && ultimateSkill.CurrentCoolTime > 0)
@@ -206,25 +195,4 @@ public class PlayeableCharacterBase : MovableBase
         }
     }
 
-    private const float Ray_Dist = 2f;
-    private RaycastHit slopeHit;
-
-    // 내가 지정한 경사도 이내인지
-    protected bool IsOnSlope()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out slopeHit, Ray_Dist))
-        {
-            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle != 0f && angle < maxSlopeAngle;
-        }
-
-        return false;
-    }
-
-    // 경사도에 맞춰 이동 방향을 바꿔주는 메서드
-    protected Vector3 DirectionToSlope(Vector3 direction)
-    {
-        return Vector3.ProjectOnPlane(direction, slopeHit.normal);
-    }
 }
