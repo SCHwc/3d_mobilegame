@@ -20,9 +20,11 @@ namespace PartnerStates
             int nearestIndex = -1;
             if (partner.focusTarget == null)
             {
-                float playerDistance = (GameManager.Instance.player.gameObject.transform.position - partner.gameObject.transform.position).magnitude;
+                Vector3 position = partner.idlePosition.position;
+                position.y = partner.gameObject.transform.position.y;
+                float playerDistance = (position - partner.gameObject.transform.position).magnitude;
 
-                if (playerDistance > 2)
+                if (playerDistance > 1.5f)
                 {
                     partner.agent.enabled = true;
                     partner.agent.SetDestination(GameManager.Instance.player.gameObject.transform.position);
