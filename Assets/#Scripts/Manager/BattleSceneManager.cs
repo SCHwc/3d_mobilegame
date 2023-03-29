@@ -131,7 +131,6 @@ public class BattleSceneManager : MonoBehaviour
         {
             if (partners[i] != null)
             {
-
                 partners[i].idlePosition = GameManager.Instance.player.partnerPos[i];
             }
         }
@@ -148,6 +147,8 @@ public class BattleSceneManager : MonoBehaviour
             if (qteIdx >= partners.Length)
                 return;
         }
+
+        if (partners[qteIdx].focusTarget == null) return;
 
         isQTEStarted = true;
         qteTimer = 0f;
